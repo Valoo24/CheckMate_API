@@ -1,3 +1,10 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.SqlServer.Management.SqlParser.Parser;
+using System.Data;
+using System.Data.SqlClient;
+using System.Text;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +13,40 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+// - IDbConnection
+builder.Services.AddScoped<IDbConnection>(sp =>
+{
+    return new SqlConnection(builder.Configuration.GetConnectionString("default"));
+});
+
+
+// Creation + Gestion du Token
+builder.Services.AddSingleton<TokenManager>();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("TokenInfo").GetSection("secret").Value)),
+        ValidateIssuer = false,
+        ValidIssuer = builder.Configuration.GetSection("TokenInfo").GetSection("issuer").Value,
+        ValidateAudience = false,
+        ValidAudience = builder.Configuration.GetSection("TokenInfo").GetSection("audience").Value
+    };
+});
+
+
+// Verif de l'authentification + verif droit admin 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Auth", policy => policy.RequireAuthenticatedUser());
+    options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
+});
+
+
 
 var app = builder.Build();
 
