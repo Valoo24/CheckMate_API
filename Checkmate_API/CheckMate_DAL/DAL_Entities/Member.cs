@@ -14,7 +14,7 @@ namespace CheckMate_DAL.DAL_Entities
         public string Mail { get; set; }
         public string PasswordHash { get; set; }
         public DateTime Birthdate { get; set; }
-        public Char Gender { get; set; }
+        public char Gender { get; set; }
         public int Elo { get; set; }
         public bool IsAdmin { get; set; }
     }
