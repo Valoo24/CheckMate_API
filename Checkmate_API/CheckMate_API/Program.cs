@@ -1,6 +1,6 @@
+using CheckMate_API.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.SqlServer.Management.SqlParser.Parser;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text;

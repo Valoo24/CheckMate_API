@@ -20,6 +20,6 @@ namespace CheckMate_DAL.DAL_Entities
         public int TournamentRound { get; set; }
         public bool IsWomenOnly { get; set; }
         public DateTime CreationDate { get; set; }
-        public DateTime UpdateTime { get; set; }
+        public DateTime UpdateDate { get; set; }
     }
 }
