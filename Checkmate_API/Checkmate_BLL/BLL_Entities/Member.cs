@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CheckMate_DAL.DAL_Entities
+namespace CheckMate_BLL.BLL_Entities
 {
     public class Member : IEntity<int>
     {

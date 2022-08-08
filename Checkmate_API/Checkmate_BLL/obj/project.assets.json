@@ -1,26 +1,45 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {}
+    "net6.0": {
+      "CheckMate_DAL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/CheckMate_DAL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CheckMate_DAL.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "CheckMate_DAL/1.0.0": {
+      "type": "project",
+      "path": "../CheckMate_DAL/CheckMate_DAL.csproj",
+      "msbuildProject": "../CheckMate_DAL/CheckMate_DAL.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net6.0": []
+    "net6.0": [
+      "CheckMate_DAL >= 1.0.0"
+    ]
   },
   "packageFolders": {
-    "C:\\Users\\Flo_Del\\.nuget\\packages\\": {}
+    "C:\\Users\\Benji\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Flo_Del\\Desktop\\Labo Echec\\Checkmate_API\\Checkmate_BLL\\CheckMate_BLL.csproj",
+      "projectUniqueName": "C:\\Users\\Benji\\Desktop\\CheckMate_API\\Checkmate_API\\Checkmate_BLL\\CheckMate_BLL.csproj",
       "projectName": "CheckMate_BLL",
-      "projectPath": "C:\\Users\\Flo_Del\\Desktop\\Labo Echec\\Checkmate_API\\Checkmate_BLL\\CheckMate_BLL.csproj",
-      "packagesPath": "C:\\Users\\Flo_Del\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Flo_Del\\Desktop\\Labo Echec\\Checkmate_API\\Checkmate_BLL\\obj\\",
+      "projectPath": "C:\\Users\\Benji\\Desktop\\CheckMate_API\\Checkmate_API\\Checkmate_BLL\\CheckMate_BLL.csproj",
+      "packagesPath": "C:\\Users\\Benji\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Benji\\Desktop\\CheckMate_API\\Checkmate_API\\Checkmate_BLL\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Flo_Del\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Benji\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -33,7 +52,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Benji\\Desktop\\CheckMate_API\\Checkmate_API\\CheckMate_DAL\\CheckMate_DAL.csproj": {
+              "projectPath": "C:\\Users\\Benji\\Desktop\\CheckMate_API\\Checkmate_API\\CheckMate_DAL\\CheckMate_DAL.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -60,7 +83,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
       }
     }
   }
