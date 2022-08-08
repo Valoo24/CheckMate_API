@@ -1,5 +1,6 @@
 ﻿using CheckMate_BLL.BLL_Entities;
 using CheckMate_BLL.Interfaces;
+using CheckMate_DAL.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,12 @@ namespace CheckMate_BLL.Services
 {
     public class MatchService : IMatchService
     {
+        private MatchRepository Repository;
+        public MatchService(MatchRepository repository)
+        {
+            repository = Repository;
+        }
+
         public int Create(Match entity)
         {
             throw new NotImplementedException();

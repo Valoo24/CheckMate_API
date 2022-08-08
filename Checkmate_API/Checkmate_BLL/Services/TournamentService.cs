@@ -1,5 +1,6 @@
 ﻿using CheckMate_BLL.BLL_Entities;
 using CheckMate_BLL.Interfaces;
+using CheckMate_DAL.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,13 @@ namespace CheckMate_BLL.Services
 {
     public class TournamentService : ITournamentService
     {
+        private TournamentRepository Repository;
+
+        public TournamentService(TournamentRepository repository)
+        {
+            Repository = repository;
+        }
+
         public int Create(Tournament entity)
         {
             throw new NotImplementedException();
