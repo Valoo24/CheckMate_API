@@ -10,5 +10,29 @@ namespace CheckMate_DAL.Repositories
 {
     public class MemberRepository : IRepository<Member, int>
     {
+        public int Create(Member entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Delete(Member entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Member Read(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Member> ReadAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Update(Member entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

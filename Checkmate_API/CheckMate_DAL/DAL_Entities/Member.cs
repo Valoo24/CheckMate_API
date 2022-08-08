@@ -10,7 +10,7 @@ namespace CheckMate_DAL.DAL_Entities
     public class Member : IEntity<int>
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string Pseudo { get; set; }
         public string Mail { get; set; }
         public string PasswordHash { get; set; }
         public DateTime Birthdate { get; set; }
