@@ -8,6 +8,10 @@ namespace CheckMate_DAL.Interfaces
 {
     public interface IRepository<Tentity, TKey> where Tentity : IEntity<TKey>
     {
-        // Implémenter ici les méthodes du CRUD
+        public TKey Create(Tentity entity);
+        public Tentity Read(TKey id);
+        public IEnumerable<Tentity> ReadAll();
+        public TKey Update(Tentity entity);
+        public TKey Delete(Tentity entity);
     }
 }
