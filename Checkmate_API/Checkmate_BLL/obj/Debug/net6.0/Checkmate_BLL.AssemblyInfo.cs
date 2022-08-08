@@ -11,12 +11,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("Checkmate_BLL")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("CheckMate_BLL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
-[assembly: System.Reflection.AssemblyProductAttribute("Checkmate_BLL")]
-[assembly: System.Reflection.AssemblyTitleAttribute("Checkmate_BLL")]
+[assembly: System.Reflection.AssemblyProductAttribute("CheckMate_BLL")]
+[assembly: System.Reflection.AssemblyTitleAttribute("CheckMate_BLL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Généré par la classe MSBuild WriteCodeFragment.
