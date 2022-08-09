@@ -1,7 +1,11 @@
 ﻿using CheckMate_BLL.BLL_Entities;
+<<<<<<< HEAD
 using CheckMate_BLL.Tools;
 using CheckMate_DAL.Interfaces;
 using CheckMate_DAL.Interfaces;
+=======
+using CheckMate_DAL.Interfaces;
+>>>>>>> 0a1938917252138a9a92160d081065ec9cb27ac6
 using CheckMate_DAL.Repositories;
 using System;
 using System.Collections.Generic;

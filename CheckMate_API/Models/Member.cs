@@ -12,7 +12,9 @@ namespace CheckMate_API.Models
         public string Mail { get; set; } = String.Empty;
         public string PasswordHash { get; set; }
         public DateTime Birthdate { get; set; }
+
         public string Gender { get; set; }
+
         public int Elo { get; set; }
         public string Token { get; set; } = String.Empty;
         public bool IsAdmin { get; set; }
