@@ -1,4 +1,5 @@
 ﻿using CheckMate_API.Models;
+using CheckMate_API.Tools;
 using CheckMate_BLL.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +24,7 @@ namespace CheckMate_API.Controllers
             {
                 return BadRequest();
             }
-            return Ok(_service.Add(form.FormToModel()));
+            return Ok(_service.Create(form.FromRegisterFormToModel()));
         }*/
     }
 }
