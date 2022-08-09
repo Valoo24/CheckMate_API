@@ -8,11 +8,12 @@ namespace CheckMate_BLL.Tools
 {
     public static class Mappers
     {
+        #region Mapper Member
         /// <summary>
-        /// Transforme un Member de la DAL en un Member de la BLL
+        /// Transforme un Member de la DAL en un Member de la BLL.
         /// </summary>
-        /// <param name="member">objet de type Member de la DAL à modifier.</param>
-        /// <returns>Renvoie un objet de typer Member de la BLL</returns>
+        /// <param name="member">Objet de type Member de la DAL à transformer.</param>
+        /// <returns>Renvoie un objet de typer Member de la BLL.</returns>
         public static BLL_Entities.Member FromDALToBLL(this CheckMate_DAL.DAL_Entities.Member member)
         {
             return new BLL_Entities.Member
@@ -27,6 +28,11 @@ namespace CheckMate_BLL.Tools
                 IsAdmin = member.IsAdmin,
             };
         }
+        /// <summary>
+        /// Transforme un Member de la BLL en un Member de la DAL.
+        /// </summary>
+        /// <param name="member">Objet de type Member de la BLL à transformer</param>
+        /// <returns>Renvoie un objet de typer Member de la DAL.</returns>
         public static CheckMate_DAL.DAL_Entities.Member FromBLLToDal(this BLL_Entities.Member member)
         {
             return new CheckMate_DAL.DAL_Entities.Member
@@ -41,6 +47,14 @@ namespace CheckMate_BLL.Tools
                 IsAdmin = member.IsAdmin,
             };
         }
+        #endregion
+
+        #region Mapper Match
+        /// <summary>
+        /// Transforme un Match de la DAL en un Match de la BLL.
+        /// </summary>
+        /// <param name="match">Objet de type Match de la DAL à transformer</param>
+        /// <returns>Renvoie un objet de typer Match de la BLL.</returns>
         public static BLL_Entities.Match FromDALToBLL(this CheckMate_DAL.DAL_Entities.Match match)
         {
             return new BLL_Entities.Match
@@ -53,6 +67,11 @@ namespace CheckMate_BLL.Tools
                 Result = match.Result,
             };
         }
+        /// <summary>
+        /// Transforme un Match de la DAL en un Match de la BLL.
+        /// </summary>
+        /// <param name="match">Objet de type Match de la DAL à transformer.</param>
+        /// <returns>Renvoie un objet de typer Match de la BLL.</returns>
         public static CheckMate_DAL.DAL_Entities.Match FromBLLToDAL(this BLL_Entities.Match match)
         {
             return new CheckMate_DAL.DAL_Entities.Match
@@ -65,6 +84,14 @@ namespace CheckMate_BLL.Tools
                 Result = match.Result,
             };
         }
+        #endregion
+
+        #region Mapper Tournament
+        /// <summary>
+        /// Transforme un Tournament de la DAL en un Tournament de la BLL.
+        /// </summary>
+        /// <param name="tournament">Objet de type Tournament de la DAL à transformer</param>
+        /// <returns>Renvoie un objet de typer Tournament de la BLL.</returns>
         public static BLL_Entities.Tournament FromDALToBLL(this CheckMate_DAL.DAL_Entities.Tournament tournament)
         {
             return new BLL_Entities.Tournament
@@ -83,6 +110,11 @@ namespace CheckMate_BLL.Tools
                 UpdateDate = tournament.UpdateDate,
             };
         }
+        /// <summary>
+        /// Transforme un Tournament de la DAL en un Tournament de la BLL.
+        /// </summary>
+        /// <param name="tournament">Objet de type Tournament de la DAL à transformer.</param>
+        /// <returns>Renvoie un objet de type Tournament de la BLL.</returns>
         public static CheckMate_DAL.DAL_Entities.Tournament FromBLLToDAL(this BLL_Entities.Tournament tournament)
         {
             return new CheckMate_DAL.DAL_Entities.Tournament
@@ -101,5 +133,6 @@ namespace CheckMate_BLL.Tools
                 UpdateDate = tournament.UpdateDate,
             };
         }
+        #endregion
     }
 }

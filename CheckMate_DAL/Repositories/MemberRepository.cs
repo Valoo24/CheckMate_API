@@ -23,7 +23,7 @@ namespace CheckMate_DAL.Repositories
         /// Permet de convertir les données de la table Member de la base de donnée en un objet Member (Entity de la DAL).
         /// </summary>
         /// <param name="record">Tableau de donnée récupérée dpuis la base de donnée.</param>
-        /// <returns>Renvoie un Member (Entity de la DAL).</returns>
+        /// <returns>Un Member (Entity de la DAL).</returns>
         protected Member Convert(IDataRecord record)
         {
             return new Member
@@ -43,7 +43,7 @@ namespace CheckMate_DAL.Repositories
         /// Permet d'enregistrer un Member (Entity de la DAL) dans la base de donnée.
         /// </summary>
         /// <param name="entity">Objet Member à enregistrer dans la base de donnée.</param>
-        /// <returns>Renvoie l'ID du Member crée dans la base de donnée.</returns>
+        /// <returns>L'ID du Member crée dans la base de donnée.</returns>
         public int Create(Member entity)
         {
             using(IDbCommand cmd = _Connection.CreateCommand())
@@ -70,7 +70,7 @@ namespace CheckMate_DAL.Repositories
         /// Permet de récupérer un Member dans la base de donnée selon l'ID introduit.
         /// </summary>
         /// <param name="id">ID du Member à récupérer dans la base de donnée</param>
-        /// <returns>Renvoie un Member (Entity de la DAL).</returns>
+        /// <returns>Un Member (Entity de la DAL).</returns>
         public Member Read(int id)
         {
             using (IDbCommand cmd = _Connection.CreateCommand())
