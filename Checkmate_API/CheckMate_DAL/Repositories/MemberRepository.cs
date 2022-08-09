@@ -55,7 +55,7 @@ namespace CheckMate_DAL.Repositories
         {
             using(IDbCommand cmd = _Connection.CreateCommand())
             {
-                cmd.CommandText = "Insert into [Member] ([Pseudo] , Mail , Password_Hash, Birthdate , Gender , Elo , Is_Admin Outpout inserted.Member_Id Values (@Pseudo , @Mail, @PasswordHash , @Birthdate , @Gender , @Elo , @IsAdmin";
+                cmd.CommandText = "Insert into [Member] ([Pseudo] , Mail , Password_Hash, Birthdate , Gender , Elo , Is_Admin) Outpout inserted.Member_Id Values (@Pseudo , @Mail, @PasswordHash , @Birthdate , @Gender , @Elo , @IsAdmin";
 
                 // Ajout parametre SQL 
                 AddParameter(cmd, "@Pseudo", entity.Pseudo);

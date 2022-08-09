@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CheckMate_BLL", "Checkmate_
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CheckMate_DAL", "CheckMate_DAL\CheckMate_DAL.csproj", "{57707905-CF27-476F-9F55-F48EB757BAAF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tools", "Tools\Tools.csproj", "{D87EEF32-F007-4713-8905-EB17C9253634}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{57707905-CF27-476F-9F55-F48EB757BAAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57707905-CF27-476F-9F55-F48EB757BAAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57707905-CF27-476F-9F55-F48EB757BAAF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D87EEF32-F007-4713-8905-EB17C9253634}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D87EEF32-F007-4713-8905-EB17C9253634}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D87EEF32-F007-4713-8905-EB17C9253634}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D87EEF32-F007-4713-8905-EB17C9253634}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
