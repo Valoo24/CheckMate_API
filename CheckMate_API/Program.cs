@@ -17,7 +17,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<MemberService, MemberService>();
 builder.Services.AddScoped<MemberRepository, MemberRepository>();
-builder.Services.AddScoped<ITournamentService, TournamentService>();
+builder.Services.AddScoped<TournamentService, TournamentService>();
 builder.Services.AddScoped<TournamentRepository, TournamentRepository>();
 
 // - IDbConnection

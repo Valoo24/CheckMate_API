@@ -31,14 +31,14 @@ namespace CheckMate_DAL.Repositories
         {
             return new Member
             {
-                Id = (int)record["Id"],
+                Id = (int)record["Member_Id"],
                 Pseudo = (string)record["Pseudo"],
-                Mail = (string)record["Email"],
+                Mail = (string)record["Mail"],
                 PasswordHash = (string)record["Password_Hash"],
                 Birthdate = (DateTime)record["Birthdate"],
                 Gender = (string)record["Gender"],
                 Elo = (int)record["Elo"],
-                IsAdmin = (bool)record["IsAdmin"]
+                IsAdmin = (bool)record["Is_Admin"]
             };
         }
 
@@ -68,20 +68,11 @@ namespace CheckMate_DAL.Repositories
                 return id;
             }
         }
-
-<<<<<<< HEAD
-        public bool Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-=======
         /// <summary>
         /// Permet de récupérer un Member dans la base de donnée selon l'ID introduit.
         /// </summary>
         /// <param name="id">ID du Member à récupérer dans la base de donnée</param>
         /// <returns>Un Member (Entity de la DAL).</returns>
->>>>>>> d2659366d949335ce68195efa2a22fc08e6a8685
         public Member Read(int id)
         {
             using (IDbCommand cmd = _Connection.CreateCommand())
@@ -95,6 +86,30 @@ namespace CheckMate_DAL.Repositories
                     if (reader.Read())
                         return Convert(reader);
                     return null;
+                }
+            }
+        }
+        #endregion
+
+        #region Méthodes Custom
+        public Member Login(Member login)
+        {
+            using (IDbCommand cmd = _Connection.CreateCommand())
+            {
+                cmd.CommandText = $"SELECT * FROM Member where (Pseudo = @Pseudo OR Mail = @Mail) AND Password_Hash = @Password";
+
+                DataAccess.AddParameter(cmd, "@Pseudo", login.Pseudo);
+                DataAccess.AddParameter(cmd, "@Mail", login.Mail);
+                DataAccess.AddParameter(cmd, "@Password", login.PasswordHash);
+
+                DataAccess.ConnectionOpen(_Connection);
+                using (IDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        return Convert(reader);
+                    }
+                    throw new ArgumentNullException($"Membre Inexistant");
                 }
             }
         }

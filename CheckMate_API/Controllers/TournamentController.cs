@@ -1,6 +1,6 @@
 ﻿using CheckMate_API.Models;
 using CheckMate_API.Tools;
-using CheckMate_BLL.Interfaces;
+using CheckMate_BLL.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,9 +10,9 @@ namespace CheckMate_API.Controllers
     [ApiController]
     public class TournamentController : ControllerBase
     {
-        private ITournamentService _service;
+        private TournamentService _service;
 
-        public TournamentController(ITournamentService service)
+        public TournamentController(TournamentService service)
         {
             _service = service;
         }
