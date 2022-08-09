@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Flo_Del\\Desktop\\Labo Echec\\Checkmate_API\\CheckMate_API\\CheckMate_API.csproj": {}
+    "C:\\Users\\Benji\\Desktop\\CheckMate_API\\Checkmate_API\\CheckMate_API\\CheckMate_API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Flo_Del\\Desktop\\Labo Echec\\Checkmate_API\\CheckMate_API\\CheckMate_API.csproj": {
+    "C:\\Users\\Benji\\Desktop\\CheckMate_API\\Checkmate_API\\CheckMate_API\\CheckMate_API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Flo_Del\\Desktop\\Labo Echec\\Checkmate_API\\CheckMate_API\\CheckMate_API.csproj",
+        "projectUniqueName": "C:\\Users\\Benji\\Desktop\\CheckMate_API\\Checkmate_API\\CheckMate_API\\CheckMate_API.csproj",
         "projectName": "CheckMate_API",
-        "projectPath": "C:\\Users\\Flo_Del\\Desktop\\Labo Echec\\Checkmate_API\\CheckMate_API\\CheckMate_API.csproj",
-        "packagesPath": "C:\\Users\\Flo_Del\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Flo_Del\\Desktop\\Labo Echec\\Checkmate_API\\CheckMate_API\\obj\\",
+        "projectPath": "C:\\Users\\Benji\\Desktop\\CheckMate_API\\Checkmate_API\\CheckMate_API\\CheckMate_API.csproj",
+        "packagesPath": "C:\\Users\\Benji\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Benji\\Desktop\\CheckMate_API\\Checkmate_API\\CheckMate_API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Flo_Del\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Benji\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,8 +28,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Flo_Del\\Desktop\\Labo Echec\\Checkmate_API\\Checkmate_BLL\\CheckMate_BLL.csproj": {
-                "projectPath": "C:\\Users\\Flo_Del\\Desktop\\Labo Echec\\Checkmate_API\\Checkmate_BLL\\CheckMate_BLL.csproj"
+              "C:\\Users\\Benji\\Desktop\\CheckMate_API\\Checkmate_API\\Checkmate_BLL\\CheckMate_BLL.csproj": {
+                "projectPath": "C:\\Users\\Benji\\Desktop\\CheckMate_API\\Checkmate_API\\Checkmate_BLL\\CheckMate_BLL.csproj"
               }
             }
           }
@@ -79,21 +79,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Flo_Del\\Desktop\\Labo Echec\\Checkmate_API\\Checkmate_BLL\\CheckMate_BLL.csproj": {
+    "C:\\Users\\Benji\\Desktop\\CheckMate_API\\Checkmate_API\\Checkmate_BLL\\CheckMate_BLL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Flo_Del\\Desktop\\Labo Echec\\Checkmate_API\\Checkmate_BLL\\CheckMate_BLL.csproj",
+        "projectUniqueName": "C:\\Users\\Benji\\Desktop\\CheckMate_API\\Checkmate_API\\Checkmate_BLL\\CheckMate_BLL.csproj",
         "projectName": "CheckMate_BLL",
-        "projectPath": "C:\\Users\\Flo_Del\\Desktop\\Labo Echec\\Checkmate_API\\Checkmate_BLL\\CheckMate_BLL.csproj",
-        "packagesPath": "C:\\Users\\Flo_Del\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Flo_Del\\Desktop\\Labo Echec\\Checkmate_API\\Checkmate_BLL\\obj\\",
+        "projectPath": "C:\\Users\\Benji\\Desktop\\CheckMate_API\\Checkmate_API\\Checkmate_BLL\\CheckMate_BLL.csproj",
+        "packagesPath": "C:\\Users\\Benji\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Benji\\Desktop\\CheckMate_API\\Checkmate_API\\Checkmate_BLL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Flo_Del\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Benji\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -107,8 +107,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Flo_Del\\Desktop\\Labo Echec\\Checkmate_API\\CheckMate_DAL\\CheckMate_DAL.csproj": {
-                "projectPath": "C:\\Users\\Flo_Del\\Desktop\\Labo Echec\\Checkmate_API\\CheckMate_DAL\\CheckMate_DAL.csproj"
+              "C:\\Users\\Benji\\Desktop\\CheckMate_API\\Checkmate_API\\CheckMate_DAL\\CheckMate_DAL.csproj": {
+                "projectPath": "C:\\Users\\Benji\\Desktop\\CheckMate_API\\Checkmate_API\\CheckMate_DAL\\CheckMate_DAL.csproj"
               }
             }
           }
@@ -137,21 +137,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Flo_Del\\Desktop\\Labo Echec\\Checkmate_API\\CheckMate_DAL\\CheckMate_DAL.csproj": {
+    "C:\\Users\\Benji\\Desktop\\CheckMate_API\\Checkmate_API\\CheckMate_DAL\\CheckMate_DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Flo_Del\\Desktop\\Labo Echec\\Checkmate_API\\CheckMate_DAL\\CheckMate_DAL.csproj",
+        "projectUniqueName": "C:\\Users\\Benji\\Desktop\\CheckMate_API\\Checkmate_API\\CheckMate_DAL\\CheckMate_DAL.csproj",
         "projectName": "CheckMate_DAL",
-        "projectPath": "C:\\Users\\Flo_Del\\Desktop\\Labo Echec\\Checkmate_API\\CheckMate_DAL\\CheckMate_DAL.csproj",
-        "packagesPath": "C:\\Users\\Flo_Del\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Flo_Del\\Desktop\\Labo Echec\\Checkmate_API\\CheckMate_DAL\\obj\\",
+        "projectPath": "C:\\Users\\Benji\\Desktop\\CheckMate_API\\Checkmate_API\\CheckMate_DAL\\CheckMate_DAL.csproj",
+        "packagesPath": "C:\\Users\\Benji\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Benji\\Desktop\\CheckMate_API\\Checkmate_API\\CheckMate_DAL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Flo_Del\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Benji\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -191,7 +191,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     }

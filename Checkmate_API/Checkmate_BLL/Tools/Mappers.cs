@@ -1,13 +1,10 @@
-﻿using CheckMate_BLL.BLL_Entities;
-using CheckMate_DAL.DAL_Entities;
-using CheckMate_API.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tools
+namespace CheckMate_BLL.Tools
 {
     public static class Mappers
     {
@@ -16,9 +13,9 @@ namespace Tools
         /// </summary>
         /// <param name="member">objet de type Member de la DAL à modifier.</param>
         /// <returns>Renvoie un objet de typer Member de la BLL</returns>
-        public static CheckMate_BLL.BLL_Entities.Member FromDALToBLL(this CheckMate_DAL.DAL_Entities.Member member)
+        public static BLL_Entities.Member FromDALToBLL(this CheckMate_DAL.DAL_Entities.Member member)
         {
-            return new CheckMate_BLL.BLL_Entities.Member
+            return new BLL_Entities.Member
             {
                 Id = member.Id,
                 Pseudo = member.Pseudo,
@@ -30,7 +27,7 @@ namespace Tools
                 IsAdmin = member.IsAdmin,
             };
         }
-        public static CheckMate_DAL.DAL_Entities.Member FromBLLToDal(CheckMate_BLL.BLL_Entities.Member member)
+        public static CheckMate_DAL.DAL_Entities.Member FromBLLToDal(this BLL_Entities.Member member)
         {
             return new CheckMate_DAL.DAL_Entities.Member
             {
@@ -44,9 +41,9 @@ namespace Tools
                 IsAdmin = member.IsAdmin,
             };
         }
-        public static CheckMate_BLL.BLL_Entities.Match FromDALToBLL(this CheckMate_DAL.DAL_Entities.Match match)
+        public static BLL_Entities.Match FromDALToBLL(this CheckMate_DAL.DAL_Entities.Match match)
         {
-            return new CheckMate_BLL.BLL_Entities.Match
+            return new BLL_Entities.Match
             {
                 Id = match.Id,
                 FkTournamentId = match.FkTournamentId,
@@ -56,7 +53,7 @@ namespace Tools
                 Result = match.Result,
             };
         }
-        public static CheckMate_DAL.DAL_Entities.Match FromBLLToDAL(this CheckMate_BLL.BLL_Entities.Match match)
+        public static CheckMate_DAL.DAL_Entities.Match FromBLLToDAL(this BLL_Entities.Match match)
         {
             return new CheckMate_DAL.DAL_Entities.Match
             {
@@ -68,9 +65,9 @@ namespace Tools
                 Result = match.Result,
             };
         }
-        public static CheckMate_BLL.BLL_Entities.Tournament FromDALToBLL(this CheckMate_DAL.DAL_Entities.Tournament tournament)
+        public static BLL_Entities.Tournament FromDALToBLL(this CheckMate_DAL.DAL_Entities.Tournament tournament)
         {
-            return new CheckMate_BLL.BLL_Entities.Tournament
+            return new BLL_Entities.Tournament
             {
                 Id = tournament.Id,
                 Place = tournament.Place,
@@ -86,7 +83,7 @@ namespace Tools
                 UpdateDate = tournament.UpdateDate,
             };
         }
-        public static CheckMate_DAL.DAL_Entities.Tournament FromBLLToDAL(this CheckMate_BLL.BLL_Entities.Tournament tournament)
+        public static CheckMate_DAL.DAL_Entities.Tournament FromBLLToDAL(this BLL_Entities.Tournament tournament)
         {
             return new CheckMate_DAL.DAL_Entities.Tournament
             {
@@ -104,58 +101,5 @@ namespace Tools
                 UpdateDate = tournament.UpdateDate,
             };
         }
-        public static CheckMate_API.Models.Member FromBLLToModel(this CheckMate_BLL.BLL_Entities.Member member)
-        {
-            return new CheckMate_API.Models.Member
-            {
-                MemberId = member.Id,
-                Pseudo = member.Pseudo,
-                Mail = member.Mail,
-                PasswordHash = member.PasswordHash,
-                Birthdate = member.Birthdate,
-                Gender = member.Gender,
-                Elo = member.Elo,
-                IsAdmin = member.IsAdmin,
-            };
-        }
-        public static CheckMate_BLL.BLL_Entities.Member FromModelToBLL(this CheckMate_API.Models.Member member)
-        {
-            return new CheckMate_BLL.BLL_Entities.Member
-            {
-                Id = member.MemberId,
-                Pseudo = member.Pseudo,
-                Mail = member.Mail,
-                PasswordHash = member.PasswordHash,
-                Birthdate = member.Birthdate,
-                Gender = member.Gender,
-                Elo = member.Elo,
-                IsAdmin = member.IsAdmin,
-            };
-        }
-        public static CheckMate_API.Models.Member FromRegisterFormToModel(this MemberRegisterForm form)
-        {
-            return new CheckMate_API.Models.Member
-            {
-                Pseudo = form.Pseudo,
-                Mail = form.Mail,
-                PasswordHash = form.Password,
-                Birthdate = form.Birthdate,
-                Gender = form.Gender,
-                Elo = form.Elo,
-            };
-        }
-        public static MemberRegisterForm FromModelToRegisterForm(this CheckMate_API.Models.Member member)
-        {
-            return new MemberRegisterForm
-            {
-                Pseudo = member.Pseudo,
-                Mail = member.Mail,
-                Password = member.PasswordHash,
-                Birthdate = member.Birthdate,
-                Gender = member.Gender,
-                Elo = member.Elo,
-            };
-        }
-
     }
 }

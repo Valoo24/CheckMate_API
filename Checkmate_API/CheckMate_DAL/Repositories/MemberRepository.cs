@@ -45,6 +45,7 @@ namespace CheckMate_DAL.Repositories
                 Mail = (string)record["Email"],
                 PasswordHash = (string)record["Password_Hash"],
                 Birthdate = (DateTime)record["Birthdate"],
+                Gender = (char)record["Gender"],
                 Elo = (int)record["Elo"],
                 IsAdmin = (bool)record["IsAdmin"]
             };
@@ -55,7 +56,7 @@ namespace CheckMate_DAL.Repositories
         {
             using(IDbCommand cmd = _Connection.CreateCommand())
             {
-                cmd.CommandText = "Insert into [Member] ([Pseudo] , Mail , Password_Hash, Birthdate , Gender , Elo , Is_Admin) Outpout inserted.Member_Id Values (@Pseudo , @Mail, @PasswordHash , @Birthdate , @Gender , @Elo , @IsAdmin";
+                cmd.CommandText = "Insert into [Member] ([Pseudo] , Mail , Password_Hash, Birthdate , Gender , Elo , Is_Admin) Output inserted.Member_Id Values (@Pseudo , @Mail, @PasswordHash , @Birthdate , @Gender , @Elo , @IsAdmin)";
 
                 // Ajout parametre SQL 
                 AddParameter(cmd, "@Pseudo", entity.Pseudo);
@@ -70,7 +71,6 @@ namespace CheckMate_DAL.Repositories
                 int id = (int)cmd.ExecuteScalar();
                 _Connection.Close();
                 return id;
-
             }
         }
 

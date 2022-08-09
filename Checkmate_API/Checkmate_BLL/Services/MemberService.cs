@@ -1,6 +1,7 @@
 ﻿using CheckMate_BLL.BLL_Entities;
 using CheckMate_BLL.Interfaces;
 using CheckMate_DAL.Repositories;
+using CheckMate_BLL.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace CheckMate_BLL.Services
 
         public int Create(Member entity)
         {
-            throw new NotImplementedException();
+            return Repository.Create(entity.FromBLLToDal());
         }
 
         public bool Delete(Member entity)
