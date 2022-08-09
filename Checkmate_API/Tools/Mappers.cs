@@ -80,7 +80,6 @@ namespace CheckMate_API.Tools
                 Elo = member.Elo,
             };
         }
-<<<<<<< HEAD
 
         public static Tournament FromTournamentFormToModel( this TournamentForm tournament)
         {
@@ -113,8 +112,5 @@ namespace CheckMate_API.Tools
             };
 
         }
-=======
-        #endregion
->>>>>>> d2659366d949335ce68195efa2a22fc08e6a8685
     }
 }

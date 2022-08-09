@@ -1,10 +1,5 @@
 ﻿using CheckMate_BLL.BLL_Entities;
-<<<<<<< HEAD
-using CheckMate_BLL.Interfaces;
-using CheckMate_BLL.Tools;
-=======
 using CheckMate_DAL.Interfaces;
->>>>>>> d2659366d949335ce68195efa2a22fc08e6a8685
 using CheckMate_DAL.Repositories;
 using System;
 using System.Collections.Generic;
@@ -32,10 +27,6 @@ namespace CheckMate_BLL.Services
         {
             return Repository.Create(entity.FromBLLToDAL());
         }
-<<<<<<< HEAD
-
-=======
->>>>>>> d2659366d949335ce68195efa2a22fc08e6a8685
         public bool Delete(int id)
         {
             return Repository.Delete(id);

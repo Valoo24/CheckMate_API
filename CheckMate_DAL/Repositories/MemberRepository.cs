@@ -69,19 +69,16 @@ namespace CheckMate_DAL.Repositories
             }
         }
 
-<<<<<<< HEAD
-        public bool Delete(int id)
+        public bool Delete(Member entity)
         {
             throw new NotImplementedException();
         }
 
-=======
         /// <summary>
         /// Permet de récupérer un Member dans la base de donnée selon l'ID introduit.
         /// </summary>
         /// <param name="id">ID du Member à récupérer dans la base de donnée</param>
         /// <returns>Un Member (Entity de la DAL).</returns>
->>>>>>> d2659366d949335ce68195efa2a22fc08e6a8685
         public Member Read(int id)
         {
             using (IDbCommand cmd = _Connection.CreateCommand())
