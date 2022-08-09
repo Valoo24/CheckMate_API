@@ -23,7 +23,7 @@ namespace CheckMate_BLL.Services
         }
         #endregion
 
-        #region A FAIRE !!!!!
+        #region Méthodes CRUD
         public int Create(Tournament entity)
         {
             return Repository.Create(entity.FromBLLToDAL());
@@ -34,12 +34,15 @@ namespace CheckMate_BLL.Services
         }
         public Tournament Read(int id)
         {
-           return Repository.Read(id).FromDALToBLL();
+            return Repository.Read(id).FromDALToBLL();
         }
         public IEnumerable<Tournament> ReadAll()
         {
             return Repository.ReadAll().Select(x => x.FromDALToBLL());
         }
+        #endregion
+
+        #region A FAIRE !!!!!
         public bool Update(Tournament entity)
         {
             throw new NotImplementedException();

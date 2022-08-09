@@ -21,7 +21,7 @@ namespace CheckMate_API.Controllers
 
 
         [HttpGet]
-        [Authorize("Auth")]
+        //[Authorize("Auth")]
         public IActionResult GetAll()
         {
             return Ok(_service.ReadAll().Select(x => x));

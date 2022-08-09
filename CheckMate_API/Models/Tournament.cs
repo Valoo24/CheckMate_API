@@ -19,7 +19,13 @@ namespace CheckMate_API.Models
         public bool IsWomenOnly { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime UpdateTime { get; set; }
-
+        public DateTime EndDate 
+        { 
+            get
+            {
+                return CreationDate.AddDays((double)MinPlayer);
+            }
+        }
     }
 
     /// <summary>
