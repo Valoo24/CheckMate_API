@@ -40,5 +40,27 @@ namespace CheckMate_API.Controllers
             return Ok(_service.Create(form.FromRegisterFormToModel().FromModelToBLL()));
         }
         #endregion
+
+        #region Méthodes Custom
+        [HttpPost("login")]
+        public IActionResult Login(MemberLoginForm login)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                try
+                {
+                    return Ok(_service.Login(login.FromLoginFormToModel().FromModelToBLL()));
+                }
+                catch (Exception e)
+                {
+                    return BadRequest(e.Message);
+                }
+            }
+        }
+        #endregion
     }
 }

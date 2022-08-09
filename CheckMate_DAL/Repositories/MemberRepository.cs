@@ -68,12 +68,10 @@ namespace CheckMate_DAL.Repositories
                 return id;
             }
         }
-
         public bool Delete(Member entity)
         {
             throw new NotImplementedException();
         }
-
         /// <summary>
         /// Permet de récupérer un Member dans la base de donnée selon l'ID introduit.
         /// </summary>
@@ -92,6 +90,30 @@ namespace CheckMate_DAL.Repositories
                     if (reader.Read())
                         return Convert(reader);
                     return null;
+                }
+            }
+        }
+        #endregion
+
+        #region Méthodes Custom
+        public Member Login(Member login)
+        {
+            using (IDbCommand cmd = _Connection.CreateCommand())
+            {
+                cmd.CommandText = $"SELECT * FROM Member where (Pseudo = @Pseudo OR Mail = @Mail) AND Password_Hash = @Password";
+
+                DataAccess.AddParameter(cmd, "@Pseudo", login.Pseudo);
+                DataAccess.AddParameter(cmd, "@Mail", login.Mail);
+                DataAccess.AddParameter(cmd, "@Password", login.PasswordHash);
+
+                DataAccess.ConnectionOpen(_Connection);
+                using (IDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        return Convert(reader);
+                    }
+                    throw new ArgumentNullException($"Membre Inexistant");
                 }
             }
         }

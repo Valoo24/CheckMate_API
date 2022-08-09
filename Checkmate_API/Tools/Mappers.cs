@@ -80,7 +80,26 @@ namespace CheckMate_API.Tools
                 Elo = member.Elo,
             };
         }
+        public static Member FromLoginFormToModel(this MemberLoginForm form)
+        {
+            return new Member
+            {
+                Pseudo = form.Credentials,
+                Mail = form.Credentials,
+                PasswordHash = form.Password
+            };
+        }
+        public static MemberLoginForm FromModelToLoginForm(this Member member)
+        {
+            return new MemberLoginForm
+            {
+                Credentials = member.Pseudo + " " + member.Mail,
+                Password = member.PasswordHash,
+            };
+        }
+        #endregion
 
+        #region Mapper Tournament
         public static Tournament FromTournamentFormToModel( this TournamentForm tournament)
         {
             return new Tournament
@@ -112,6 +131,7 @@ namespace CheckMate_API.Tools
             };
 
         }
+        #endregion
     }
     #endregion
 } 

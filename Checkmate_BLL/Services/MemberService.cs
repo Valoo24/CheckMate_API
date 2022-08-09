@@ -30,6 +30,20 @@ namespace CheckMate_BLL.Services
         }
         #endregion
 
+        #region Méthode Custom
+        public Member Login(Member loginForm)
+        {
+            try
+            {
+                return Repository.Login(loginForm.FromBLLToDal()).FromDALToBLL();
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        #endregion
+
         #region A FAIRE !!!!!
         public bool Delete(int id)
         {
