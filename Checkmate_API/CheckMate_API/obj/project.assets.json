@@ -335,6 +335,29 @@
             "rid": "win"
           }
         }
+      },
+      "CheckMate_BLL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "CheckMate_DAL": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/CheckMate_BLL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CheckMate_BLL.dll": {}
+        }
+      },
+      "CheckMate_DAL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/CheckMate_DAL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CheckMate_DAL.dll": {}
+        }
       }
     }
   },
@@ -1081,10 +1104,21 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "CheckMate_BLL/1.0.0": {
+      "type": "project",
+      "path": "../Checkmate_BLL/CheckMate_BLL.csproj",
+      "msbuildProject": "../Checkmate_BLL/CheckMate_BLL.csproj"
+    },
+    "CheckMate_DAL/1.0.0": {
+      "type": "project",
+      "path": "../CheckMate_DAL/CheckMate_DAL.csproj",
+      "msbuildProject": "../CheckMate_DAL/CheckMate_DAL.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "CheckMate_BLL >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.7",
       "Microsoft.SqlServer.Management.SqlParser >= 160.22506.0",
       "Swashbuckle.AspNetCore >= 6.2.3",
@@ -1117,7 +1151,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Benji\\Desktop\\CheckMate_API\\Checkmate_API\\Checkmate_BLL\\CheckMate_BLL.csproj": {
+              "projectPath": "C:\\Users\\Benji\\Desktop\\CheckMate_API\\Checkmate_API\\Checkmate_BLL\\CheckMate_BLL.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

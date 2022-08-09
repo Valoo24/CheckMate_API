@@ -5,11 +5,11 @@ VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CheckMate_API", "CheckMate_API\CheckMate_API.csproj", "{0D6D20AF-CB41-4662-898F-F5F42AF99DF9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CheckMate_BLL", "Checkmate_BLL\CheckMate_BLL.csproj", "{B98BE9CA-FB0D-475F-9B5C-61BCD75F8DC3}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CheckMate_DAL", "CheckMate_DAL\CheckMate_DAL.csproj", "{57707905-CF27-476F-9F55-F48EB757BAAF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tools", "Tools\Tools.csproj", "{D87EEF32-F007-4713-8905-EB17C9253634}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CheckMate_BLL", "Checkmate_BLL\CheckMate_BLL.csproj", "{66912AE1-26D9-4F74-A661-928B8B77C856}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +21,6 @@ Global
 		{0D6D20AF-CB41-4662-898F-F5F42AF99DF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D6D20AF-CB41-4662-898F-F5F42AF99DF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D6D20AF-CB41-4662-898F-F5F42AF99DF9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B98BE9CA-FB0D-475F-9B5C-61BCD75F8DC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B98BE9CA-FB0D-475F-9B5C-61BCD75F8DC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B98BE9CA-FB0D-475F-9B5C-61BCD75F8DC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B98BE9CA-FB0D-475F-9B5C-61BCD75F8DC3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{57707905-CF27-476F-9F55-F48EB757BAAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{57707905-CF27-476F-9F55-F48EB757BAAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57707905-CF27-476F-9F55-F48EB757BAAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +29,10 @@ Global
 		{D87EEF32-F007-4713-8905-EB17C9253634}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D87EEF32-F007-4713-8905-EB17C9253634}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D87EEF32-F007-4713-8905-EB17C9253634}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66912AE1-26D9-4F74-A661-928B8B77C856}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66912AE1-26D9-4F74-A661-928B8B77C856}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66912AE1-26D9-4F74-A661-928B8B77C856}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66912AE1-26D9-4F74-A661-928B8B77C856}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

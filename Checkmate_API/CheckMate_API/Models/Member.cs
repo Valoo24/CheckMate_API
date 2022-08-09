@@ -12,7 +12,7 @@ namespace CheckMate_API.Models
 
         public DateTime Birthdate { get; set; }
 
-        public string Gender { get; set; } = String.Empty;
+        public char Gender { get; set; }
 
         public int Elo { get; set; }
         public string Token { get; set; } = String.Empty;
@@ -36,7 +36,7 @@ namespace CheckMate_API.Models
         public DateTime Birthdate { get; set; }
 
         [Required]
-        public string Gender { get; set; }
+        public char Gender { get; set; }
         [Required]
         public int  Elo { get; set; }
 
@@ -45,7 +45,7 @@ namespace CheckMate_API.Models
         public string Password { get; set; }
        
        
-
+        // !!! Message d'erreur temporaire !!!
         [DataType(DataType.Password)]
         [Compare(nameof(Password), ErrorMessage = "Les deux mdp doivent correspondre")]
         public string PasswordCheck { get; set; }

@@ -1,5 +1,6 @@
 ﻿using CheckMate_BLL.BLL_Entities;
 using CheckMate_DAL.DAL_Entities;
+using CheckMate_API.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -101,6 +102,34 @@ namespace Tools
                 IsWomenOnly = tournament.IsWomenOnly,
                 CreationDate = tournament.CreationDate,
                 UpdateDate = tournament.UpdateDate,
+            };
+        }
+        public static CheckMate_API.Models.Member FromBLLToModel(this CheckMate_BLL.BLL_Entities.Member member)
+        {
+            return new CheckMate_API.Models.Member
+            {
+                MemberId = member.Id,
+                Pseudo = member.Pseudo,
+                Mail = member.Mail,
+                PasswordHash = member.PasswordHash,
+                Birthdate = member.Birthdate,
+                Gender = member.Gender,
+                Elo = member.Elo,
+                IsAdmin = member.IsAdmin,
+            };
+        }
+        public static CheckMate_BLL.BLL_Entities.Member FromModelToBLL(this CheckMate_API.Models.Member member)
+        {
+            return new CheckMate_BLL.BLL_Entities.Member
+            {
+                Id = member.MemberId,
+                Pseudo = member.Pseudo,
+                Mail = member.Mail,
+                PasswordHash = member.PasswordHash,
+                Birthdate = member.Birthdate,
+                Gender = member.Gender,
+                Elo = member.Elo,
+                IsAdmin = member.IsAdmin,
             };
         }
     }
