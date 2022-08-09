@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CheckMate_DAL.Repositories
 {
-    internal class TournamentRepository : IRepository<Tournament, int>
+    public class TournamentRepository : IRepository<Tournament, int>
     {
 
         protected IDbConnection _Connection;

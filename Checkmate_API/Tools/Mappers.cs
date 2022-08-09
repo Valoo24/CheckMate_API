@@ -10,6 +10,11 @@ namespace Tools
 {
     public static class Mappers
     {
+        /// <summary>
+        /// Transforme un Member de la DAL en un Member de la BLL
+        /// </summary>
+        /// <param name="member">objet de type Member de la DAL à modifier.</param>
+        /// <returns>Renvoie un objet de typer Member de la BLL</returns>
         public static CheckMate_BLL.BLL_Entities.Member FromDALToBLL(this CheckMate_DAL.DAL_Entities.Member member)
         {
             return new CheckMate_BLL.BLL_Entities.Member
