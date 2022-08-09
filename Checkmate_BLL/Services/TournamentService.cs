@@ -1,5 +1,6 @@
 ﻿using CheckMate_BLL.BLL_Entities;
 using CheckMate_BLL.Interfaces;
+using CheckMate_BLL.Tools;
 using CheckMate_DAL.Repositories;
 using System;
 using System.Collections.Generic;
@@ -20,22 +21,22 @@ namespace CheckMate_BLL.Services
 
         public int Create(Tournament entity)
         {
-            throw new NotImplementedException();
+            return Repository.Create(entity.FromBLLToDAL());
         }
 
-        public bool Delete(Tournament entity)
+        public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            return Repository.Delete(id);
         }
 
         public Tournament Read(int id)
         {
-            throw new NotImplementedException();
+           return Repository.Read(id).FromDALToBLL();
         }
 
         public IEnumerable<Tournament> ReadAll()
         {
-            throw new NotImplementedException();
+            return Repository.ReadAll().Select(x => x.FromDALToBLL());
         }
 
         public bool Update(Tournament entity)

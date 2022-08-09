@@ -16,8 +16,8 @@ namespace CheckMate_BLL.BLL_Entities
         public int MaxPlayer { get; set; }
         public int MinElo { get; set; }
         public int MaxElo { get; set; }
-        public char Category { get; set; }
-        public char TournamentStatus { get; set; }
+        public string Category { get; set; }
+        public string TournamentStatus { get; set; }
         public int TournamentRound { get; set; }
         public bool IsWomenOnly { get; set; }
         public DateTime CreationDate { get; set; }

@@ -40,16 +40,18 @@ namespace CheckMate_DAL.Repositories
 
         protected Tournament Convert(IDataRecord record)
         {
+           // string temp1 = record["Category"].ToString();
+            //string temp2 = record["Tournament_Status"].ToString();
             return new Tournament
             {
-                Id = (int)record["Id"],
+                Id = (int)record["Tournament_Id"],
                 Place = (string)record["Place"],
                 MinPlayer = (int)record["Min_Player"],
                 MaxPlayer = (int)record["Max_Player"],
                 MinElo = (int)record["Min_Elo"],
                 MaxElo = (int)record["Max_Elo"],
-                Category = (char)record["Category"],
-                TournamentStatus = (char)record["Tournament_Status"],
+                Category = (string)record["Category"],
+                TournamentStatus = (string)record["Tournament_Status"],
                 TournamentRound = (int)record["Tournament_Round"],
                 IsWomenOnly = (bool)record["Is_Women_Only"],
                 CreationDate = (DateTime)record["Creation_Date"],
@@ -61,7 +63,7 @@ namespace CheckMate_DAL.Repositories
         {
             using (IDbCommand cmd = _Connection.CreateCommand())
             {
-                cmd.CommandText = "Insert into [Tournament] ([Place] , Min_Player , Max_Player, Min_Elo , Max_Elo,  Category , Tournament_Status , Tournament_Round, Is_Women_Only, Creation_Date, Update_Date)  Output inserted.Member_Id Values (@Place , @MinPlayer, @MaxPlayer , @MinElo, @MaxElo , @Category , @TournamentStatus , @TournamentRound , @IsWomenOnly , @CreationDate , @UpdateDate)";
+                cmd.CommandText = "Insert into [Tournament] ([Place] , Min_Player , Max_Player, Min_Elo , Max_Elo,  Category , Tournament_Status , Tournament_Round, Is_Women_Only, Creation_Date, Update_Date)  Output inserted.Tournament_Id Values (@Place , @MinPlayer, @MaxPlayer , @MinElo, @MaxElo , @Category , @TournamentStatus , @TournamentRound , @IsWomenOnly , @CreationDate , @UpdateDate)";
 
                 // Ajout parametre SQL 
                 AddParameter(cmd, "@Place", entity.Place);
@@ -85,12 +87,12 @@ namespace CheckMate_DAL.Repositories
             }
         }
 
-        public bool Delete(Tournament entity)
+        public bool Delete(int id)
         {
             using (IDbCommand cmd = _Connection.CreateCommand())
             {
-                cmd.CommandText = $"DELETE FROM Tournament WHERE Id = @id";
-                AddParameter(cmd, "@id", entity.Id);
+                cmd.CommandText = $"DELETE FROM Tournament WHERE Tournament_Id = @id";
+                AddParameter(cmd, "@id", id);
 
                 _Connection.Open();
                 return cmd.ExecuteNonQuery() == 1;
@@ -101,7 +103,7 @@ namespace CheckMate_DAL.Repositories
         {
             using (IDbCommand cmd = _Connection.CreateCommand())
             {
-                cmd.CommandText = $"SELECT * FROM Tournament WHERE Id = @id";
+                cmd.CommandText = $"SELECT * FROM Tournament WHERE Tournament_Id = @id";
                 AddParameter(cmd, "@id", id);
 
                 ConnectionOpen();

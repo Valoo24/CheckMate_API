@@ -45,7 +45,7 @@ namespace CheckMate_DAL.Repositories
                 Mail = (string)record["Email"],
                 PasswordHash = (string)record["Password_Hash"],
                 Birthdate = (DateTime)record["Birthdate"],
-                Gender = (char)record["Gender"],
+                Gender = (string)record["Gender"],
                 Elo = (int)record["Elo"],
                 IsAdmin = (bool)record["IsAdmin"]
             };
@@ -74,7 +74,7 @@ namespace CheckMate_DAL.Repositories
             }
         }
 
-        public bool Delete(Member entity)
+        public bool Delete(int id)
         {
             throw new NotImplementedException();
         }

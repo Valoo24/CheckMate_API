@@ -12,7 +12,7 @@ namespace CheckMate_API.Models
 
         public DateTime Birthdate { get; set; }
 
-        public char Gender { get; set; }
+        public string Gender { get; set; }
 
         public int Elo { get; set; }
         public string Token { get; set; } = String.Empty;
@@ -36,7 +36,7 @@ namespace CheckMate_API.Models
         public DateTime Birthdate { get; set; }
 
         [Required]
-        public char Gender { get; set; }
+        public string Gender { get; set; }
         [Required]
         public int  Elo { get; set; }
 

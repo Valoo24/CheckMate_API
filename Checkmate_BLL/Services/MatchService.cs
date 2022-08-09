@@ -22,7 +22,7 @@ namespace CheckMate_BLL.Services
             throw new NotImplementedException();
         }
 
-        public bool Delete(Match entity)
+        public bool Delete(int id)
         {
             throw new NotImplementedException();
         }

@@ -149,5 +149,37 @@ namespace CheckMate_API.Tools
                 Elo = member.Elo,
             };
         }
+
+        public static Tournament FromTournamentFormToModel( this TournamentForm tournament)
+        {
+            return new Tournament
+            {
+                Place = tournament.Place,
+                MinPlayer = tournament.MinPlayer,
+                MaxPlayer = tournament.MaxPlayer,
+                MinElo = tournament.MinElo,
+                MaxElo = tournament.MaxElo,
+                Category = tournament.Category,
+                TournamentStatus = "W",
+                TournamentRound = 0,
+                IsWomenOnly = tournament.IsWomenOnly
+            };
+        }
+        public static CheckMate_BLL.BLL_Entities.Tournament FromAPIToBLL(this CheckMate_API.Models.Tournament tournament)
+        {
+            return new CheckMate_BLL.BLL_Entities.Tournament
+            {
+                Place = tournament.Place,
+                MinPlayer = tournament.MinPlayer,
+                MaxPlayer = tournament.MaxPlayer,
+                MinElo = tournament.MinElo,
+                MaxElo = tournament.MaxElo,
+                Category = tournament.Category,
+                TournamentStatus = "W",
+                TournamentRound = 0,
+                IsWomenOnly = tournament.IsWomenOnly
+            };
+
+        }
     }
 }
