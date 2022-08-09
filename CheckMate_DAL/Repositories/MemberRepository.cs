@@ -68,15 +68,10 @@ namespace CheckMate_DAL.Repositories
                 return id;
             }
         }
-<<<<<<< HEAD
-=======
-
         public bool Delete(Member entity)
         {
             throw new NotImplementedException();
         }
-
->>>>>>> 0a1938917252138a9a92160d081065ec9cb27ac6
         /// <summary>
         /// Permet de récupérer un Member dans la base de donnée selon l'ID introduit.
         /// </summary>

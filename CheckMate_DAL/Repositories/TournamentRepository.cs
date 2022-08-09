@@ -78,10 +78,6 @@ namespace CheckMate_DAL.Repositories
                 return id;
             }
         }
-<<<<<<< HEAD
-
-=======
->>>>>>> 0a1938917252138a9a92160d081065ec9cb27ac6
         /// <summary>
         /// Supprime un Tournament dans la base de donnée.
         /// </summary>
@@ -92,13 +88,7 @@ namespace CheckMate_DAL.Repositories
             using (IDbCommand cmd = _Connection.CreateCommand())
             {
                 cmd.CommandText = $"DELETE FROM Tournament WHERE Tournament_Id = @id";
-<<<<<<< HEAD
                 DataAccess.AddParameter(cmd, "@id", id);
-                cmd.CommandText = $"DELETE FROM Tournament WHERE Id = @id";
-                DataAccess.AddParameter(cmd, "@id", id);
-=======
-                AddParameter(cmd, "@id", id);
->>>>>>> 0a1938917252138a9a92160d081065ec9cb27ac6
 
                 DataAccess.ConnectionOpen(_Connection);
                 return cmd.ExecuteNonQuery() == 1;
@@ -115,13 +105,7 @@ namespace CheckMate_DAL.Repositories
             using (IDbCommand cmd = _Connection.CreateCommand())
             {
                 cmd.CommandText = $"SELECT * FROM Tournament WHERE Tournament_Id = @id";
-<<<<<<< HEAD
                 DataAccess.AddParameter(cmd, "@id", id);
-                cmd.CommandText = $"SELECT * FROM Tournament WHERE Id = @id";
-                DataAccess.AddParameter(cmd, "@id", id);
-=======
-                AddParameter(cmd, "@id", id);
->>>>>>> 0a1938917252138a9a92160d081065ec9cb27ac6
 
                 DataAccess.ConnectionOpen(_Connection);
                 using (IDataReader reader = cmd.ExecuteReader())
