@@ -1,5 +1,6 @@
 ﻿using CheckMate_DAL.DAL_Entities;
 using CheckMate_DAL.Interfaces;
+using CheckMate_DAL.Tools;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,35 +16,6 @@ namespace CheckMate_DAL.Repositories
         protected IDbConnection _Connection;
         public TournamentRepository(IDbConnection connection)
         { _Connection = connection; }
-        #endregion
-
-        #region Méthodes Custom
-        /// <summary>
-        /// Ouvre correctement la connection à la base de donnée, quelque soit l'état de la connection.
-        /// </summary>
-        public void ConnectionOpen()
-        {
-            if (_Connection.State == ConnectionState.Open)
-            {
-                _Connection.Close();
-
-            }
-            _Connection.Open();
-
-        }
-        /// <summary>
-        /// Permet de sécuriser l'introduction par l'utilisateur de données dans la base de données.
-        /// </summary>
-        /// <param name="cmd">Commande SQL à introduire dans le base de donnée.</param>
-        /// <param name="name">Nom référencé de la donnée dans la requête SQL.</param>
-        /// <param name="data">Donée à sécuriser et à introduire dans la basse de donnée.</param>
-        protected void AddParameter(IDbCommand cmd, string name, object data)
-        {
-            IDbDataParameter param = cmd.CreateParameter();
-            param.ParameterName = name;
-            param.Value = data ?? DBNull.Value;
-            cmd.Parameters.Add(param);
-        }
         #endregion
 
         #region Méthodes CRUD
@@ -82,20 +54,20 @@ namespace CheckMate_DAL.Repositories
                 cmd.CommandText = "Insert into [Tournament] ([Place] , Min_Player , Max_Player, Min_Elo , Max_Elo,  Category , Tournament_Status , Tournament_Round, Is_Women_Only, Creation_Date, Update_Date)  Output inserted.Member_Id Values (@Place , @MinPlayer, @MaxPlayer , @MinElo, @MaxElo , @Category , @TournamentStatus , @TournamentRound , @IsWomenOnly , @CreationDate , @UpdateDate)";
 
                 // Ajout parametre SQL 
-                AddParameter(cmd, "@Place", entity.Place);
-                AddParameter(cmd, "@MinPlayer", entity.MinPlayer);
-                AddParameter(cmd, "@MaxPlayer", entity.MaxPlayer);
-                AddParameter(cmd, "@MinElo", entity.MinElo);
-                AddParameter(cmd, "@MaxElo", entity.MaxElo);
-                AddParameter(cmd, "@Category", entity.Category);
-                AddParameter(cmd, "@TournamentStatus", 'W');
-                AddParameter(cmd, "@TournamentRound", 0);
-                AddParameter(cmd, "@IsWomenOnly", entity.IsWomenOnly);
-                AddParameter(cmd, "@CreationDate", DateTime.Now);
-                AddParameter(cmd, "@UpdateDate", DateTime.Now);
+                DataAccess.AddParameter(cmd, "@Place", entity.Place);
+                DataAccess.AddParameter(cmd, "@MinPlayer", entity.MinPlayer);
+                DataAccess.AddParameter(cmd, "@MaxPlayer", entity.MaxPlayer);
+                DataAccess.AddParameter(cmd, "@MinElo", entity.MinElo);
+                DataAccess.AddParameter(cmd, "@MaxElo", entity.MaxElo);
+                DataAccess.AddParameter(cmd, "@Category", entity.Category);
+                DataAccess.AddParameter(cmd, "@TournamentStatus", 'W');
+                DataAccess.AddParameter(cmd, "@TournamentRound", 0);
+                DataAccess.AddParameter(cmd, "@IsWomenOnly", entity.IsWomenOnly);
+                DataAccess.AddParameter(cmd, "@CreationDate", DateTime.Now);
+                DataAccess.AddParameter(cmd, "@UpdateDate", DateTime.Now);
 
 
-                ConnectionOpen();
+                DataAccess.ConnectionOpen(_Connection);
                 int id = (int)cmd.ExecuteScalar();
                 _Connection.Close();
                 return id;
@@ -104,16 +76,16 @@ namespace CheckMate_DAL.Repositories
         /// <summary>
         /// Supprime un Tournament dans la base de donnée.
         /// </summary>
-        /// <param name="entity">Objet Tournament (Entity de la DAL) à supprimer.</param>
+        /// <param name="id">ID du Tournament à supprimer</param>
         /// <returns>True si le Tournament à été supprimé correctement, False si ce n'est pas le cas.</returns>
-        public bool Delete(Tournament entity)
+        public bool Delete(int id)
         {
             using (IDbCommand cmd = _Connection.CreateCommand())
             {
                 cmd.CommandText = $"DELETE FROM Tournament WHERE Id = @id";
-                AddParameter(cmd, "@id", entity.Id);
+                DataAccess.AddParameter(cmd, "@id", id);
 
-                _Connection.Open();
+                DataAccess.ConnectionOpen(_Connection);
                 return cmd.ExecuteNonQuery() == 1;
             }
         }
@@ -128,9 +100,9 @@ namespace CheckMate_DAL.Repositories
             using (IDbCommand cmd = _Connection.CreateCommand())
             {
                 cmd.CommandText = $"SELECT * FROM Tournament WHERE Id = @id";
-                AddParameter(cmd, "@id", id);
+                DataAccess.AddParameter(cmd, "@id", id);
 
-                ConnectionOpen();
+                DataAccess.ConnectionOpen(_Connection);
                 using (IDataReader reader = cmd.ExecuteReader())
                 {
                     if (reader.Read())
@@ -149,7 +121,7 @@ namespace CheckMate_DAL.Repositories
             {
                 cmd.CommandText = $"SELECT * FROM Tournament";
 
-                ConnectionOpen();
+                DataAccess.ConnectionOpen(_Connection);
                 using (IDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())

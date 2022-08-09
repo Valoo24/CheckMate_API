@@ -11,10 +11,13 @@ namespace CheckMate_DAL.Repositories
 {
     public class MemberRepository : IRepository<Member, int>
     {
+        #region propriétés et Constructeur
         protected IDbConnection _Connection;
-        public MemberRepository(IDbConnection connection) /*: base(connection, "Member", "Id")*/
+        public MemberRepository(IDbConnection connection)
         { _Connection = connection; }
+        #endregion
 
+        #region Méthodes Custom
         /// <summary>
         /// Verifie si la connection est bien fermée avant de l'ouvrir, sinon la ferme et rouvre
         /// </summary>
@@ -36,6 +39,8 @@ namespace CheckMate_DAL.Repositories
             param.Value = data ?? DBNull.Value;
             cmd.Parameters.Add(param);
         }
+        #endregion
+
         protected Member Convert(IDataRecord record)
         {
             return new Member
@@ -74,7 +79,7 @@ namespace CheckMate_DAL.Repositories
             }
         }
 
-        public bool Delete(Member entity)
+        public bool Delete(int id)
         {
             throw new NotImplementedException();
         }

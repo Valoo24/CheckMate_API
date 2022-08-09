@@ -24,7 +24,7 @@ namespace CheckMate_BLL.Services
             return Repository.Create(entity.FromBLLToDal());
         }
 
-        public bool Delete(Member entity)
+        public bool Delete(int id)
         {
             throw new NotImplementedException();
         }

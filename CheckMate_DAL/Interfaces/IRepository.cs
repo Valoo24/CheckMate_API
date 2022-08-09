@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,6 @@ namespace CheckMate_DAL.Interfaces
         public Tentity Read(TKey id);
         public IEnumerable<Tentity> ReadAll();
         public bool Update(Tentity entity);
-        public bool Delete(Tentity entity);
+        public bool Delete(TKey id);
     }
 }
