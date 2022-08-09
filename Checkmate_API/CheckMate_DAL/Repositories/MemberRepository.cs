@@ -12,7 +12,7 @@ namespace CheckMate_DAL.Repositories
     public class MemberRepository : IRepository<Member, int>
     {
         protected IDbConnection _Connection;
-        public MemberRepository(IDbConnection connection) /*: base(connection, "Member", "Id")*/
+        public MemberRepository(IDbConnection connection)
         { _Connection = connection; }
 
         /// <summary>
