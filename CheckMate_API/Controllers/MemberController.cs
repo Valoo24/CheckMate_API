@@ -17,6 +17,7 @@ namespace CheckMate_API.Controllers
             _service = service;
         }
 
+        //test
         [HttpPost]
         public IActionResult Create(MemberRegisterForm form)
         {

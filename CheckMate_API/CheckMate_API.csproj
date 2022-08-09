@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Checkmate_BLL\CheckMate_BLL.csproj" />
+    <ProjectReference Include="..\CheckMate_DAL\CheckMate_DAL.csproj" />
   </ItemGroup>
 
 </Project>

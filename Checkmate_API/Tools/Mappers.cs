@@ -1,13 +1,6 @@
-﻿using CheckMate_BLL.BLL_Entities;
-using CheckMate_DAL.DAL_Entities;
-using CheckMate_API.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CheckMate_API.Models;
 
-namespace Tools
+namespace CheckMate_API.Tools
 {
     public static class Mappers
     {
@@ -156,6 +149,5 @@ namespace Tools
                 Elo = member.Elo,
             };
         }
-
     }
 }
