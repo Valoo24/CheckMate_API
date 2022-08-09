@@ -11,13 +11,15 @@ namespace CheckMate_DAL.Repositories
 {
     public class TournamentRepository : IRepository<Tournament, int>
     {
-
+        #region Propriétés et constructeurs
         protected IDbConnection _Connection;
-        public TournamentRepository(IDbConnection connection) /*: base(connection, "Member", "Id")*/
+        public TournamentRepository(IDbConnection connection)
         { _Connection = connection; }
+        #endregion
 
+        #region Méthodes Custom
         /// <summary>
-        /// Verifie si la connection est bien fermée avant de l'ouvrir, sinon la ferme et rouvre
+        /// Ouvre correctement la connection à la base de donnée, quelque soit l'état de la connection.
         /// </summary>
         public void ConnectionOpen()
         {
@@ -29,7 +31,12 @@ namespace CheckMate_DAL.Repositories
             _Connection.Open();
 
         }
-        // Securisation des entrées dans la DB 
+        /// <summary>
+        /// Permet de sécuriser l'introduction par l'utilisateur de données dans la base de données.
+        /// </summary>
+        /// <param name="cmd">Commande SQL à introduire dans le base de donnée.</param>
+        /// <param name="name">Nom référencé de la donnée dans la requête SQL.</param>
+        /// <param name="data">Donée à sécuriser et à introduire dans la basse de donnée.</param>
         protected void AddParameter(IDbCommand cmd, string name, object data)
         {
             IDbDataParameter param = cmd.CreateParameter();
@@ -37,7 +44,14 @@ namespace CheckMate_DAL.Repositories
             param.Value = data ?? DBNull.Value;
             cmd.Parameters.Add(param);
         }
+        #endregion
 
+        #region Méthodes CRUD
+        /// <summary>
+        /// Permet de convertir les données de la table Tournament de la base de donnée en un objet Tournament (Entity dans la DAL).
+        /// </summary>
+        /// <param name="record">Tableau de donnée récupérée de la base de donnée SQL.</param>
+        /// <returns>Un objet Tournament (Entity dans la DAL).</returns>
         protected Tournament Convert(IDataRecord record)
         {
             return new Tournament
@@ -56,7 +70,11 @@ namespace CheckMate_DAL.Repositories
                 UpdateDate = (DateTime)record["Update_Date"],
             };
         }
-
+        /// <summary>
+        /// Méthode permettant d'enregistrer un tournoi dans la base de donnée.
+        /// </summary>
+        /// <param name="entity">Objet Tournoi à enregistrer dans la base de donnée.</param>
+        /// <returns>l'ID du tournoi crée.</returns>
         public int Create(Tournament entity)
         {
             using (IDbCommand cmd = _Connection.CreateCommand())
@@ -81,10 +99,13 @@ namespace CheckMate_DAL.Repositories
                 int id = (int)cmd.ExecuteScalar();
                 _Connection.Close();
                 return id;
-
             }
         }
-
+        /// <summary>
+        /// Supprime un Tournament dans la base de donnée.
+        /// </summary>
+        /// <param name="entity">Objet Tournament (Entity de la DAL) à supprimer.</param>
+        /// <returns>True si le Tournament à été supprimé correctement, False si ce n'est pas le cas.</returns>
         public bool Delete(Tournament entity)
         {
             using (IDbCommand cmd = _Connection.CreateCommand())
@@ -96,7 +117,12 @@ namespace CheckMate_DAL.Repositories
                 return cmd.ExecuteNonQuery() == 1;
             }
         }
-
+        /// <summary>
+        /// Récupère un Tournament de la base de donnée via une ID.
+        /// </summary>
+        /// <param name="id">ID du Tournament à récupérer.</param>
+        /// <returns>Le Tournament(Entity de la DAL) correspondant à l'ID.</returns>
+        /// <exception cref="ArgumentNullException">Une exception est levée si l'ID ne correspond à aucun Tournament dans la base de donnée.</exception>
         public Tournament Read(int id)
         {
             using (IDbCommand cmd = _Connection.CreateCommand())
@@ -113,7 +139,10 @@ namespace CheckMate_DAL.Repositories
                 }
             }
         }
-
+        /// <summary>
+        /// Récupère tous les Tournament de la base de données.
+        /// </summary>
+        /// <returns>Une liste (sous four de IEnumerable) de tous les Tournament présent dans la base de données.</returns>
         public IEnumerable<Tournament> ReadAll()
         {
             using (IDbCommand cmd = _Connection.CreateCommand())
@@ -131,7 +160,13 @@ namespace CheckMate_DAL.Repositories
                 _Connection.Close();
             }
         }
+        #endregion
 
+        /*---------------------------------
+         *!                               !
+         *!     A FAIRE !!!               !
+         *!                               !
+         ----------------------------------*/
         public bool Update(Tournament entity)
         {
             throw new NotImplementedException();
