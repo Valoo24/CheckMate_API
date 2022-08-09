@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CheckMate_DAL\CheckMate_DAL.csproj" />
+  </ItemGroup>
+
 </Project>
