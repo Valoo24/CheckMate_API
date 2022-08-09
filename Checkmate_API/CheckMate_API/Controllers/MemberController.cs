@@ -17,14 +17,14 @@ namespace CheckMate_API.Controllers
             _service = service;
         }
 
-        /*[HttpPost]
+        [HttpPost]
         public IActionResult Create(MemberRegisterForm form)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
-            return Ok(_service.Create(form.FromRegisterFormToModel()));
-        }*/
+            return Ok(_service.Create(form.FromRegisterFormToModel().FromModelToBLL()));
+        }
     }
 }

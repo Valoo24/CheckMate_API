@@ -70,7 +70,6 @@ namespace CheckMate_DAL.Repositories
                 int id = (int)cmd.ExecuteScalar();
                 _Connection.Close();
                 return id;
-
             }
         }
 
