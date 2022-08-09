@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace CheckMate_DAL.Tools
 {
+    /// <summary>
+    /// Classe où il faut rajouter les méthodes d'accès aux données dans la base de données communes aux Repository.
+    /// </summary>
     public static class DataAccess
     {
         /// <summary>

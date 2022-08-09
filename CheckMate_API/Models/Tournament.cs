@@ -2,6 +2,9 @@
 
 namespace CheckMate_API.Models
 {
+    /// <summary>
+    /// Model principal de Tournament.
+    /// </summary>
     public class Tournament
     {
         public int TournamentId { get; set; }
@@ -19,6 +22,9 @@ namespace CheckMate_API.Models
 
     }
 
+    /// <summary>
+    /// Model de formulaire pour les Tournament
+    /// </summary>
     public class TournamentForm
     {
 

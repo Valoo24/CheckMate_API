@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace CheckMate_DAL.Repositories
 {
+    /// <summary>
+    /// Repository où sont définies toutes les méthodes d'accès aux données dans la base de donnée pour les Tournanment.
+    /// </summary>
     public class TournamentRepository : IRepository<Tournament, int>
     {
         #region Propriétés et constructeurs

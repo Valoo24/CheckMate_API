@@ -10,6 +10,9 @@ using CheckMate_DAL.Interfaces;
 
 namespace CheckMate_BLL.Services
 {
+    /// <summary>
+    /// Service qui permet de faire le lien des données correspondant aux Member entre la DAL et l'API.
+    /// </summary>
     public class MemberService : IRepository<Member, int>
     {
         #region Propriétés et constructeurs

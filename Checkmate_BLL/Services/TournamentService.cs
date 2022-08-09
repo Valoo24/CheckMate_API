@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace CheckMate_BLL.Services
 {
+    /// <summary>
+    /// Service qui permet de faire le lien des données correspondant aux Tournament entre la DAL et l'API.
+    /// </summary>
     public class TournamentService : IRepository<Tournament, int>
     {
         #region Propriétés et constructeurs

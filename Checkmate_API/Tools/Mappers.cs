@@ -2,6 +2,9 @@
 
 namespace CheckMate_API.Tools
 {
+    /// <summary>
+    /// Classe dans laquelle il faut écrire les méthode d'extensions pour chaque Objet à transformer de l'API à la BLL et inversément.
+    /// </summary>
     public static class Mappers
     {
         #region Member Mapper

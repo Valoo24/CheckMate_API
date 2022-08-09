@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace CheckMate_BLL.Tools
 {
     /// <summary>
-    /// Classe dans laquelle il faut écrire les méthode d'extensions pour chaque Objet à transformer.
+    /// Classe dans laquelle il faut écrire les méthode d'extensions pour chaque Objet à transformer de la BLL à la DAL et inversément.
     /// </summary>
     public static class Mappers
     {

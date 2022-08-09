@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace CheckMate_DAL.Repositories
 {
+    /// <summary>
+    /// Repository où sont définies toutes les méthodes d'accès aux données dans la base de donnée pour les Member.
+    /// </summary>
     public class MemberRepository : IRepository<Member, int>
     {
         #region propriétés et Constructeur

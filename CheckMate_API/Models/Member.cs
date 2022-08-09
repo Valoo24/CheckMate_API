@@ -2,6 +2,9 @@
 
 namespace CheckMate_API.Models
 {
+    /// <summary>
+    /// Model Principal de Member.
+    /// </summary>
     public class Member
     {
         public int MemberId { get; set; }
@@ -16,7 +19,9 @@ namespace CheckMate_API.Models
 
 
     }
-
+    /// <summary>
+    /// Model de formulaire de création pour les Member.
+    /// </summary>
     public class MemberRegisterForm
     {
         [Required]
@@ -44,8 +49,9 @@ namespace CheckMate_API.Models
         [Compare(nameof(Password), ErrorMessage = "Les deux mdp doivent correspondre")]
         public string PasswordCheck { get; set; }
     }   
-
-
+    /// <summary>
+    /// Model de formulaire pour la connexion d'un Member.
+    /// </summary>
     public class MemberLoginForm
     {
         [Required]

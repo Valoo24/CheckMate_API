@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace CheckMate_DAL.Repositories
 {
+    /// <summary>
+    /// Repository où sont définies toutes les méthodes d'accès aux données dans la base de donnée pour les Match.
+    /// </summary>
     public class MatchRepository : IRepository<Match, int>
     {
         #region Propriétés et constructeurs
