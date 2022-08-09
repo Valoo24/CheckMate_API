@@ -7,17 +7,11 @@ namespace CheckMate_API.Models
         public int MemberId { get; set; }
         public string Pseudo { get; set; } = String.Empty;
         public string Mail { get; set; } = String.Empty;
-
         public string PasswordHash { get; set; }
-
         public DateTime Birthdate { get; set; }
-
         public char Gender { get; set; }
-
         public int Elo { get; set; }
         public string Token { get; set; } = String.Empty;
-
-
         public bool IsAdmin { get; set; }
 
 

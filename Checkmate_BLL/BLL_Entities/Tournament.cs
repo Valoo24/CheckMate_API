@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace CheckMate_BLL.BLL_Entities
 {
+    /// <summary>
+    /// Objet Tournament de la BLL.
+    /// </summary>
     public class Tournament : IEntity<int>
     {
         public int Id { get; set; }

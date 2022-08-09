@@ -39,9 +39,5 @@ namespace CheckMate_API.Models
         public char Category { get; set; }
         [Required]
         public bool IsWomenOnly { get; set; }
-
-
-
-
     }
 }

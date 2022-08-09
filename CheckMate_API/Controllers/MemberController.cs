@@ -1,6 +1,6 @@
 ﻿using CheckMate_API.Models;
 using CheckMate_API.Tools;
-using CheckMate_BLL.Interfaces;
+using CheckMate_BLL.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,14 +10,13 @@ namespace CheckMate_API.Controllers
     [ApiController]
     public class MemberController : ControllerBase
     {
-        private IMemberService _service;
+        private MemberService _service;
 
-        public MemberController(IMemberService service)
+        public MemberController(MemberService service)
         {
             _service = service;
         }
 
-        //test
         [HttpPost]
         public IActionResult Create(MemberRegisterForm form)
         {
