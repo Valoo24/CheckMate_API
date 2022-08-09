@@ -132,5 +132,30 @@ namespace Tools
                 IsAdmin = member.IsAdmin,
             };
         }
+        public static CheckMate_API.Models.Member FromRegisterFormToModel(this MemberRegisterForm form)
+        {
+            return new CheckMate_API.Models.Member
+            {
+                Pseudo = form.Pseudo,
+                Mail = form.Mail,
+                PasswordHash = form.Password,
+                Birthdate = form.Birthdate,
+                Gender = form.Gender,
+                Elo = form.Elo,
+            };
+        }
+        public static MemberRegisterForm FromModelToRegisterForm(this CheckMate_API.Models.Member member)
+        {
+            return new MemberRegisterForm
+            {
+                Pseudo = member.Pseudo,
+                Mail = member.Mail,
+                Password = member.PasswordHash,
+                Birthdate = member.Birthdate,
+                Gender = member.Gender,
+                Elo = member.Elo,
+            };
+        }
+
     }
 }
