@@ -29,7 +29,7 @@ namespace CheckMate_BLL.BLL_Entities
         {
             get
             {
-                return CreationDate.AddDays((double)MinPlayer);
+                return new DateTime(CreationDate.AddDays((double)MinPlayer).Year, CreationDate.AddDays((double)MinPlayer).Month, CreationDate.AddDays((double)MinPlayer).Day,23,59,59);
             }
         }
     }
