@@ -24,7 +24,7 @@ namespace CheckMate_BLL.Services
             return Repository.Create(entity.FromBLLToDal());
         }
 
-        public int Delete(Member entity)
+        public bool Delete(Member entity)
         {
             throw new NotImplementedException();
         }
@@ -39,7 +39,7 @@ namespace CheckMate_BLL.Services
             throw new NotImplementedException();
         }
 
-        public int Update(Member entity)
+        public bool Update(Member entity)
         {
             throw new NotImplementedException();
         }

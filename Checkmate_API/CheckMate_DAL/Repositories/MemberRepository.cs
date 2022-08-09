@@ -74,7 +74,7 @@ namespace CheckMate_DAL.Repositories
             }
         }
 
-        public int Delete(Member entity)
+        public bool Delete(Member entity)
         {
             throw new NotImplementedException();
         }
@@ -102,7 +102,7 @@ namespace CheckMate_DAL.Repositories
             throw new NotImplementedException();
         }
 
-        public int Update(Member entity)
+        public bool Update(Member entity)
         {
             throw new NotImplementedException();
         }
