@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace CheckMate_BLL.Tools
 {
+    /// <summary>
+    /// Classe dans laquelle il faut écrire les méthode d'extensions pour chaque Objet à transformer.
+    /// </summary>
     public static class Mappers
     {
         #region Mapper Member
