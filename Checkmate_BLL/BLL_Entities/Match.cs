@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace CheckMate_BLL.BLL_Entities
 {
+    /// <summary>
+    /// Objet Match de la BLL.
+    /// </summary>
     public class Match : IEntity<int>
     {
         public int Id { get; set; }

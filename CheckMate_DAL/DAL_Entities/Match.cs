@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace CheckMate_DAL.DAL_Entities
 {
+    /// <summary>
+    /// Objet Match de la DAL.
+    /// </summary>
     public class Match : IEntity<int>
     {
         public int Id { get; set; }

@@ -2,104 +2,20 @@
 
 namespace CheckMate_API.Tools
 {
+    /// <summary>
+    /// Classe dans laquelle il faut écrire les méthode d'extensions pour chaque Objet à transformer de l'API à la BLL et inversément.
+    /// </summary>
     public static class Mappers
     {
+        #region Member Mapper
         /// <summary>
-        /// Transforme un Member de la DAL en un Member de la BLL
+        /// Permet de transformer un Member (Entity de la BLL) en un Model Member.
         /// </summary>
-        /// <param name="member">objet de type Member de la DAL à modifier.</param>
-        /// <returns>Renvoie un objet de typer Member de la BLL</returns>
-        public static CheckMate_BLL.BLL_Entities.Member FromDALToBLL(this CheckMate_DAL.DAL_Entities.Member member)
+        /// <param name="member">Member (Entity de la BLL) à transformer.</param>
+        /// <returns>Un model Member.</returns>
+        public static Member FromBLLToModel(this CheckMate_BLL.BLL_Entities.Member member)
         {
-            return new CheckMate_BLL.BLL_Entities.Member
-            {
-                Id = member.Id,
-                Pseudo = member.Pseudo,
-                Mail = member.Mail,
-                PasswordHash = member.PasswordHash,
-                Birthdate = member.Birthdate,
-                Gender = member.Gender,
-                Elo = member.Elo,
-                IsAdmin = member.IsAdmin,
-            };
-        }
-        public static CheckMate_DAL.DAL_Entities.Member FromBLLToDal(CheckMate_BLL.BLL_Entities.Member member)
-        {
-            return new CheckMate_DAL.DAL_Entities.Member
-            {
-                Id = member.Id,
-                Pseudo = member.Pseudo,
-                Mail = member.Mail,
-                PasswordHash = member.PasswordHash,
-                Birthdate = member.Birthdate,
-                Gender = member.Gender,
-                Elo = member.Elo,
-                IsAdmin = member.IsAdmin,
-            };
-        }
-        public static CheckMate_BLL.BLL_Entities.Match FromDALToBLL(this CheckMate_DAL.DAL_Entities.Match match)
-        {
-            return new CheckMate_BLL.BLL_Entities.Match
-            {
-                Id = match.Id,
-                FkTournamentId = match.FkTournamentId,
-                FkWhitePlayer = match.FkWhitePlayer,
-                FkBlackPlayer = match.FkBlackPlayer,
-                MatchRound = match.MatchRound,
-                Result = match.Result,
-            };
-        }
-        public static CheckMate_DAL.DAL_Entities.Match FromBLLToDAL(this CheckMate_BLL.BLL_Entities.Match match)
-        {
-            return new CheckMate_DAL.DAL_Entities.Match
-            {
-                Id = match.Id,
-                FkTournamentId = match.FkTournamentId,
-                FkWhitePlayer = match.FkWhitePlayer,
-                FkBlackPlayer = match.FkBlackPlayer,
-                MatchRound = match.MatchRound,
-                Result = match.Result,
-            };
-        }
-        public static CheckMate_BLL.BLL_Entities.Tournament FromDALToBLL(this CheckMate_DAL.DAL_Entities.Tournament tournament)
-        {
-            return new CheckMate_BLL.BLL_Entities.Tournament
-            {
-                Id = tournament.Id,
-                Place = tournament.Place,
-                MinPlayer = tournament.MinPlayer,
-                MaxPlayer = tournament.MaxPlayer,
-                MinElo = tournament.MinElo,
-                MaxElo = tournament.MaxElo,
-                Category = tournament.Category,
-                TournamentStatus = tournament.TournamentStatus,
-                TournamentRound = tournament.TournamentRound,
-                IsWomenOnly = tournament.IsWomenOnly,
-                CreationDate = tournament.CreationDate,
-                UpdateDate = tournament.UpdateDate,
-            };
-        }
-        public static CheckMate_DAL.DAL_Entities.Tournament FromBLLToDAL(this CheckMate_BLL.BLL_Entities.Tournament tournament)
-        {
-            return new CheckMate_DAL.DAL_Entities.Tournament
-            {
-                Id = tournament.Id,
-                Place = tournament.Place,
-                MinPlayer = tournament.MinPlayer,
-                MaxPlayer = tournament.MaxPlayer,
-                MinElo = tournament.MinElo,
-                MaxElo = tournament.MaxElo,
-                Category = tournament.Category,
-                TournamentStatus = tournament.TournamentStatus,
-                TournamentRound = tournament.TournamentRound,
-                IsWomenOnly = tournament.IsWomenOnly,
-                CreationDate = tournament.CreationDate,
-                UpdateDate = tournament.UpdateDate,
-            };
-        }
-        public static CheckMate_API.Models.Member FromBLLToModel(this CheckMate_BLL.BLL_Entities.Member member)
-        {
-            return new CheckMate_API.Models.Member
+            return new Member
             {
                 MemberId = member.Id,
                 Pseudo = member.Pseudo,
@@ -111,7 +27,12 @@ namespace CheckMate_API.Tools
                 IsAdmin = member.IsAdmin,
             };
         }
-        public static CheckMate_BLL.BLL_Entities.Member FromModelToBLL(this CheckMate_API.Models.Member member)
+        /// <summary>
+        /// Permet de transformer un model Member en un Member (Entity de la BLL).
+        /// </summary>
+        /// <param name="member">Model Member à transformer.</param>
+        /// <returns>Un objet Member (Entity de la BLL).</returns>
+        public static CheckMate_BLL.BLL_Entities.Member FromModelToBLL(this Member member)
         {
             return new CheckMate_BLL.BLL_Entities.Member
             {
@@ -125,9 +46,14 @@ namespace CheckMate_API.Tools
                 IsAdmin = member.IsAdmin,
             };
         }
-        public static CheckMate_API.Models.Member FromRegisterFormToModel(this MemberRegisterForm form)
+        /// <summary>
+        /// Permet de tranformer un formulaire de création d'un Member en un model Member.
+        /// </summary>
+        /// <param name="form">Formulaire de création d'un Member.</param>
+        /// <returns>Un model Member.</returns>
+        public static Member FromRegisterFormToModel(this MemberRegisterForm form)
         {
-            return new CheckMate_API.Models.Member
+            return new Member
             {
                 Pseudo = form.Pseudo,
                 Mail = form.Mail,
@@ -137,7 +63,12 @@ namespace CheckMate_API.Tools
                 Elo = form.Elo,
             };
         }
-        public static MemberRegisterForm FromModelToRegisterForm(this CheckMate_API.Models.Member member)
+        /// <summary>
+        /// Permet de transformer un model Member en un formulaire de création de Member.
+        /// </summary>
+        /// <param name="member">model Member à transformer.</param>
+        /// <returns>Un formulaire de création de Member.</returns>
+        public static MemberRegisterForm FromModelToRegisterForm(this Member member)
         {
             return new MemberRegisterForm
             {
@@ -149,6 +80,7 @@ namespace CheckMate_API.Tools
                 Elo = member.Elo,
             };
         }
+<<<<<<< HEAD
 
         public static Tournament FromTournamentFormToModel( this TournamentForm tournament)
         {
@@ -181,5 +113,8 @@ namespace CheckMate_API.Tools
             };
 
         }
+=======
+        #endregion
+>>>>>>> d2659366d949335ce68195efa2a22fc08e6a8685
     }
 }

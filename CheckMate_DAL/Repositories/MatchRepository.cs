@@ -2,14 +2,25 @@
 using CheckMate_DAL.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace CheckMate_DAL.Repositories
 {
+    /// <summary>
+    /// Repository où sont définies toutes les méthodes d'accès aux données dans la base de donnée pour les Match.
+    /// </summary>
     public class MatchRepository : IRepository<Match, int>
     {
+        #region Propriétés et constructeurs
+        protected IDbConnection _Connection;
+        public MatchRepository(IDbConnection connection)
+        { _Connection = connection; }
+        #endregion
+
+        #region A FAIRE !!!!!
         public int Create(Match entity)
         {
             throw new NotImplementedException();
@@ -34,5 +45,6 @@ namespace CheckMate_DAL.Repositories
         {
             throw new NotImplementedException();
         }
+        #endregion
     }
 }

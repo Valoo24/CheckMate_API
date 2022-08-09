@@ -5,6 +5,9 @@ using System.Text;
 
 namespace CheckMate_API.Infrastructure
 {
+    /// <summary>
+    /// Classe qui permet de gérer les Tokens.
+    /// </summary>
     public class TokenManager
     {
         private readonly string _issuer, _audience, _secret;

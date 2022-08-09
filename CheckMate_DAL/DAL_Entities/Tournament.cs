@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace CheckMate_DAL.DAL_Entities
 {
+    /// <summary>
+    /// Objet Tournament de la DAL.
+    /// </summary>
     public class Tournament : IEntity<int>
     {
         public int Id { get; set; }
