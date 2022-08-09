@@ -11,7 +11,7 @@ namespace CheckMate_DAL.Interfaces
         public TKey Create(Tentity entity);
         public Tentity Read(TKey id);
         public IEnumerable<Tentity> ReadAll();
-        public TKey Update(Tentity entity);
-        public TKey Delete(Tentity entity);
+        public bool Update(Tentity entity);
+        public bool Delete(Tentity entity);
     }
 }
