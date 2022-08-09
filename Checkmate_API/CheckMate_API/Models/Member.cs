@@ -49,8 +49,6 @@ namespace CheckMate_API.Models
         [DataType(DataType.Password)]
         [Compare(nameof(Password), ErrorMessage = "Les deux mdp doivent correspondre")]
         public string PasswordCheck { get; set; }
-
-
     }   
 
 

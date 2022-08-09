@@ -1,4 +1,7 @@
 using CheckMate_API.Infrastructure;
+using CheckMate_BLL.Interfaces;
+using CheckMate_BLL.Services;
+using CheckMate_DAL.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Data;
@@ -13,7 +16,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddScoped<IMemberService, MemberService>();
+builder.Services.AddScoped<MemberRepository, MemberRepository>();
 
 // - IDbConnection
 builder.Services.AddScoped<IDbConnection>(sp =>
