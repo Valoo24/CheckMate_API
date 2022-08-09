@@ -30,10 +30,7 @@ namespace CheckMate_BLL.Services
         }
         #endregion
 
-<<<<<<< HEAD
-=======
         #region A FAIRE !!!!!
->>>>>>> d2659366d949335ce68195efa2a22fc08e6a8685
         public bool Delete(int id)
         {
             throw new NotImplementedException();

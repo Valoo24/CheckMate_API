@@ -1,4 +1,5 @@
 ﻿using CheckMate_BLL.BLL_Entities;
+using CheckMate_BLL.Tools;
 using CheckMate_DAL.Interfaces;
 using CheckMate_DAL.Repositories;
 using System;

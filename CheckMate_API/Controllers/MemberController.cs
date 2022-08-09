@@ -1,4 +1,5 @@
-﻿using CheckMate_API.Models;
+﻿using CheckMate_API.Infrastructure;
+using CheckMate_API.Models;
 using CheckMate_API.Tools;
 using CheckMate_BLL.Services;
 using Microsoft.AspNetCore.Http;
@@ -15,8 +16,10 @@ namespace CheckMate_API.Controllers
     {
         #region Propriétés et Constructeurs
         private MemberService _service;
-        public MemberController(MemberService service)
+        private TokenManager _tokenManager;
+        public MemberController(MemberService service, TokenManager manager)
         {
+            _tokenManager = manager;
             _service = service;
         }
         #endregion

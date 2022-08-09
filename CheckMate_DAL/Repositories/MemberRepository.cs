@@ -31,14 +31,14 @@ namespace CheckMate_DAL.Repositories
         {
             return new Member
             {
-                Id = (int)record["Id"],
+                Id = (int)record["Member_Id"],
                 Pseudo = (string)record["Pseudo"],
-                Mail = (string)record["Email"],
+                Mail = (string)record["Mail"],
                 PasswordHash = (string)record["Password_Hash"],
                 Birthdate = (DateTime)record["Birthdate"],
                 Gender = (string)record["Gender"],
                 Elo = (int)record["Elo"],
-                IsAdmin = (bool)record["IsAdmin"]
+                IsAdmin = (bool)record["Is_Admin"]
             };
         }
 

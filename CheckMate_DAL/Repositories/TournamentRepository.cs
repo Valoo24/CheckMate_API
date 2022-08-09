@@ -88,7 +88,7 @@ namespace CheckMate_DAL.Repositories
             using (IDbCommand cmd = _Connection.CreateCommand())
             {
                 cmd.CommandText = $"DELETE FROM Tournament WHERE Tournament_Id = @id";
-                AddParameter(cmd, "@id", id);
+                DataAccess.AddParameter(cmd, "@id", id);
 
                 DataAccess.ConnectionOpen(_Connection);
                 return cmd.ExecuteNonQuery() == 1;
@@ -105,7 +105,7 @@ namespace CheckMate_DAL.Repositories
             using (IDbCommand cmd = _Connection.CreateCommand())
             {
                 cmd.CommandText = $"SELECT * FROM Tournament WHERE Tournament_Id = @id";
-                AddParameter(cmd, "@id", id);
+                DataAccess.AddParameter(cmd, "@id", id);
 
                 DataAccess.ConnectionOpen(_Connection);
                 using (IDataReader reader = cmd.ExecuteReader())
