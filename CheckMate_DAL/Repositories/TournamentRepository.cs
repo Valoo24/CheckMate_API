@@ -134,14 +134,11 @@ namespace CheckMate_DAL.Repositories
         }
         #endregion
 
-        /*---------------------------------
-         *!                               !
-         *!     A FAIRE !!!               !
-         *!                               !
-         ----------------------------------*/
+        #region A FAIRE !!!!!
         public bool Update(Tournament entity)
         {
             throw new NotImplementedException();
         }
+        #endregion
     }
 }
