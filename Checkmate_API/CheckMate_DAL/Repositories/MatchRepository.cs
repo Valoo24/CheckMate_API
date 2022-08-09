@@ -15,7 +15,7 @@ namespace CheckMate_DAL.Repositories
             throw new NotImplementedException();
         }
 
-        public int Delete(Match entity)
+        public bool Delete(Match entity)
         {
             throw new NotImplementedException();
         }
@@ -30,7 +30,7 @@ namespace CheckMate_DAL.Repositories
             throw new NotImplementedException();
         }
 
-        public int Update(Match entity)
+        public bool Update(Match entity)
         {
             throw new NotImplementedException();
         }

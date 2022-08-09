@@ -23,7 +23,7 @@ namespace CheckMate_BLL.Services
             throw new NotImplementedException();
         }
 
-        public int Delete(Tournament entity)
+        public bool Delete(Tournament entity)
         {
             throw new NotImplementedException();
         }
@@ -38,7 +38,7 @@ namespace CheckMate_BLL.Services
             throw new NotImplementedException();
         }
 
-        public int Update(Tournament entity)
+        public bool Update(Tournament entity)
         {
             throw new NotImplementedException();
         }
