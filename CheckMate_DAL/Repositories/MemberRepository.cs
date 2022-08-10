@@ -1,6 +1,7 @@
 ﻿using CheckMate_DAL.DAL_Entities;
 using CheckMate_DAL.Interfaces;
 using CheckMate_DAL.Tools;
+using Isopoh.Cryptography.Argon2;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,11 +14,11 @@ namespace CheckMate_DAL.Repositories
     /// <summary>
     /// Repository où sont définies toutes les méthodes d'accès aux données dans la base de donnée pour les Member.
     /// </summary>
-    public class MemberRepository : IRepository<Member, int>
+    public class MemberRepository : IRepository<Member, int> 
     {
         #region propriétés et Constructeur
         protected IDbConnection _Connection;
-        public MemberRepository(IDbConnection connection)
+        public MemberRepository(IDbConnection connection) //: base(connection, "Member", "Id")
         { _Connection = connection; }
         #endregion
 
@@ -68,10 +69,7 @@ namespace CheckMate_DAL.Repositories
                 return id;
             }
         }
-        public bool Delete(Member entity)
-        {
-            throw new NotImplementedException();
-        }
+        
         /// <summary>
         /// Permet de récupérer un Member dans la base de donnée selon l'ID introduit.
         /// </summary>
@@ -93,37 +91,59 @@ namespace CheckMate_DAL.Repositories
                 }
             }
         }
-        #endregion
 
-        #region Méthodes Custom
-        public Member Login(Member login)
+
+        public bool Delete(int id)
         {
             using (IDbCommand cmd = _Connection.CreateCommand())
             {
-                cmd.CommandText = $"SELECT * FROM Member where (Pseudo = @Pseudo OR Mail = @Mail) AND Password_Hash = @Password";
-
-                DataAccess.AddParameter(cmd, "@Pseudo", login.Pseudo);
-                DataAccess.AddParameter(cmd, "@Mail", login.Mail);
-                DataAccess.AddParameter(cmd, "@Password", login.PasswordHash);
+                cmd.CommandText = $"DELETE FROM Member WHERE Member_Id = @id";
+                DataAccess.AddParameter(cmd, "@id", id);
 
                 DataAccess.ConnectionOpen(_Connection);
-                using (IDataReader reader = cmd.ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-                        return Convert(reader);
-                    }
-                    throw new ArgumentNullException($"Membre Inexistant");
-                }
+                return cmd.ExecuteNonQuery() == 1;
             }
         }
         #endregion
 
-        #region A FAIRE !!!!!
-        public bool Delete(int id)
+        #region Méthodes Custom
+
+
+        public string GetHashByCredential(string credential)
         {
-            throw new NotImplementedException();
+            using (IDbCommand cmd = _Connection.CreateCommand())
+            {
+                cmd.CommandText = $"SELECT Password_Hash FROM Member WHERE Pseudo = @Credential OR Mail = @Credential" ;
+                DataAccess.AddParameter(cmd, "@Credential", credential);
+
+                DataAccess.ConnectionOpen(_Connection);
+                object result = cmd.ExecuteScalar();
+                _Connection.Close();
+
+                return result is DBNull ? null : (string)result;
+            }
         }
+        public Member GetByCredential(string credential)
+        {
+            using (IDbCommand cmd = _Connection.CreateCommand())
+            {
+                cmd.CommandText = $"SELECT * FROM Member WHERE Pseudo = @Credential OR Mail = @Credential";
+                DataAccess.AddParameter(cmd, "@Credential", credential);
+
+                DataAccess.ConnectionOpen(_Connection);
+                using(IDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                        return Convert(reader);
+                    return null;
+                }
+            }
+        }
+
+        #endregion
+
+        #region A FAIRE !!!!!
+        
 
         public IEnumerable<Member> ReadAll()
         {

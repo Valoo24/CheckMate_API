@@ -14,8 +14,20 @@ namespace CheckMate_API.Models
         public DateTime Birthdate { get; set; }
 
         public string Gender { get; set; }
+        private int _Elo;
+        public int Elo
+        {
+            get { return _Elo; }
+            set
+            {
+                if (Elo == 0)
+                { _Elo = 1200; }
 
-        public int Elo { get; set; }
+            }
+        }
+
+
+
         public string Token { get; set; } = String.Empty;
         public bool IsAdmin { get; set; }
 
@@ -38,8 +50,10 @@ namespace CheckMate_API.Models
 
         [Required]
         public string Gender { get; set; }
+
+        
         [Required]
-        public int  Elo { get; set; }
+        public int Elo { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
