@@ -38,6 +38,11 @@ namespace CheckMate_API.Controllers
                 return BadRequest("Le formulaire d'inscription n'a pas été rempli correctement.");
             }
 
+            if(form.Gender.Length > 1)
+            {
+                return BadRequest("Le champ \"Gender\" ne peut pas contenir plus d'une lettre");
+            }
+
             try
             {
                 return Ok(_service.Create(form.FromRegisterFormToModel().FromModelToBLL()));
