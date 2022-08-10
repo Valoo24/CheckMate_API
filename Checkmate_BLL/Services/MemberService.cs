@@ -35,7 +35,7 @@ namespace CheckMate_BLL.Services
             DBEntity.PasswordHash = pwdHash;
 
 
-            // Recuperation du member
+            // Récupération du member
            
             return Repository.Create(DBEntity);
         }
@@ -44,7 +44,7 @@ namespace CheckMate_BLL.Services
         #region Méthode Custom
         public Member Login(string credential , string password)
         {
-            // Récuperation le Hash lier au compte
+            // Récuperation le Hash lié au compte
             string hash = Repository.GetHashByCredential(credential);
 
             if (string.IsNullOrWhiteSpace(hash))

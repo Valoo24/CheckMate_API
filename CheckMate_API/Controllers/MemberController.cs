@@ -30,14 +30,22 @@ namespace CheckMate_API.Controllers
         /// </summary>
         /// <param name="form">Formulaire de création du Member.</param>
         /// <returns>Une réponse HTTP avec l'ID du Member crée.</returns>
-        [HttpPost]
+        [HttpPost("Register")]
         public IActionResult Create(MemberRegisterForm form)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
+
             return Ok(_service.Create(form.FromRegisterFormToModel().FromModelToBLL()));
+        }
+
+        [HttpDelete("DeleteMember")]
+        public IActionResult Delete(int id)
+        {
+            _service.Delete(id);
+            return Ok();
         }
         #endregion
 
@@ -63,13 +71,6 @@ namespace CheckMate_API.Controllers
                     return BadRequest(e.Message);
                 }
             }
-        }
-
-        [HttpDelete]
-        public IActionResult Delete(int id)
-        {
-            _service.Delete(id);
-            return Ok();
         }
         #endregion
     }
