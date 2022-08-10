@@ -50,14 +50,20 @@ namespace CheckMate_API.Controllers
             }
         }
 
-        [Authorize("Auth")]
-        [Authorize("Admin")]
+        //[Authorize("Auth")]
+        //[Authorize("Admin")]
 
         [HttpDelete]
         public IActionResult Delete(int id)
         {
-            _service.Delete(id);
-            return Ok();
+            if(_service.Delete(id))
+            {
+                return Ok($"Le Tournament n°{id} a bien été supprimé.");
+            }
+            else
+            {
+                return BadRequest($"Le Tournament n°{id} n'existe pas dans la base de donnée.");
+            }
         }
        // [Authorize("Admin")]
 
