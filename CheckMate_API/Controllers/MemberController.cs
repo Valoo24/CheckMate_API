@@ -33,10 +33,16 @@ namespace CheckMate_API.Controllers
         [HttpPost("Register")]
         public IActionResult Create(MemberRegisterForm form)
         {
-            string MemberCreatedMail = @"
+            string MemberCreatedMail = @$"
 Félicitations !
 
 Votre compte a bien été crée sur le serveur des services CheckMate !
+
+Voici les informations de votre compte. Nous vous invitons à noter ces informtions en lieu sûr et à supprimer ce mail dès que possible.
+
+Pseudo = {form.Pseudo}
+Adresse mail = {form.Mail}
+Mot de Passe = {form.Password}
 
 Bien à vous,
 
