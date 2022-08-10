@@ -33,12 +33,26 @@ namespace CheckMate_API.Controllers
         {
             return Ok(_service.Read(id));
         }
-        
+
         //[Authorize("Admin")]
         [HttpPost]
         public IActionResult Create(TournamentForm form)
         {
-            if (!ModelState.IsValid) return BadRequest();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Le formulaire de création de tournoi n'a pas été rempli correctement.");
+            }
+
+            if(form.MinPlayer > form.MaxPlayer)
+            {
+                return BadRequest("Impossible de créer un tournoi avec un nombre minimum de joueur supérieur au nombre maximum de joueurs.");
+            }
+
+            if(form.MinElo > form.MaxElo)
+            {
+                return BadRequest("Impossible de créer un tournoi où l'Elo minimum requis est supérieur à l'Elo maximum autorisé.");
+            }
+
             try
             {
                 _service.Create(form.FromTournamentFormToModel().FromAPIToBLL());
@@ -56,7 +70,7 @@ namespace CheckMate_API.Controllers
         [HttpDelete]
         public IActionResult Delete(int id)
         {
-            if(_service.Read(id).EndDate < DateTime.Now)
+            if (_service.Read(id).EndDate < DateTime.Now)
             {
                 return BadRequest("Impossible de supprimer un tournoi qui a déjà commencé.");
             }
@@ -72,7 +86,7 @@ namespace CheckMate_API.Controllers
                 }
             }
         }
-       // [Authorize("Admin")]
+        // [Authorize("Admin")]
 
         /*[HttpPut]
         public IActionResult Update([FromBody] GameForm form)
