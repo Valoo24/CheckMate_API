@@ -44,7 +44,6 @@ namespace CheckMate_API.Models
         [Required]
         [Range(2, 32)]
         public int MaxPlayer { get; set; }
-       
         [Range(0, 3000)]
         public int MinElo { get; set; }
         [Range(0, 3000)]
