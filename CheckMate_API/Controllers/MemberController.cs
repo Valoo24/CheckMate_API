@@ -35,10 +35,17 @@ namespace CheckMate_API.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest("Le formulaire d'inscription n'a pas été rempli correctement.");
             }
 
-            return Ok(_service.Create(form.FromRegisterFormToModel().FromModelToBLL()));
+            try
+            {
+                return Ok(_service.Create(form.FromRegisterFormToModel().FromModelToBLL()));
+            }
+            catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpDelete("DeleteMember")]
@@ -61,7 +68,7 @@ namespace CheckMate_API.Controllers
             {
                 try
                 {
-                    Member currentUser = _service.Login(login.Credentials,login.Password).FromBLLToModel();
+                    Member currentUser = _service.Login(login.Credentials, login.Password).FromBLLToModel();
 
                     currentUser.Token = _tokenManager.GenerateToken(currentUser);
                     return Ok(currentUser.Token);

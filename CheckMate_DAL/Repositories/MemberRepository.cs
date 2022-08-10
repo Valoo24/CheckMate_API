@@ -64,9 +64,16 @@ namespace CheckMate_DAL.Repositories
                 DataAccess.AddParameter(cmd, "@IsAdmin", entity.IsAdmin);
 
                 DataAccess.ConnectionOpen(_Connection);
-                int id = (int)cmd.ExecuteScalar();
-                _Connection.Close();
-                return id;
+                try
+                {
+                    int id = (int)cmd.ExecuteScalar();
+                    _Connection.Close();
+                    return id;
+                }
+                catch(Exception e)
+                {
+                    throw new Exception(e.Message);
+                }
             }
         }
         
