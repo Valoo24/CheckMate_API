@@ -94,8 +94,7 @@ namespace CheckMate_API.Controllers
         [HttpDelete("DeleteTournament")]
         public IActionResult Delete(int id)
         {
-            Tournament tournament = _service.Read(id).FromBLLToModel();
-            if (_service.Read(id).EndDate < DateTime.Now)
+             if (_service.Read(id).EndDate < DateTime.Now)
             {
                 return BadRequest("Impossible de supprimer un tournoi qui a déjà commencé.");
             }
