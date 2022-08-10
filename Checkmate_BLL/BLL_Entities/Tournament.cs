@@ -25,5 +25,12 @@ namespace CheckMate_BLL.BLL_Entities
         public bool IsWomenOnly { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime UpdateDate { get; set; }
+        public DateTime EndDate
+        {
+            get
+            {
+                return new DateTime(CreationDate.AddDays((double)MinPlayer).Year, CreationDate.AddDays((double)MinPlayer).Month, CreationDate.AddDays((double)MinPlayer).Day,23,59,59);
+            }
+        }
     }
 }

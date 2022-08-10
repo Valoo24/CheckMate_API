@@ -60,7 +60,7 @@ namespace CheckMate_API.Tools
                 PasswordHash = form.Password,
                 Birthdate = form.Birthdate,
                 Gender = form.Gender,
-                Elo = form.Elo
+                Elo = form.Elo,
             };
         }
         /// <summary>
@@ -133,5 +133,4 @@ namespace CheckMate_API.Tools
         }
         #endregion
     }
-    
 } 
