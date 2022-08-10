@@ -104,6 +104,7 @@ namespace CheckMate_API.Tools
         {
             return new Tournament
             {
+                Name = tournament.Name,
                 Place = tournament.Place,
                 MinPlayer = tournament.MinPlayer,
                 MaxPlayer = tournament.MaxPlayer,
@@ -119,6 +120,7 @@ namespace CheckMate_API.Tools
         {
             return new CheckMate_BLL.BLL_Entities.Tournament
             {
+                Name = tournament.Name,
                 Place = tournament.Place,
                 MinPlayer = tournament.MinPlayer,
                 MaxPlayer = tournament.MaxPlayer,
@@ -129,7 +131,6 @@ namespace CheckMate_API.Tools
                 TournamentRound = 0,
                 IsWomenOnly = tournament.IsWomenOnly
             };
-
         }
         #endregion
     }

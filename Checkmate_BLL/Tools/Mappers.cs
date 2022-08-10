@@ -100,6 +100,7 @@ namespace CheckMate_BLL.Tools
             return new BLL_Entities.Tournament
             {
                 Id = tournament.Id,
+                Name = tournament.Name,
                 Place = tournament.Place,
                 MinPlayer = tournament.MinPlayer,
                 MaxPlayer = tournament.MaxPlayer,
@@ -123,6 +124,7 @@ namespace CheckMate_BLL.Tools
             return new CheckMate_DAL.DAL_Entities.Tournament
             {
                 Id = tournament.Id,
+                Name = tournament.Name,
                 Place = tournament.Place,
                 MinPlayer = tournament.MinPlayer,
                 MaxPlayer = tournament.MaxPlayer,
