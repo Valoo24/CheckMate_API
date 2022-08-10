@@ -33,6 +33,16 @@ namespace CheckMate_API.Controllers
         [HttpPost("Register")]
         public IActionResult Create(MemberRegisterForm form)
         {
+            string MemberCreatedMail = @"
+Félicitations !
+
+Votre compte a bien été crée sur le serveur des services CheckMate !
+
+Bien à vous,
+
+l'équipe de développement du service CheckMate.";
+            int CreatedMemberId;
+
             if (!ModelState.IsValid)
             {
                 return BadRequest("Le formulaire d'inscription n'a pas été rempli correctement.");
@@ -47,12 +57,24 @@ namespace CheckMate_API.Controllers
             {
                 try
                 {
-                    return Ok(_service.Create(form.FromRegisterFormToModel().FromModelToBLL()));
+                    CreatedMemberId = _service.Create(form.FromRegisterFormToModel().FromModelToBLL());
                 }
                 catch (Exception e)
                 {
                     return BadRequest(e.Message);
                 }
+
+                try
+                {
+                    MailManager.SendFromKhunly(form.Mail, MemberCreatedMail);
+                }
+                catch(Exception e)
+                {
+                    return Ok($"Le Member a bien été enregistré dans la base de donnée, mais le mail ne s'est pas envoyé correctement. Message d'erreur:\n{e.Message}");
+                }
+
+                return Ok($"Le Member a bien été crée. ID = {CreatedMemberId}");
+
             }
             else
             {
@@ -64,7 +86,7 @@ namespace CheckMate_API.Controllers
         public IActionResult Delete(int id)
         {
             _service.Delete(id);
-            return Ok();
+            return Ok($"Le Member n°{id} a bien été supprimé correctement.");
         }
         #endregion
 
