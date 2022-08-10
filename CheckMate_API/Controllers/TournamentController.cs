@@ -21,20 +21,20 @@ namespace CheckMate_API.Controllers
 
 
         [HttpGet]
-        [Authorize("Auth")]
+        //[Authorize("Auth")]
         public IActionResult GetAll()
         {
             return Ok(_service.ReadAll().Select(x => x));
         }
 
-        [Authorize("Auth")]
+        //[Authorize("Auth")]
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
             return Ok(_service.Read(id));
         }
         
-        [Authorize("Admin")]
+        //[Authorize("Admin")]
         [HttpPost]
         public IActionResult Create(TournamentForm form)
         {
@@ -56,13 +56,20 @@ namespace CheckMate_API.Controllers
         [HttpDelete]
         public IActionResult Delete(int id)
         {
-            if(_service.Delete(id))
+            if(_service.Read(id).EndDate < DateTime.Now)
             {
-                return Ok($"Le Tournament n°{id} a bien été supprimé.");
+                return BadRequest("Impossible de supprimer un tournoi qui a déjà commencé.");
             }
             else
             {
-                return BadRequest($"Le Tournament n°{id} n'existe pas dans la base de donnée.");
+                if (_service.Delete(id))
+                {
+                    return Ok($"Le Tournament n°{id} a bien été supprimé.");
+                }
+                else
+                {
+                    return BadRequest($"Le Tournament n°{id} n'existe pas dans la base de donnée.");
+                }
             }
         }
        // [Authorize("Admin")]
