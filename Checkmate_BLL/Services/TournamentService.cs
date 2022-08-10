@@ -23,6 +23,16 @@ namespace CheckMate_BLL.Services
         }
         #endregion
 
+        #region Méthodes Custom
+        public IEnumerable<Tournament> GetTop10ByUpdateTime()
+        {
+            foreach(CheckMate_DAL.DAL_Entities.Tournament tournament in Repository.GetTop10ByUpdateTime())
+            {
+                yield return tournament.FromDALToBLL();
+            }
+        }
+        #endregion
+
         #region Méthodes CRUD
         public int Create(Tournament entity)
         {

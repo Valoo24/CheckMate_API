@@ -21,6 +21,25 @@ namespace CheckMate_DAL.Repositories
         { _Connection = connection; }
         #endregion
 
+        #region Méthodes Custom
+        public IEnumerable<Tournament> GetTop10ByUpdateTime()
+        {
+            using (IDbCommand cmd = _Connection.CreateCommand())
+            {
+                cmd.CommandText = "SELECT Top 10 * FROM [Tournament] ORDER BY Update_Date";
+
+                DataAccess.ConnectionOpen(_Connection);
+                using (IDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        yield return Convert(reader);
+                    }
+                }
+            }
+        }
+        #endregion
+
         #region Méthodes CRUD
         /// <summary>
         /// Permet de convertir les données de la table Tournament de la base de donnée en un objet Tournament (Entity dans la DAL).
@@ -29,8 +48,6 @@ namespace CheckMate_DAL.Repositories
         /// <returns>Un objet Tournament (Entity dans la DAL).</returns>
         protected Tournament Convert(IDataRecord record)
         {
-           // string temp1 = record["Category"].ToString();
-            //string temp2 = record["Tournament_Status"].ToString();
             return new Tournament
             {
                 Id = (int)record["Tournament_Id"],

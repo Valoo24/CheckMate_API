@@ -20,11 +20,17 @@ namespace CheckMate_API.Controllers
 
 
 
-        [HttpGet("allTournament")]
+        [HttpGet("AllTournament")]
         //[Authorize("Auth")]
         public IActionResult GetAll()
         {
             return Ok(_service.ReadAll().Select(x => x));
+        }
+
+        [HttpGet("Top10ByUpdate")]
+        public IActionResult GetTop10ByUpdateTime()
+        {
+            return Ok(_service.GetTop10ByUpdateTime());
         }
 
         //[Authorize("Auth")]
