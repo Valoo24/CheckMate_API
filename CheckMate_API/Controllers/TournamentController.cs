@@ -20,7 +20,7 @@ namespace CheckMate_API.Controllers
 
 
 
-        [HttpGet]
+        [HttpGet("allTournament")]
         //[Authorize("Auth")]
         public IActionResult GetAll()
         {
@@ -35,7 +35,7 @@ namespace CheckMate_API.Controllers
         }
 
         //[Authorize("Admin")]
-        [HttpPost]
+        [HttpPost("CreateTournament")]
         public IActionResult Create(TournamentForm form)
         {
             if (!ModelState.IsValid)
@@ -67,7 +67,7 @@ namespace CheckMate_API.Controllers
         //[Authorize("Auth")]
         //[Authorize("Admin")]
 
-        [HttpDelete]
+        [HttpDelete("DeleteTournament")]
         public IActionResult Delete(int id)
         {
             if (_service.Read(id).EndDate < DateTime.Now)
