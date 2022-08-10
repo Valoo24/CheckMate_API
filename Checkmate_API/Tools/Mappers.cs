@@ -127,7 +127,23 @@ namespace CheckMate_API.Tools
                 MinElo = tournament.MinElo,
                 MaxElo = tournament.MaxElo,
                 Category = tournament.Category,
-                TournamentStatus = "W",
+                TournamentStatus = tournament.TournamentStatus,
+                TournamentRound = 0,
+                IsWomenOnly = tournament.IsWomenOnly
+            };
+        }
+        public static Tournament FromBLLToModel(this CheckMate_BLL.BLL_Entities.Tournament tournament)
+        {
+            return new Tournament
+            {
+                Name = tournament.Name,
+                Place = tournament.Place,
+                MinPlayer = tournament.MinPlayer,
+                MaxPlayer = tournament.MaxPlayer,
+                MinElo = tournament.MinElo,
+                MaxElo = tournament.MaxElo,
+                Category = tournament.Category,
+                TournamentStatus = tournament.TournamentStatus,
                 TournamentRound = 0,
                 IsWomenOnly = tournament.IsWomenOnly
             };
