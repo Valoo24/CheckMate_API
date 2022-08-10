@@ -7,6 +7,7 @@ namespace CheckMate_API.Models
     /// </summary>
     public class Tournament
     {
+        public string Name { get; set; }
         public int TournamentId { get; set; }
         public string Place { get; set; }
         public int MinPlayer { get; set; }
@@ -33,7 +34,8 @@ namespace CheckMate_API.Models
     /// </summary>
     public class TournamentForm
     {
-
+        [Required]
+        public string Name { get; set; }
         [Required]
         public string Place { get; set; }
         [Required]

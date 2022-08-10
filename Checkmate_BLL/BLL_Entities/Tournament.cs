@@ -14,6 +14,7 @@ namespace CheckMate_BLL.BLL_Entities
     public class Tournament : IEntity<int>
     {
         public int Id { get; set; }
+        public string Name { get; set; }
         public string Place { get; set; }
         public int MinPlayer { get; set; }
         public int MaxPlayer { get; set; }

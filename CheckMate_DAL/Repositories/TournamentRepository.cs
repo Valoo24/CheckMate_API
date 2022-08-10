@@ -51,6 +51,7 @@ namespace CheckMate_DAL.Repositories
             return new Tournament
             {
                 Id = (int)record["Tournament_Id"],
+                Name = (string)record["Name"],
                 Place = (string)record["Place"],
                 MinPlayer = (int)record["Min_Player"],
                 MaxPlayer = (int)record["Max_Player"],
@@ -73,9 +74,10 @@ namespace CheckMate_DAL.Repositories
         {
             using (IDbCommand cmd = _Connection.CreateCommand())
             {
-                cmd.CommandText = "Insert into [Tournament] ([Place] , Min_Player , Max_Player, Min_Elo , Max_Elo,  Category , Tournament_Status , Tournament_Round, Is_Women_Only, Creation_Date, Update_Date)  Output inserted.Tournament_Id Values (@Place , @MinPlayer, @MaxPlayer , @MinElo, @MaxElo , @Category , @TournamentStatus , @TournamentRound , @IsWomenOnly , @CreationDate , @UpdateDate)";
+                cmd.CommandText = "Insert into [Tournament] (Name, [Place] , Min_Player , Max_Player, Min_Elo , Max_Elo,  Category , Tournament_Status , Tournament_Round, Is_Women_Only, Creation_Date, Update_Date)  Output inserted.Tournament_Id Values (@Name, @Place , @MinPlayer, @MaxPlayer , @MinElo, @MaxElo , @Category , @TournamentStatus , @TournamentRound , @IsWomenOnly , @CreationDate , @UpdateDate)";
 
                 // Ajout parametre SQL 
+                DataAccess.AddParameter(cmd, "@Name", entity.Name);
                 DataAccess.AddParameter(cmd, "@Place", entity.Place);
                 DataAccess.AddParameter(cmd, "@MinPlayer", entity.MinPlayer);
                 DataAccess.AddParameter(cmd, "@MaxPlayer", entity.MaxPlayer);
