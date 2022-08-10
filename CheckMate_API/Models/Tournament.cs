@@ -27,6 +27,7 @@ namespace CheckMate_API.Models
                 return new DateTime(CreationDate.AddDays((double)MinPlayer).Year, CreationDate.AddDays((double)MinPlayer).Month, CreationDate.AddDays((double)MinPlayer).Day, 23, 59, 59);
             }
         }
+        public DateTime SavedEndDate { get; set; }
     }
 
     /// <summary>

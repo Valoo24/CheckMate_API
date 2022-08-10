@@ -116,7 +116,7 @@ namespace CheckMate_API.Tools
                 IsWomenOnly = tournament.IsWomenOnly
             };
         }
-        public static CheckMate_BLL.BLL_Entities.Tournament FromAPIToBLL(this CheckMate_API.Models.Tournament tournament)
+        public static CheckMate_BLL.BLL_Entities.Tournament FromAPIToBLL(this Tournament tournament)
         {
             return new CheckMate_BLL.BLL_Entities.Tournament
             {
