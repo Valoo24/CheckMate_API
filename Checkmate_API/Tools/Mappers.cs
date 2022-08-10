@@ -104,6 +104,7 @@ namespace CheckMate_API.Tools
         {
             return new Tournament
             {
+                Name = tournament.Name,
                 Place = tournament.Place,
                 MinPlayer = tournament.MinPlayer,
                 MaxPlayer = tournament.MaxPlayer,
@@ -115,21 +116,37 @@ namespace CheckMate_API.Tools
                 IsWomenOnly = tournament.IsWomenOnly
             };
         }
-        public static CheckMate_BLL.BLL_Entities.Tournament FromAPIToBLL(this CheckMate_API.Models.Tournament tournament)
+        public static CheckMate_BLL.BLL_Entities.Tournament FromAPIToBLL(this Tournament tournament)
         {
             return new CheckMate_BLL.BLL_Entities.Tournament
             {
+                Name = tournament.Name,
                 Place = tournament.Place,
                 MinPlayer = tournament.MinPlayer,
                 MaxPlayer = tournament.MaxPlayer,
                 MinElo = tournament.MinElo,
                 MaxElo = tournament.MaxElo,
                 Category = tournament.Category,
-                TournamentStatus = "W",
+                TournamentStatus = tournament.TournamentStatus,
                 TournamentRound = 0,
                 IsWomenOnly = tournament.IsWomenOnly
             };
-
+        }
+        public static Tournament FromBLLToModel(this CheckMate_BLL.BLL_Entities.Tournament tournament)
+        {
+            return new Tournament
+            {
+                Name = tournament.Name,
+                Place = tournament.Place,
+                MinPlayer = tournament.MinPlayer,
+                MaxPlayer = tournament.MaxPlayer,
+                MinElo = tournament.MinElo,
+                MaxElo = tournament.MaxElo,
+                Category = tournament.Category,
+                TournamentStatus = tournament.TournamentStatus,
+                TournamentRound = 0,
+                IsWomenOnly = tournament.IsWomenOnly
+            };
         }
         #endregion
     }

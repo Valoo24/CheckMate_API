@@ -32,6 +32,24 @@ namespace CheckMate_API.Controllers
         [HttpGet("Top10ByUpdate")]
         public IActionResult GetTop10ByUpdateTime()
         {
+            IList<Tournament> tournaments = new List<Tournament>();
+            foreach(CheckMate_BLL.BLL_Entities.Tournament tournament in _service.GetTop10ByUpdateTime())
+            {
+                tournaments.Add(new Tournament 
+                { 
+                    TournamentId = tournament.Id,
+                    Name = tournament.Name,
+                    Place = tournament.Place,
+                    MinPlayer = tournament.MinPlayer,
+                    MaxPlayer = tournament.MaxPlayer,
+                    Category = tournament.Category,
+                    MinElo = tournament.MinElo,
+                    MaxElo = tournament.MaxElo,
+                    TournamentStatus = tournament.TournamentStatus,
+                    SavedEndDate = tournament.EndDate,
+                    TournamentRound = tournament.TournamentRound,
+                });
+            }
             return Ok(_service.GetTop10ByUpdateTime());
         }
 
@@ -78,10 +96,11 @@ namespace CheckMate_API.Controllers
         [HttpDelete("DeleteTournament")]
         public IActionResult Delete(int id)
         {
-            if (_service.Read(id).EndDate < DateTime.Now)
+             if (_service.Read(id).EndDate < DateTime.Now)
             {
                 return BadRequest("Impossible de supprimer un tournoi qui a déjà commencé.");
             }
+
             else
             {
                 if (_service.Delete(id))

@@ -7,6 +7,7 @@ namespace CheckMate_API.Models
     /// </summary>
     public class Tournament
     {
+        public string Name { get; set; }
         public int TournamentId { get; set; }
         public string Place { get; set; }
         public int MinPlayer { get; set; }
@@ -26,6 +27,7 @@ namespace CheckMate_API.Models
                 return new DateTime(CreationDate.AddDays((double)MinPlayer).Year, CreationDate.AddDays((double)MinPlayer).Month, CreationDate.AddDays((double)MinPlayer).Day, 23, 59, 59);
             }
         }
+        public DateTime SavedEndDate { get; set; }
     }
 
     /// <summary>
@@ -33,7 +35,8 @@ namespace CheckMate_API.Models
     /// </summary>
     public class TournamentForm
     {
-
+        [Required]
+        public string Name { get; set; }
         [Required]
         public string Place { get; set; }
         [Required]
@@ -42,7 +45,6 @@ namespace CheckMate_API.Models
         [Required]
         [Range(2, 32)]
         public int MaxPlayer { get; set; }
-       
         [Range(0, 3000)]
         public int MinElo { get; set; }
         [Range(0, 3000)]
