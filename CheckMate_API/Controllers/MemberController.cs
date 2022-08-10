@@ -43,13 +43,20 @@ namespace CheckMate_API.Controllers
                 return BadRequest("Le champ \"Gender\" ne peut pas contenir plus d'une lettre");
             }
 
-            try
+            if(form.Gender == "X" || form.Gender =="M" || form.Gender =="F")
             {
-                return Ok(_service.Create(form.FromRegisterFormToModel().FromModelToBLL()));
+                try
+                {
+                    return Ok(_service.Create(form.FromRegisterFormToModel().FromModelToBLL()));
+                }
+                catch (Exception e)
+                {
+                    return BadRequest(e.Message);
+                }
             }
-            catch(Exception e)
+            else
             {
-                return BadRequest(e.Message);
+                return BadRequest("Le champ \"Gender\" n'accepte que les lettres suivantes: M pour Male, F pour Female et X pour Autre");
             }
         }
 
