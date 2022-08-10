@@ -31,6 +31,14 @@ namespace CheckMate_BLL.Services
                 yield return tournament.FromDALToBLL();
             }
         }
+        public bool CheckInscription(int idtournoi, int idjoueur)
+        {
+            return Repository.CheckInscription(idtournoi, idjoueur);
+        }
+        public bool Inscription(int idTournoi , int idJoueur)
+        {
+            return Repository.Inscription(idTournoi , idJoueur);
+        }
         #endregion
 
         #region Méthodes CRUD

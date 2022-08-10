@@ -38,6 +38,44 @@ namespace CheckMate_DAL.Repositories
                 }
             }
         }
+
+        public bool Inscription(int idTournoi , int idJoueur)
+        {
+            using (IDbCommand cmd = _Connection.CreateCommand())
+            {
+                cmd.CommandText = " Insert into [Tournament_Inscription] ( [FK_Tournament_Id], [FK_Member_Id] )  Values ( @idTournoi, @idJoueur ) ";
+
+                // Ajout parametre SQL 
+                DataAccess.AddParameter(cmd, "@idTournoi", idTournoi );
+                DataAccess.AddParameter(cmd, "@idJoueur",idJoueur );
+               
+                DataAccess.ConnectionOpen(_Connection);
+                
+               
+                return cmd.ExecuteNonQuery() == 1;
+                _Connection.Close();
+            }
+        }
+
+        public bool CheckInscription(int idTournoi , int idJoueur)
+        {
+            using (IDbCommand cmd = _Connection.CreateCommand())
+            {
+                cmd.CommandText = $"SELECT * FROM Tournament_Inscription  WHERE FK_Tournament_Id = @idTournoi AND FK_Member_Id = @idJoueur";
+                DataAccess.AddParameter(cmd, "@idTournoi", idTournoi);
+                DataAccess.AddParameter(cmd, "@idJoueur", idJoueur);
+
+                DataAccess.ConnectionOpen(_Connection);
+                using (IDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                        return true;
+                    else return false;
+                }
+            }
+        }
+
+
         #endregion
 
         #region Méthodes CRUD

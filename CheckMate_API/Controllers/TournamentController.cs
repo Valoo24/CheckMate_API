@@ -4,6 +4,7 @@ using CheckMate_BLL.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace CheckMate_API.Controllers
 {
@@ -21,9 +22,10 @@ namespace CheckMate_API.Controllers
 
 
         [HttpGet("AllTournament")]
-        //[Authorize("Auth")]
+        [Authorize("Auth")]
         public IActionResult GetAll()
         {
+           
             return Ok(_service.ReadAll().Select(x => x));
         }
 
@@ -33,14 +35,14 @@ namespace CheckMate_API.Controllers
             return Ok(_service.GetTop10ByUpdateTime());
         }
 
-        //[Authorize("Auth")]
+        [Authorize("Auth")]
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
             return Ok(_service.Read(id));
         }
 
-        //[Authorize("Admin")]
+        [Authorize("Admin")]
         [HttpPost("CreateTournament")]
         public IActionResult Create(TournamentForm form)
         {
@@ -70,8 +72,8 @@ namespace CheckMate_API.Controllers
             }
         }
 
-        //[Authorize("Auth")]
-        //[Authorize("Admin")]
+        [Authorize("Auth")]
+        [Authorize("Admin")]
 
         [HttpDelete("DeleteTournament")]
         public IActionResult Delete(int id)
@@ -92,8 +94,19 @@ namespace CheckMate_API.Controllers
                 }
             }
         }
-        // [Authorize("Admin")]
-
+        [Authorize("Auth")]
+        [HttpPost("Inscription/{id}")]
+        public IActionResult Inscription(int id)
+        {
+            string idJoueur = User.FindFirst(ClaimTypes.Sid).Value;
+            if (_service.CheckInscription(id, int.Parse(idJoueur)) == false)
+            {
+                _service.Inscription(id, int.Parse(idJoueur));
+                return Ok();
+            }
+            return BadRequest($"Vous etes deja inscrit au tournoi n°{id}");
+            
+        }
         /*[HttpPut]
         public IActionResult Update([FromBody] GameForm form)
         {
