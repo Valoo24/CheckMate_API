@@ -53,13 +53,23 @@ namespace CheckMate_API.Controllers
             {
                 try
                 {
-                    return Ok(_service.Login(login.FromLoginFormToModel().FromModelToBLL()));
+                    Member currentUser = _service.Login(login.Credentials,login.Password).FromBLLToModel();
+
+                    currentUser.Token = _tokenManager.GenerateToken(currentUser);
+                    return Ok(currentUser.Token);
                 }
                 catch (Exception e)
                 {
                     return BadRequest(e.Message);
                 }
             }
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            _service.Delete(id);
+            return Ok();
         }
         #endregion
     }
