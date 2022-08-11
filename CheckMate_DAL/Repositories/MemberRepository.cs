@@ -68,7 +68,7 @@ namespace CheckMate_DAL.Repositories
                 {
                     DataAccess.ConnectionOpen(_Connection);
                 }
-                catch(ConnectionFailedException e)
+                catch (ConnectionFailedException e)
                 {
                     throw new ConnectionFailedException(e.Message);
                 }
@@ -108,7 +108,11 @@ namespace CheckMate_DAL.Repositories
             }
         }
 
-
+        /// <summary>
+        /// Permet de supprimer un Member dans la base de donée selon l'ID introduit.
+        /// </summary>
+        /// <param name="id">ID du Member à supprimer dans la base de donnée.</param>
+        /// <returns>True si le Member a été supprimé correctement, False si une erreur s'est produite.</returns>
         public bool Delete(int id)
         {
             using (IDbCommand cmd = _Connection.CreateCommand())
@@ -116,7 +120,15 @@ namespace CheckMate_DAL.Repositories
                 cmd.CommandText = $"DELETE FROM Member WHERE Member_Id = @id";
                 DataAccess.AddParameter(cmd, "@id", id);
 
-                DataAccess.ConnectionOpen(_Connection);
+                try
+                {
+                    DataAccess.ConnectionOpen(_Connection);
+                }
+                catch(ConnectionFailedException e)
+                {
+                    throw new ConnectionFailedException(e.Message);
+                }
+
                 return cmd.ExecuteNonQuery() == 1;
             }
         }
@@ -159,8 +171,6 @@ namespace CheckMate_DAL.Repositories
         #endregion
 
         #region A FAIRE !!!!!
-
-
         public IEnumerable<Member> ReadAll()
         {
             throw new NotImplementedException();
