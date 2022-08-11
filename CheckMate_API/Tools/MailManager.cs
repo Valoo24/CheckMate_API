@@ -1,11 +1,12 @@
-﻿using System.Net;
+﻿using CheckMate_API.Exceptions;
+using System.Net;
 using System.Net.Mail;
 
 namespace CheckMate_API.Tools
 {
     public static class MailManager
     {
-        public static bool SendFromKhunly(string receiverMailAdress, string content)
+        public static void SendFromKhunly(string receiverMailAdress, string content)
         {
             string sender = "net2022@khunly.be";
             string pasword = "test1234=";
@@ -25,11 +26,10 @@ namespace CheckMate_API.Tools
             try
             {
                 smtp.Send(message);
-                return true;
             }
             catch(Exception e)
             {
-                return false;
+                throw new MailNotSentExceptions(e.Message);
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CheckMate_DAL.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -22,7 +23,15 @@ namespace CheckMate_DAL.Tools
             {
                 connection.Close();
             }
-            connection.Open();
+
+            try
+            {
+                connection.Open();
+            }
+            catch(Exception e)
+            {
+                throw new ConnectionFailedException(e.Message);
+            }
         }
         /// <summary>
         /// Permet de sécuriser l'introduction par l'utilisateur de données dans la base de données.

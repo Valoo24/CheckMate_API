@@ -1,4 +1,5 @@
-﻿using CheckMate_API.Infrastructure;
+﻿using CheckMate_API.Exceptions;
+using CheckMate_API.Infrastructure;
 using CheckMate_API.Models;
 using CheckMate_API.Tools;
 using CheckMate_BLL.Services;
@@ -54,12 +55,12 @@ l'équipe de développement du service CheckMate.";
                 return BadRequest("Le formulaire d'inscription n'a pas été rempli correctement.");
             }
 
-            if(form.Gender.Length > 1)
+            if (form.Gender.Length > 1)
             {
                 return BadRequest("Le champ \"Gender\" ne peut pas contenir plus d'une lettre");
             }
 
-            if(form.Gender == "X" || form.Gender =="M" || form.Gender =="F")
+            if (form.Gender == "X" || form.Gender == "M" || form.Gender == "F")
             {
                 try
                 {
@@ -74,9 +75,9 @@ l'équipe de développement du service CheckMate.";
                 {
                     MailManager.SendFromKhunly(form.Mail, MemberCreatedMail);
                 }
-                catch(Exception e)
+                catch (MailNotSentExceptions e)
                 {
-                    return Ok($"Le Member a bien été enregistré dans la base de donnée, mais le mail ne s'est pas envoyé correctement. Message d'erreur:\n{e.Message}");
+                    return Ok($"Le Member a bien été crée (ID = {CreatedMemberId}), mais le mail ne s'est pas envoyé correctement. Message d'erreur:\n{e.Message}");
                 }
 
                 return Ok($"Le Member a bien été crée. ID = {CreatedMemberId}");
@@ -91,7 +92,15 @@ l'équipe de développement du service CheckMate.";
         [HttpDelete("DeleteMember")]
         public IActionResult Delete(int id)
         {
-            _service.Delete(id);
+            try
+            {
+                _service.Delete(id);
+            }
+            catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+
             return Ok($"Le Member n°{id} a bien été supprimé correctement.");
         }
         #endregion

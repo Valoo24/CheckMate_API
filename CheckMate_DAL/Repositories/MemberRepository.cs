@@ -1,4 +1,5 @@
 ﻿using CheckMate_DAL.DAL_Entities;
+using CheckMate_DAL.Exceptions;
 using CheckMate_DAL.Interfaces;
 using CheckMate_DAL.Tools;
 using Isopoh.Cryptography.Argon2;
@@ -14,7 +15,7 @@ namespace CheckMate_DAL.Repositories
     /// <summary>
     /// Repository où sont définies toutes les méthodes d'accès aux données dans la base de donnée pour les Member.
     /// </summary>
-    public class MemberRepository : IRepository<Member, int> 
+    public class MemberRepository : IRepository<Member, int>
     {
         #region propriétés et Constructeur
         protected IDbConnection _Connection;
@@ -50,7 +51,7 @@ namespace CheckMate_DAL.Repositories
         /// <returns>L'ID du Member crée dans la base de donnée.</returns>
         public int Create(Member entity)
         {
-            using(IDbCommand cmd = _Connection.CreateCommand())
+            using (IDbCommand cmd = _Connection.CreateCommand())
             {
                 cmd.CommandText = "Insert into [Member] ([Pseudo] , Mail , Password_Hash, Birthdate , Gender , Elo , Is_Admin) Output inserted.Member_Id Values (@Pseudo , @Mail, @PasswordHash , @Birthdate , @Gender , @Elo , @IsAdmin)";
 
@@ -63,20 +64,28 @@ namespace CheckMate_DAL.Repositories
                 DataAccess.AddParameter(cmd, "@Elo", entity.Elo);
                 DataAccess.AddParameter(cmd, "@IsAdmin", entity.IsAdmin);
 
-                DataAccess.ConnectionOpen(_Connection);
+                try
+                {
+                    DataAccess.ConnectionOpen(_Connection);
+                }
+                catch (ConnectionFailedException e)
+                {
+                    throw new ConnectionFailedException(e.Message);
+                }
+
                 try
                 {
                     int id = (int)cmd.ExecuteScalar();
-                    _Connection.Close();
+                    //_Connection.Close();
                     return id;
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
-                    throw new Exception(e.Message);
+                    throw new QuerryFailedException(e.Message);
                 }
             }
         }
-        
+
         /// <summary>
         /// Permet de récupérer un Member dans la base de donnée selon l'ID introduit.
         /// </summary>
@@ -89,7 +98,15 @@ namespace CheckMate_DAL.Repositories
                 cmd.CommandText = $"SELECT * FROM Member WHERE Member_Id = @Id";
                 DataAccess.AddParameter(cmd, "@Id", id);
 
-                DataAccess.ConnectionOpen(_Connection);
+                try
+                {
+                    DataAccess.ConnectionOpen(_Connection);
+                }
+                catch (ConnectionFailedException e)
+                {
+                    throw new ConnectionFailedException(e.Message);
+                }
+
                 using (IDataReader reader = cmd.ExecuteReader())
                 {
                     if (reader.Read())
@@ -99,7 +116,11 @@ namespace CheckMate_DAL.Repositories
             }
         }
 
-
+        /// <summary>
+        /// Permet de supprimer un Member dans la base de donée selon l'ID introduit.
+        /// </summary>
+        /// <param name="id">ID du Member à supprimer dans la base de donnée.</param>
+        /// <returns>True si le Member a été supprimé correctement, False si une erreur s'est produite.</returns>
         public bool Delete(int id)
         {
             using (IDbCommand cmd = _Connection.CreateCommand())
@@ -107,7 +128,15 @@ namespace CheckMate_DAL.Repositories
                 cmd.CommandText = $"DELETE FROM Member WHERE Member_Id = @id";
                 DataAccess.AddParameter(cmd, "@id", id);
 
-                DataAccess.ConnectionOpen(_Connection);
+                try
+                {
+                    DataAccess.ConnectionOpen(_Connection);
+                }
+                catch(ConnectionFailedException e)
+                {
+                    throw new ConnectionFailedException(e.Message);
+                }
+
                 return cmd.ExecuteNonQuery() == 1;
             }
         }
@@ -115,21 +144,38 @@ namespace CheckMate_DAL.Repositories
 
         #region Méthodes Custom
 
-
+        /// <summary>
+        /// Récupère le mot de passe Hashé et stocké dans la base de donnée selon le credential (Pseudo ou Adresse Mail) en paramètre.
+        /// </summary>
+        /// <param name="credential">Pseudo ou Mail introduit par l'utilisateur.</param>
+        /// <returns>Le mot de passe Hashé de l'utilisateur.</returns>
         public string GetHashByCredential(string credential)
         {
             using (IDbCommand cmd = _Connection.CreateCommand())
             {
-                cmd.CommandText = $"SELECT Password_Hash FROM Member WHERE Pseudo = @Credential OR Mail = @Credential" ;
+                cmd.CommandText = $"SELECT Password_Hash FROM Member WHERE Pseudo = @Credential OR Mail = @Credential";
                 DataAccess.AddParameter(cmd, "@Credential", credential);
 
-                DataAccess.ConnectionOpen(_Connection);
+                try
+                {
+                    DataAccess.ConnectionOpen(_Connection);
+                }
+                catch (ConnectionFailedException e)
+                {
+                    throw new ConnectionFailedException(e.Message);
+                }
+
                 object result = cmd.ExecuteScalar();
                 _Connection.Close();
 
                 return result is DBNull ? null : (string)result;
             }
         }
+        /// <summary>
+        /// Récupère un Member dans la base de donnée selon le credential (Pseudo ou Mail) en paramètre.
+        /// </summary>
+        /// <param name="credential">Pseudo ou Mail introduit par l'utilisateur.</param>
+        /// <returns>Le Member correspondant au Pseudo ou Mail introduit.</returns>
         public Member GetByCredential(string credential)
         {
             using (IDbCommand cmd = _Connection.CreateCommand())
@@ -137,8 +183,16 @@ namespace CheckMate_DAL.Repositories
                 cmd.CommandText = $"SELECT * FROM Member WHERE Pseudo = @Credential OR Mail = @Credential";
                 DataAccess.AddParameter(cmd, "@Credential", credential);
 
-                DataAccess.ConnectionOpen(_Connection);
-                using(IDataReader reader = cmd.ExecuteReader())
+                try
+                {
+                    DataAccess.ConnectionOpen(_Connection);
+                }
+                catch (ConnectionFailedException e)
+                {
+                    throw new ConnectionFailedException(e.Message);
+                }
+
+                using (IDataReader reader = cmd.ExecuteReader())
                 {
                     if (reader.Read())
                         return Convert(reader);
@@ -150,8 +204,6 @@ namespace CheckMate_DAL.Repositories
         #endregion
 
         #region A FAIRE !!!!!
-        
-
         public IEnumerable<Member> ReadAll()
         {
             throw new NotImplementedException();
