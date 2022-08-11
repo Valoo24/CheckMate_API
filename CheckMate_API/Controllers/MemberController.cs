@@ -73,7 +73,7 @@ l'équipe de développement du service CheckMate.";
 
                 try
                 {
-                    MailManager.SendFromKhunly(form.Mail, MemberCreatedMail);
+                    MailManager.SendFromKhunly(form.Mail, MemberCreatedMail, "Votre inscription aux services CheckMate.");
                 }
                 catch (MailNotSentExceptions e)
                 {
