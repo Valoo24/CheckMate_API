@@ -98,7 +98,15 @@ namespace CheckMate_DAL.Repositories
                 cmd.CommandText = $"SELECT * FROM Member WHERE Member_Id = @Id";
                 DataAccess.AddParameter(cmd, "@Id", id);
 
-                DataAccess.ConnectionOpen(_Connection);
+                try
+                {
+                    DataAccess.ConnectionOpen(_Connection);
+                }
+                catch (ConnectionFailedException e)
+                {
+                    throw new ConnectionFailedException(e.Message);
+                }
+
                 using (IDataReader reader = cmd.ExecuteReader())
                 {
                     if (reader.Read())
@@ -136,7 +144,11 @@ namespace CheckMate_DAL.Repositories
 
         #region Méthodes Custom
 
-
+        /// <summary>
+        /// Récupère le mot de passe Hashé et stocké dans la base de donnée selon le credential (Pseudo ou Adresse Mail) en paramètre.
+        /// </summary>
+        /// <param name="credential">Pseudo ou Mail introduit par l'utilisateur.</param>
+        /// <returns>Le mot de passe Hashé de l'utilisateur.</returns>
         public string GetHashByCredential(string credential)
         {
             using (IDbCommand cmd = _Connection.CreateCommand())
@@ -144,13 +156,26 @@ namespace CheckMate_DAL.Repositories
                 cmd.CommandText = $"SELECT Password_Hash FROM Member WHERE Pseudo = @Credential OR Mail = @Credential";
                 DataAccess.AddParameter(cmd, "@Credential", credential);
 
-                DataAccess.ConnectionOpen(_Connection);
+                try
+                {
+                    DataAccess.ConnectionOpen(_Connection);
+                }
+                catch (ConnectionFailedException e)
+                {
+                    throw new ConnectionFailedException(e.Message);
+                }
+
                 object result = cmd.ExecuteScalar();
                 _Connection.Close();
 
                 return result is DBNull ? null : (string)result;
             }
         }
+        /// <summary>
+        /// Récupère un Member dans la base de donnée selon le credential (Pseudo ou Mail) en paramètre.
+        /// </summary>
+        /// <param name="credential">Pseudo ou Mail introduit par l'utilisateur.</param>
+        /// <returns>Le Member correspondant au Pseudo ou Mail introduit.</returns>
         public Member GetByCredential(string credential)
         {
             using (IDbCommand cmd = _Connection.CreateCommand())
@@ -158,7 +183,15 @@ namespace CheckMate_DAL.Repositories
                 cmd.CommandText = $"SELECT * FROM Member WHERE Pseudo = @Credential OR Mail = @Credential";
                 DataAccess.AddParameter(cmd, "@Credential", credential);
 
-                DataAccess.ConnectionOpen(_Connection);
+                try
+                {
+                    DataAccess.ConnectionOpen(_Connection);
+                }
+                catch (ConnectionFailedException e)
+                {
+                    throw new ConnectionFailedException(e.Message);
+                }
+
                 using (IDataReader reader = cmd.ExecuteReader())
                 {
                     if (reader.Read())
