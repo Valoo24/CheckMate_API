@@ -11,4 +11,9 @@ namespace CheckMate_DAL.Exceptions
     {
         public ConnectionFailedException(string message) : base(message) { }
     }
+
+    public class QuerryFailedException : Exception
+    {
+        public QuerryFailedException(string message) : base(message) { }
+    }
 }
