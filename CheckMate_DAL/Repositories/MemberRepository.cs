@@ -120,6 +120,12 @@ namespace CheckMate_DAL.Repositories
             }
         }
 
+        /// <summary>
+        /// Permet de récupérer tous les Member de la base de donnée.
+        /// </summary>
+        /// <returns>Un IEnumerable des Members présents dans la base de donnée.</returns>
+        /// <exception cref="ConnectionFailedException">Exception levée si la connexion à la base de donnée à échoué.</exception>
+        /// <exception cref="Exception">Exception levée si pour une raison il est impossible de lire et de convertir les données de la base de donnée.</exception>
         public IEnumerable<Member> ReadAll()
         {
             using (IDbCommand cmd = _Connection.CreateCommand())
@@ -169,6 +175,32 @@ namespace CheckMate_DAL.Repositories
                     DataAccess.ConnectionOpen(_Connection);
                 }
                 catch (ConnectionFailedException e)
+                {
+                    throw new ConnectionFailedException(e.Message);
+                }
+
+                return cmd.ExecuteNonQuery() == 1;
+            }
+        }
+
+        public bool Update(Member entity)
+        {
+            using (IDbCommand cmd = _Connection.CreateCommand())
+            {
+                cmd.CommandText = $"UPDATE Member SET Pseudo = @pseudo, Mail = @mail, Birthdate = @birthdate, Gender = @gender, Elo = @elo WHERE Member_Id = @id";
+
+                DataAccess.AddParameter(cmd, "@pseudo", entity.Pseudo);
+                DataAccess.AddParameter(cmd, "@mail", entity.Mail);
+                DataAccess.AddParameter(cmd, "@birthdate", entity.Birthdate);
+                DataAccess.AddParameter(cmd, "@gender", entity.Gender);
+                DataAccess.AddParameter(cmd, "@elo", entity.Elo);
+                DataAccess.AddParameter(cmd, "@id", entity.Id);
+
+                try
+                {
+                    DataAccess.ConnectionOpen(_Connection);
+                }
+                catch(ConnectionFailedException e)
                 {
                     throw new ConnectionFailedException(e.Message);
                 }
@@ -236,13 +268,6 @@ namespace CheckMate_DAL.Repositories
             }
         }
 
-        #endregion
-
-        #region A FAIRE !!!!!
-        public bool Update(Member entity)
-        {
-            throw new NotImplementedException();
-        }
         #endregion
     }
 }
