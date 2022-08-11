@@ -42,7 +42,7 @@ namespace CheckMate_API.Controllers
 
             //PasswordGenerator gen = new PasswordGenerator();
             //form.Password = gen.GenrerateNewRandomPassword();
-            
+
             string MemberCreatedMail = @$"
 Félicitations !
 
@@ -98,7 +98,7 @@ l'équipe de développement du service CheckMate.";
             }
         }
         /// <summary>
-        /// Méthode de l'API qui permet de Supprimer un Member selon une ID.
+        /// Méthode de l'API qui permet de Supprimer un Member selon une ID. Seuls un utilisateur connecté peut utiliser cette méthode.
         /// </summary>
         /// <param name="id">ID du Member à supprimée dans la base de donnée.</param>
         /// <returns>Une réponse HTTP avec l'ID du Member supprimée.</returns>
@@ -108,17 +108,35 @@ l'équipe de développement du service CheckMate.";
         {
             try
             {
-                if(_service.Delete(id) == false)
+                if (_service.Delete(id) == false)
                 {
                     return BadRequest($"Aucun Member avec l'ID n°{id} n'a pu être supprimé.");
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
 
             return Ok($"Le Member n°{id} a bien été supprimé correctement.");
+        }
+        /// <summary>
+        /// Méthode de l'API qui permet de récupérer un Member selon une ID. Seul les utilisateurs avec le rôle d'Admin peuvent utiliser cette méthode.
+        /// </summary>
+        /// <param name="id">ID du Member que l'on veut récupérr dans la base de donnée.</param>
+        /// <returns>Une réponse HTTP avec les informations du Member correspondant à l'ID.</returns>
+        [Authorize("Admin")]
+        [HttpGet("{id}")]
+        public IActionResult Read(int id)
+        {
+            try
+            {
+                return Ok(_service.Read(id));
+            }
+            catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
         #endregion
 

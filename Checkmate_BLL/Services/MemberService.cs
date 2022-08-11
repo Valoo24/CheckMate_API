@@ -85,14 +85,21 @@ namespace CheckMate_BLL.Services
 
             return IsDeleted;
         }
-        #endregion
-
-        #region A FAIRE !!!!!
 
         public Member Read(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return Repository.Read(id).FromDALToBLL();
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
+        #endregion
+
+        #region A FAIRE !!!!!
 
         public IEnumerable<Member> ReadAll()
         {
