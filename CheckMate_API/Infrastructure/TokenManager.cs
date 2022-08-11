@@ -46,7 +46,10 @@ namespace CheckMate_API.Infrastructure
             {
                 new Claim(ClaimTypes.Surname, m.Pseudo),
                 new Claim(ClaimTypes.Sid, m.MemberId.ToString()),
-                new Claim(ClaimTypes.Role, m.IsAdmin ? "Admin" : "User")
+                new Claim(ClaimTypes.Role, m.IsAdmin ? "Admin" : "User"),
+                new Claim(ClaimTypes.Gender, m.Gender),
+                new Claim(ClaimTypes.DateOfBirth, m.Birthdate.ToString()),
+                new Claim(ClaimTypes.Version, m.Elo.ToString())
             };
 
             //Configuration du token

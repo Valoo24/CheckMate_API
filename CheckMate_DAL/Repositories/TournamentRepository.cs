@@ -26,7 +26,7 @@ namespace CheckMate_DAL.Repositories
         {
             using (IDbCommand cmd = _Connection.CreateCommand())
             {
-                cmd.CommandText = "SELECT Top 10 * FROM V_Tournaments ORDER BY Update_Date";
+                cmd.CommandText = "SELECT Top 10 * FROM V_Tournaments2 ORDER BY Update_Date";
 
                 DataAccess.ConnectionOpen(_Connection);
                 using (IDataReader reader = cmd.ExecuteReader())
@@ -40,6 +40,12 @@ namespace CheckMate_DAL.Repositories
         }
         protected Tournament Convert(IDataRecord record)
         {
+            int nbreJoueur;
+            if( record["Nombre_Joueurs"] is DBNull)
+            { nbreJoueur = 0; }
+            else
+            { nbreJoueur = (int)record["Nombre_Joueurs"]; }
+
             return new Tournament
             {
                 Id = (int)record["Tournament_Id"],
@@ -55,22 +61,22 @@ namespace CheckMate_DAL.Repositories
                 IsWomenOnly = (bool)record["Is_Women_Only"],
                 CreationDate = (DateTime)record["Creation_Date"],
                 UpdateDate = (DateTime)record["Update_Date"],
-                MemberRegisteredForTournament = (int)record["Nombre_Joueurs"]
+                MemberRegisteredForTournament = nbreJoueur
             };
         }
-        public bool Inscription(int idTournoi , int idJoueur)
+        public bool Inscription(int idTournoi, int idJoueur)
         {
             using (IDbCommand cmd = _Connection.CreateCommand())
             {
                 cmd.CommandText = " Insert into [Tournament_Inscription] ( [FK_Tournament_Id], [FK_Member_Id] )  Values ( @idTournoi, @idJoueur ) ";
 
                 // Ajout parametre SQL 
-                DataAccess.AddParameter(cmd, "@idTournoi", idTournoi );
-                DataAccess.AddParameter(cmd, "@idJoueur",idJoueur );
-               
+                DataAccess.AddParameter(cmd, "@idTournoi", idTournoi);
+                DataAccess.AddParameter(cmd, "@idJoueur", idJoueur);
+
                 DataAccess.ConnectionOpen(_Connection);
-                
-               
+
+
                 return cmd.ExecuteNonQuery() == 1;
                 _Connection.Close();
             }
@@ -91,7 +97,7 @@ namespace CheckMate_DAL.Repositories
                 return id;
             }
         }*/
-        public bool CheckInscription(int idTournoi , int idJoueur)
+        public bool CheckInscription(int idTournoi, int idJoueur)
         {
             using (IDbCommand cmd = _Connection.CreateCommand())
             {
@@ -103,12 +109,43 @@ namespace CheckMate_DAL.Repositories
                 using (IDataReader reader = cmd.ExecuteReader())
                 {
                     if (reader.Read())
+                    {
+
                         return true;
+                    }
+
+
                     else return false;
                 }
             }
         }
+        public bool PossibleInscription(Tournament tournoi, int eloJoueur, DateTime BirthdateJoueur, string genderJoueur)
+        {
+            bool PeutInscrire = false;
+            bool conditionGenerale = false;
+            bool conditionGender = false;
+            bool conditionAge = false;
+            if (tournoi.TournamentStatus == "W"
+                && DateTime.Now <= new DateTime(tournoi.CreationDate.AddDays((double)tournoi.MinPlayer).Year, tournoi.CreationDate.AddDays((double)tournoi.MinPlayer).Month, tournoi.CreationDate.AddDays((double)tournoi.MinPlayer).Day, 23, 59, 59)
+                && eloJoueur <= tournoi.MaxElo && eloJoueur >= tournoi.MinElo && tournoi.MemberRegisteredForTournament < tournoi.MaxPlayer)
+            { conditionGenerale = true; }
 
+            if ( (tournoi.IsWomenOnly == true && genderJoueur == "F") || (tournoi.IsWomenOnly == false && (genderJoueur =="M" || genderJoueur =="X") ))
+            { conditionGender = true; }
+
+            int age = DateTime.Today.Year - BirthdateJoueur.Year;
+            if (BirthdateJoueur.Date > DateTime.Today.AddYears(-age))
+                age--;
+            if ((age < 18 && tournoi.Category == "J") || ((age >= 18 && age < 60) && tournoi.Category == "S") || (age >= 60 && tournoi.Category == "V"))
+            { conditionAge = true; }
+
+
+           
+            PeutInscrire = (conditionAge && conditionGender && conditionGenerale);
+
+            return PeutInscrire;
+
+        }
 
         #endregion
 
@@ -196,7 +233,7 @@ namespace CheckMate_DAL.Repositories
         {
             using (IDbCommand cmd = _Connection.CreateCommand())
             {
-                cmd.CommandText = $"SELECT * FROM V_Tournaments WHERE Tournament_Id = @id";
+                cmd.CommandText = $"SELECT * FROM V_Tournaments2 WHERE Tournament_Id = @id";
                 DataAccess.AddParameter(cmd, "@id", id);
 
                 DataAccess.ConnectionOpen(_Connection);
