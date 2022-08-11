@@ -35,16 +35,23 @@ namespace CheckMate_BLL.Services
             DBEntity.PasswordHash = pwdHash;
 
 
-            // Recuperation du member
-           
-            return Repository.Create(DBEntity);
+            // Récupération du member
+
+            try
+            {
+                return Repository.Create(DBEntity);
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
         #endregion
 
         #region Méthode Custom
-        public Member Login(string credential , string password)
+        public Member Login(string credential, string password)
         {
-            // Récuperation le Hash lier au compte
+            // Récuperation le Hash lié au compte
             string hash = Repository.GetHashByCredential(credential);
 
             if (string.IsNullOrWhiteSpace(hash))
@@ -61,8 +68,8 @@ namespace CheckMate_BLL.Services
             {
                 throw new Exception("Mot de passe incorrect");
             }
-            
-            
+
+
         }
         #endregion
 
