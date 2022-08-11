@@ -26,7 +26,7 @@ namespace CheckMate_BLL.Services
         #region Méthodes Custom
         public IEnumerable<Tournament> GetTop10ByUpdateTime()
         {
-            foreach(CheckMate_DAL.DAL_Entities.Tournament tournament in Repository.GetTop10ByUpdateTime())
+            foreach (CheckMate_DAL.DAL_Entities.Tournament tournament in Repository.GetTop10ByUpdateTime())
             {
                 yield return tournament.FromDALToBLL();
             }
@@ -35,14 +35,14 @@ namespace CheckMate_BLL.Services
         {
             return Repository.CheckInscription(idtournoi, idjoueur);
         }
-        public bool PossibleInscription(Tournament tournoi, int eloJoueur , DateTime BirthdateJoueur, string genderJoueur )
+        public bool PossibleInscription(Tournament tournoi, int eloJoueur, DateTime BirthdateJoueur, string genderJoueur)
         {
-            return Repository.PossibleInscription(tournoi.FromBLLToDAL(),eloJoueur, BirthdateJoueur, genderJoueur);
+            return Repository.PossibleInscription(tournoi.FromBLLToDAL(), eloJoueur, BirthdateJoueur, genderJoueur);
         }
 
-        public bool Inscription(int idTournoi , int idJoueur)
+        public bool Inscription(int idTournoi, int idJoueur)
         {
-            return Repository.Inscription(idTournoi , idJoueur);
+            return Repository.Inscription(idTournoi, idJoueur);
         }
 
         /*public int NumberOfPlayersInTournament(int id)
@@ -54,7 +54,19 @@ namespace CheckMate_BLL.Services
         #region Méthodes CRUD
         public int Create(Tournament entity)
         {
-            return Repository.Create(entity.FromBLLToDAL());
+            int TournamentCreatedId = 0;
+            try
+            {
+                TournamentCreatedId = Repository.Create(entity.FromBLLToDAL());
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            //Ici envoyer le mail pour les participants qui respectent les condition du tournoi.
+
+            return TournamentCreatedId;
         }
         public bool Delete(int id)
         {
@@ -68,7 +80,7 @@ namespace CheckMate_BLL.Services
         {
             return Repository.ReadAll().Select(x => x.FromDALToBLL());
         }
-        
+
         #endregion
 
         #region A FAIRE !!!!!
