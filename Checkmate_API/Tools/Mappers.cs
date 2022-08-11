@@ -107,6 +107,22 @@ namespace CheckMate_API.Tools
                 Password = member.PasswordHash,
             };
         }
+        /// <summary>
+        /// Permet de transformer un MemberUpdateForm en un model member.
+        /// </summary>
+        /// <param name="form">MemberModelForm à transformer.</param>
+        /// <returns>Un model Member.</returns>
+        public static Member FromUpdateFormToModel(this MemberUpdateForm form)
+        {
+            return new Member
+            {
+                Pseudo = form.Pseudo,
+                Mail = form.Mail,
+                Birthdate = form.Birthdate,
+                Gender = form.Gender,
+                Elo = form.Elo,
+            };
+        }
         #endregion
 
         #region Mapper Tournament

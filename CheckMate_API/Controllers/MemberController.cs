@@ -151,21 +151,22 @@ l'équipe de développement du service CheckMate.";
                 return BadRequest(e.Message);
             }
         }
-        /*
+        
         [HttpPatch("UpdateMember")]
         [Authorize("Auth")]
-        public IActionResult Update(Member member)
+        public IActionResult Update(MemberUpdateForm form)
         {
-            int Id = int.Parse(User.FindFirst(ClaimTypes.Sid).Value);
+            Member member = form.FromUpdateFormToModel();
+            member.MemberId = int.Parse(User.FindFirst(ClaimTypes.Sid).Value);
             if (_service.Update(member.FromModelToBLL()))
             {
-                return Ok($"Le Member n°{Id} a bien été mis à jour.");
+                return Ok($"Le Member n°{member.MemberId} a bien été mis à jour.");
             }
             else
             {
-                return BadRequest($"Impossible de mettre à jour le Member n°{Id}");
+                return BadRequest($"Impossible de mettre à jour le Member n°{member.MemberId}");
             }
-        }*/
+        }
         #endregion
 
         #region Méthodes Custom
