@@ -121,12 +121,23 @@ namespace CheckMate_API.Controllers
         public IActionResult Inscription(int id)
         {
             string idJoueur = User.FindFirst(ClaimTypes.Sid).Value;
+            string eloJoueur = User.FindFirst(ClaimTypes.Version).Value;
+            string BirthdateJoueur = User.FindFirst(ClaimTypes.DateOfBirth).Value;
+            string genderJoueur = User.FindFirst(ClaimTypes.Gender).Value;
+
+
+            if (!_service.PossibleInscription(_service.Read(id), int.Parse(eloJoueur), DateTime.Parse(BirthdateJoueur), genderJoueur))
+            { return BadRequest($"Vous ne correspondez pas aux critères d'admission du tournoi !"); }
+
             if (_service.CheckInscription(id, int.Parse(idJoueur)) == false)
             {
                 _service.Inscription(id, int.Parse(idJoueur));
                 return Ok();
             }
-            return BadRequest($"Vous etes deja inscrit au tournoi n°{id}");
+
+            
+
+                return BadRequest($"Vous etes deja inscrit au tournoi n°{id}");
             
         }
         /*[HttpPut]

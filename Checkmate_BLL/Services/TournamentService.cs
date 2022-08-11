@@ -35,6 +35,11 @@ namespace CheckMate_BLL.Services
         {
             return Repository.CheckInscription(idtournoi, idjoueur);
         }
+        public bool PossibleInscription(Tournament tournoi, int eloJoueur , DateTime BirthdateJoueur, string genderJoueur )
+        {
+            return Repository.PossibleInscription(tournoi.FromBLLToDAL(),eloJoueur, BirthdateJoueur, genderJoueur);
+        }
+
         public bool Inscription(int idTournoi , int idJoueur)
         {
             return Repository.Inscription(idTournoi , idJoueur);
