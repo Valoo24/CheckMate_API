@@ -253,7 +253,7 @@ namespace CheckMate_DAL.Repositories
         {
             using (IDbCommand cmd = _Connection.CreateCommand())
             {
-                cmd.CommandText = $"SELECT * FROM Tournament";
+                cmd.CommandText = $"SELECT * FROM V_Tournaments2";
 
                 DataAccess.ConnectionOpen(_Connection);
                 using (IDataReader reader = cmd.ExecuteReader())

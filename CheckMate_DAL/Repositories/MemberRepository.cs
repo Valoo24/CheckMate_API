@@ -122,7 +122,7 @@ namespace CheckMate_DAL.Repositories
 
         public IEnumerable<Member> ReadAll()
         {
-            using(IDbCommand cmd = _Connection.CreateCommand())
+            using (IDbCommand cmd = _Connection.CreateCommand())
             {
                 cmd.CommandText = $"SELECT * FROM Member";
 
@@ -130,19 +130,19 @@ namespace CheckMate_DAL.Repositories
                 {
                     DataAccess.ConnectionOpen(_Connection);
                 }
-                catch(ConnectionFailedException e)
+                catch (ConnectionFailedException e)
                 {
                     throw new ConnectionFailedException(e.Message);
                 }
 
-                using(IDataReader reader = cmd.ExecuteReader())
+                using (IDataReader reader = cmd.ExecuteReader())
                 {
-                    if(reader.Read())
+                    if (reader.Read())
                     {
-                        while(reader.Read())
+                        do
                         {
                             yield return Convert(reader);
-                        }
+                        } while (reader.Read());
                     }
                     else
                     {
