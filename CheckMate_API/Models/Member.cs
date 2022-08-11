@@ -19,9 +19,14 @@ namespace CheckMate_API.Models
             get { return _Elo; }
             set
             {
-                if (Elo == 0)
-                { _Elo = 1200; }
-
+                if (value == 0)
+                { 
+                    _Elo = 1200; 
+                }
+                else
+                {
+                    _Elo = value;
+                }
             }
         }
         public string Token { get; set; } = String.Empty;
