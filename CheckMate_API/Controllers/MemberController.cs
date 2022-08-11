@@ -88,7 +88,11 @@ l'équipe de développement du service CheckMate.";
                 return BadRequest("Le champ \"Gender\" n'accepte que les lettres suivantes: M pour Male, F pour Female et X pour Autre");
             }
         }
-
+        /// <summary>
+        /// Méthode de l'API qui permet de Supprimer un Member selon une ID.
+        /// </summary>
+        /// <param name="id">ID du Member à supprimée dans la base de donnée.</param>
+        /// <returns>Une réponse HTTP avec l'ID du Member supprimée.</returns>
         [HttpDelete("DeleteMember")]
         public IActionResult Delete(int id)
         {
@@ -109,6 +113,11 @@ l'équipe de développement du service CheckMate.";
         #endregion
 
         #region Méthodes Custom
+        /// <summary>
+        /// Méthode de l'API permettant de se connecter en tant que Member.
+        /// </summary>
+        /// <param name="login">Formulaire de connexion rempli par l'utilisateur.</param>
+        /// <returns>Une réponse HTTP avec le Token du Member si la connexion a réussi. Un message d'erreur si la connexion a échouée.</returns>
         [HttpPost("login")]
         public IActionResult Login(MemberLoginForm login)
         {
@@ -121,7 +130,6 @@ l'équipe de développement du service CheckMate.";
                 try
                 {
                     Member currentUser = _service.Login(login.Credentials, login.Password).FromBLLToModel();
-
                     currentUser.Token = _tokenManager.GenerateToken(currentUser);
                     return Ok(currentUser.Token);
                 }

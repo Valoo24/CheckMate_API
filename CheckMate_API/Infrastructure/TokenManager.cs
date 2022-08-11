@@ -11,15 +11,28 @@ namespace CheckMate_API.Infrastructure
     /// </summary>
     public class TokenManager
     {
+        #region Propriétés et Constructeurs
         private readonly string _issuer, _audience, _secret;
 
+        /// <summary>
+        /// Permet de récupérer à l'instanciation du TokenManager les information contenue dans le fichier AppSettings.Json.
+        /// </summary>
+        /// <param name="config">Collection contenant les information du fichier AppSettings.Json</param>
         public TokenManager(IConfiguration config)
         {
             _issuer = config.GetSection("TokenInfo").GetSection("issuer").Value;
             _audience = config.GetSection("TokenInfo").GetSection("audience").Value;
             _secret = config.GetSection("TokenInfo").GetSection("secret").Value;
         }
+        #endregion
 
+        #region Méthodes
+        /// <summary>
+        /// Permet de générer un Token sur base d'un Member.
+        /// </summary>
+        /// <param name="m">Member dont on veut récupérer le Token</param>
+        /// <returns>Un Token sous forme d'un JWT. Une fois décrypté, le Member se retrouve sous forme d'un Json.</returns>
+        /// <exception cref="ArgumentNullException">Exception levée si la méthode est appelée avec un Member null en paramètre.</exception>
         public string GenerateToken(Member m)
         {
             if (m is null) throw new ArgumentNullException();
@@ -46,10 +59,10 @@ namespace CheckMate_API.Infrastructure
                 );
 
             //Génération du token
-
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
 
             return handler.WriteToken(token);
         }
+        #endregion
     }
 }
