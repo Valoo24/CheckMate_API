@@ -112,6 +112,7 @@ namespace CheckMate_BLL.Tools
                 IsWomenOnly = tournament.IsWomenOnly,
                 CreationDate = tournament.CreationDate,
                 UpdateDate = tournament.UpdateDate,
+                MemberRegisteredForTournament = tournament.MemberRegisteredForTournament
             };
         }
         /// <summary>
@@ -136,6 +137,7 @@ namespace CheckMate_BLL.Tools
                 IsWomenOnly = tournament.IsWomenOnly,
                 CreationDate = tournament.CreationDate,
                 UpdateDate = tournament.UpdateDate,
+                MemberRegisteredForTournament = tournament.MemberRegisteredForTournament
             };
         }
         #endregion

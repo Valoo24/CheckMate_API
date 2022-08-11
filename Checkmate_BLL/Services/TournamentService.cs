@@ -39,6 +39,11 @@ namespace CheckMate_BLL.Services
         {
             return Repository.Inscription(idTournoi , idJoueur);
         }
+
+        /*public int NumberOfPlayersInTournament(int id)
+        {
+            return Repository.NumberOfPlayersInTournament(id);
+        }*/
         #endregion
 
         #region Méthodes CRUD
@@ -58,6 +63,7 @@ namespace CheckMate_BLL.Services
         {
             return Repository.ReadAll().Select(x => x.FromDALToBLL());
         }
+        
         #endregion
 
         #region A FAIRE !!!!!

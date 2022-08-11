@@ -26,7 +26,7 @@ namespace CheckMate_DAL.Repositories
         {
             using (IDbCommand cmd = _Connection.CreateCommand())
             {
-                cmd.CommandText = "SELECT Top 10 * FROM [Tournament] ORDER BY Update_Date";
+                cmd.CommandText = "SELECT Top 10 * FROM V_Tournaments ORDER BY Update_Date";
 
                 DataAccess.ConnectionOpen(_Connection);
                 using (IDataReader reader = cmd.ExecuteReader())
@@ -38,7 +38,26 @@ namespace CheckMate_DAL.Repositories
                 }
             }
         }
-
+        protected Tournament Convert(IDataRecord record)
+        {
+            return new Tournament
+            {
+                Id = (int)record["Tournament_Id"],
+                Name = (string)record["Name"],
+                Place = (string)record["Place"],
+                MinPlayer = (int)record["Min_Player"],
+                MaxPlayer = (int)record["Max_Player"],
+                MinElo = (int)record["Min_Elo"],
+                MaxElo = (int)record["Max_Elo"],
+                Category = (string)record["Category"],
+                TournamentStatus = (string)record["Tournament_Status"],
+                TournamentRound = (int)record["Tournament_Round"],
+                IsWomenOnly = (bool)record["Is_Women_Only"],
+                CreationDate = (DateTime)record["Creation_Date"],
+                UpdateDate = (DateTime)record["Update_Date"],
+                MemberRegisteredForTournament = (int)record["Nombre_Joueurs"]
+            };
+        }
         public bool Inscription(int idTournoi , int idJoueur)
         {
             using (IDbCommand cmd = _Connection.CreateCommand())
@@ -56,7 +75,22 @@ namespace CheckMate_DAL.Repositories
                 _Connection.Close();
             }
         }
+        /*public int NumberOfPlayersInTournament(int tournamentId)
+        {
+            using (IDbCommand cmd = _Connection.CreateCommand())
+            {
+                cmd.CommandText = "SELECT count(*) From Tournament_Inscription where FK_Tournament_Id = @tournamentId GROUP BY FK_Tournament_Id  ";
+                // Ajout parametre SQL 
+                DataAccess.AddParameter(cmd, "@tournamentId", tournamentId);
+               
 
+                DataAccess.ConnectionOpen(_Connection);
+
+                int id = (int)cmd.ExecuteScalar();
+                _Connection.Close();
+                return id;
+            }
+        }*/
         public bool CheckInscription(int idTournoi , int idJoueur)
         {
             using (IDbCommand cmd = _Connection.CreateCommand())
@@ -84,7 +118,7 @@ namespace CheckMate_DAL.Repositories
         /// </summary>
         /// <param name="record">Tableau de donnée récupérée de la base de donnée SQL.</param>
         /// <returns>Un objet Tournament (Entity dans la DAL).</returns>
-        protected Tournament Convert(IDataRecord record)
+        /*protected Tournament Convert(IDataRecord record)
         {
             return new Tournament
             {
@@ -100,9 +134,10 @@ namespace CheckMate_DAL.Repositories
                 TournamentRound = (int)record["Tournament_Round"],
                 IsWomenOnly = (bool)record["Is_Women_Only"],
                 CreationDate = (DateTime)record["Creation_Date"],
-                UpdateDate = (DateTime)record["Update_Date"],
+                UpdateDate = (DateTime)record["Update_Date"]
+                
             };
-        }
+        }*/
         /// <summary>
         /// Méthode permettant d'enregistrer un tournoi dans la base de donnée.
         /// </summary>
@@ -161,7 +196,7 @@ namespace CheckMate_DAL.Repositories
         {
             using (IDbCommand cmd = _Connection.CreateCommand())
             {
-                cmd.CommandText = $"SELECT * FROM Tournament WHERE Tournament_Id = @id";
+                cmd.CommandText = $"SELECT * FROM V_Tournaments WHERE Tournament_Id = @id";
                 DataAccess.AddParameter(cmd, "@id", id);
 
                 DataAccess.ConnectionOpen(_Connection);
