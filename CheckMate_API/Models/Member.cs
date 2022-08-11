@@ -32,6 +32,14 @@ namespace CheckMate_API.Models
         public string Token { get; set; } = String.Empty;
         public bool IsAdmin { get; set; }
     }
+    public class MemberUpdateForm
+    {
+        public string Pseudo { get; set; } = string.Empty;
+        public string Mail { get; set; } = String.Empty;
+        public DateTime Birthdate { get; set; }
+        public string Gender { get; set; } = string.Empty;
+        public int Elo { get; set; }
+    }
     /// <summary>
     /// Model de formulaire de création pour les Member.
     /// </summary>
