@@ -16,6 +16,7 @@ namespace CheckMate_BLL.BLL_Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public string Place { get; set; }
+        public int MemberRegisteredForTournament { get; set; }
         public int MinPlayer { get; set; }
         public int MaxPlayer { get; set; }
         public int MinElo { get; set; }
@@ -24,6 +25,7 @@ namespace CheckMate_BLL.BLL_Entities
         public string TournamentStatus { get; set; }
         public int TournamentRound { get; set; }
         public bool IsWomenOnly { get; set; }
+        
         public DateTime CreationDate { get; set; }
         public DateTime UpdateDate { get; set; }
         public DateTime EndDate

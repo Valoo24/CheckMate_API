@@ -35,11 +35,14 @@ namespace CheckMate_API.Controllers
             IList<Tournament> tournaments = new List<Tournament>();
             foreach(CheckMate_BLL.BLL_Entities.Tournament tournament in _service.GetTop10ByUpdateTime())
             {
+                
+
                 tournaments.Add(new Tournament 
                 { 
                     TournamentId = tournament.Id,
                     Name = tournament.Name,
                     Place = tournament.Place,
+                    MemberRegisteredForTournament = tournament.MemberRegisteredForTournament,
                     MinPlayer = tournament.MinPlayer,
                     MaxPlayer = tournament.MaxPlayer,
                     Category = tournament.Category,

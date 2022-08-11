@@ -19,6 +19,7 @@ namespace CheckMate_DAL.DAL_Entities
         public int MaxPlayer { get; set; }
         public int MinElo { get; set; }
         public int MaxElo { get; set; }
+        public int MemberRegisteredForTournament { get; set; }
         public string Category { get; set; }
         public string TournamentStatus { get; set; }
         public int TournamentRound { get; set; }

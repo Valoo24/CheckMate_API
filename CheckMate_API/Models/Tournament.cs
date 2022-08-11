@@ -18,6 +18,7 @@ namespace CheckMate_API.Models
         public string TournamentStatus { get; set; }
         public int TournamentRound { get; set; }
         public bool IsWomenOnly { get; set; }
+        public int MemberRegisteredForTournament { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime UpdateTime { get; set; }
         public DateTime EndDate 
