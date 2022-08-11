@@ -19,7 +19,7 @@ builder.Services.AddEndpointsApiExplorer();
  // ********************************************************************** //
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "MyProject", Version = "v1.0.0" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "CheckMate", Version = "v1.0.0" });
 
     var securitySchema = new OpenApiSecurityScheme
     {

@@ -3,6 +3,7 @@ using CheckMate_API.Infrastructure;
 using CheckMate_API.Models;
 using CheckMate_API.Tools;
 using CheckMate_BLL.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -93,6 +94,7 @@ l'équipe de développement du service CheckMate.";
         /// </summary>
         /// <param name="id">ID du Member à supprimée dans la base de donnée.</param>
         /// <returns>Une réponse HTTP avec l'ID du Member supprimée.</returns>
+        [Authorize("Auth")]
         [HttpDelete("DeleteMember")]
         public IActionResult Delete(int id)
         {
