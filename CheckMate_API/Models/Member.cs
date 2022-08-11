@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using CheckMate_API.Tools;
+using CheckMate_BLL.Services;
+using System.ComponentModel.DataAnnotations;
 
 namespace CheckMate_API.Models
 {
@@ -34,10 +36,16 @@ namespace CheckMate_API.Models
     }
     public class MemberUpdateForm
     {
+        [Required]
         public string Pseudo { get; set; } = string.Empty;
+        [Required]
+        [EmailAddress]
         public string Mail { get; set; } = String.Empty;
+        [Required]
         public DateTime Birthdate { get; set; }
+        [Required]
         public string Gender { get; set; } = string.Empty;
+        [Required]
         public int Elo { get; set; }
     }
     /// <summary>
