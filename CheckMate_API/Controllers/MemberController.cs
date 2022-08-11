@@ -1,4 +1,5 @@
-﻿using CheckMate_API.Infrastructure;
+﻿using CheckMate_API.Exceptions;
+using CheckMate_API.Infrastructure;
 using CheckMate_API.Models;
 using CheckMate_API.Tools;
 using CheckMate_BLL.Services;
@@ -74,7 +75,7 @@ l'équipe de développement du service CheckMate.";
                 {
                     MailManager.SendFromKhunly(form.Mail, MemberCreatedMail);
                 }
-                catch(Exception e)
+                catch(MailNotSentExceptions e)
                 {
                     return Ok($"Le Member a bien été enregistré dans la base de donnée, mais le mail ne s'est pas envoyé correctement. Message d'erreur:\n{e.Message}");
                 }
