@@ -56,7 +56,7 @@ namespace CheckMate_BLL.Services
 
             if (string.IsNullOrWhiteSpace(hash))
             {
-                throw new Exception("User inexistant");
+                throw new Exception("Member inexistant");
             }
 
             // Validation du hash avec le password

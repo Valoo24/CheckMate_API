@@ -170,7 +170,6 @@ namespace CheckMate_DAL.Repositories
                 }
 
                 object result = cmd.ExecuteScalar();
-                _Connection.Close();
 
                 return result is DBNull ? null : (string)result;
             }

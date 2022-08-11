@@ -80,6 +80,11 @@ namespace CheckMate_API.Tools
                 Elo = member.Elo,
             };
         }
+        /// <summary>
+        /// Permet de transformer un formulaire de Login en un model Member.
+        /// </summary>
+        /// <param name="form">formulaire de login à transformer.</param>
+        /// <returns>Renvoie un Member sous forme de formulaire de login.</returns>
         public static Member FromLoginFormToModel(this MemberLoginForm form)
         {
             return new Member
@@ -89,6 +94,11 @@ namespace CheckMate_API.Tools
                 PasswordHash = form.Password
             };
         }
+        /// <summary>
+        /// Permet de transformer un model Member en un formulaire de connexion de Member.
+        /// </summary>
+        /// <param name="member">model Member à transformer.</param>
+        /// <returns>Un formulaire de création de Member.</returns>
         public static MemberLoginForm FromModelToLoginForm(this Member member)
         {
             return new MemberLoginForm
@@ -100,6 +110,11 @@ namespace CheckMate_API.Tools
         #endregion
 
         #region Mapper Tournament
+        /// <summary>
+        /// Permet de transfromer un formulaire de création de Tournament en un model Tournament.
+        /// </summary>
+        /// <param name="tournament">Formulaire de création de Tournament à transformer.</param>
+        /// <returns>Un model Tournament.</returns>
         public static Tournament FromTournamentFormToModel( this TournamentForm tournament)
         {
             return new Tournament
@@ -116,6 +131,11 @@ namespace CheckMate_API.Tools
                 IsWomenOnly = tournament.IsWomenOnly
             };
         }
+        /// <summary>
+        /// Permet de transformer un model Tournament un Entity Tournament (Entity de la BLL)
+        /// </summary>
+        /// <param name="tournament">model de Tournament ) transformer.</param>
+        /// <returns>Un Entity de Tournament (Entity de la BLL).</returns>
         public static CheckMate_BLL.BLL_Entities.Tournament FromAPIToBLL(this Tournament tournament)
         {
             return new CheckMate_BLL.BLL_Entities.Tournament
@@ -132,6 +152,11 @@ namespace CheckMate_API.Tools
                 IsWomenOnly = tournament.IsWomenOnly
             };
         }
+        /// <summary>
+        /// Permet de Transformer un Entity Tournament de la BLL en un model Tournament.
+        /// </summary>
+        /// <param name="tournament">Entity Tournament de la BLL à tranformer.</param>
+        /// <returns>un model de Tournament.</returns>
         public static Tournament FromBLLToModel(this CheckMate_BLL.BLL_Entities.Tournament tournament)
         {
             return new Tournament

@@ -8,6 +8,9 @@ namespace CheckMate_BLL.Exceptions
 {
     public class MyExceptions
     {
+        /// <summary>
+        /// Exception Levée si la connexion à la Base de donnée à Échouée.
+        /// </summary>
         public class ConnectionFailedException : Exception { }
     }
 }
