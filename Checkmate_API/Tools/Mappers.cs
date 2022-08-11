@@ -142,6 +142,8 @@ namespace CheckMate_API.Tools
                 MinElo = tournament.MinElo,
                 MaxElo = tournament.MaxElo,
                 Category = tournament.Category,
+                CreationDate = DateTime.Now,
+                UpdateTime = DateTime.Now,
                 TournamentStatus = "W",
                 TournamentRound = 0,
                 IsWomenOnly = tournament.IsWomenOnly
@@ -163,6 +165,8 @@ namespace CheckMate_API.Tools
                 MinElo = tournament.MinElo,
                 MaxElo = tournament.MaxElo,
                 Category = tournament.Category,
+                CreationDate = tournament.CreationDate,
+                UpdateDate = tournament.UpdateTime,
                 TournamentStatus = tournament.TournamentStatus,
                 TournamentRound = 0,
                 IsWomenOnly = tournament.IsWomenOnly
