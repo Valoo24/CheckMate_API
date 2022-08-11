@@ -81,22 +81,40 @@ namespace CheckMate_DAL.Repositories
                 _Connection.Close();
             }
         }
-        /*public int NumberOfPlayersInTournament(int tournamentId)
+        public bool Unsubscription(int idTournoi, int idJoueur)
         {
             using (IDbCommand cmd = _Connection.CreateCommand())
             {
-                cmd.CommandText = "SELECT count(*) From Tournament_Inscription where FK_Tournament_Id = @tournamentId GROUP BY FK_Tournament_Id  ";
+                cmd.CommandText = " Delete FROM Tournament_Inscription where FK_Tournament_Id = @idTournoi AND FK_Member_Id = @idJoueur ";
+
                 // Ajout parametre SQL 
-                DataAccess.AddParameter(cmd, "@tournamentId", tournamentId);
-               
+                DataAccess.AddParameter(cmd, "@idTournoi", idTournoi);
+                DataAccess.AddParameter(cmd, "@idJoueur", idJoueur);
 
                 DataAccess.ConnectionOpen(_Connection);
 
-                int id = (int)cmd.ExecuteScalar();
+
+                return cmd.ExecuteNonQuery() == 1;
                 _Connection.Close();
-                return id;
             }
-        }*/
+        }
+
+/*public int NumberOfPlayersInTournament(int tournamentId)
+{
+    using (IDbCommand cmd = _Connection.CreateCommand())
+    {
+        cmd.CommandText = "SELECT count(*) From Tournament_Inscription where FK_Tournament_Id = @tournamentId GROUP BY FK_Tournament_Id  ";
+        // Ajout parametre SQL 
+        DataAccess.AddParameter(cmd, "@tournamentId", tournamentId);
+
+
+        DataAccess.ConnectionOpen(_Connection);
+
+        int id = (int)cmd.ExecuteScalar();
+        _Connection.Close();
+        return id;
+    }
+}*/
         public bool CheckInscription(int idTournoi, int idJoueur)
         {
             using (IDbCommand cmd = _Connection.CreateCommand())
@@ -145,6 +163,13 @@ namespace CheckMate_DAL.Repositories
 
             return PeutInscrire;
 
+        }
+
+        public bool TournamentStarted(Tournament tournoi)
+        {
+            if (tournoi.TournamentStatus == "W")
+                return false;
+            else return true;
         }
 
         #endregion
