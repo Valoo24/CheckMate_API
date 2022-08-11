@@ -77,7 +77,7 @@ l'équipe de développement du service CheckMate.";
                 }
                 catch(MailNotSentExceptions e)
                 {
-                    return Ok($"Le Member a bien été enregistré dans la base de donnée, mais le mail ne s'est pas envoyé correctement. Message d'erreur:\n{e.Message}");
+                    return Ok($"Le Member a bien été crée (ID = {CreatedMemberId}), mais le mail ne s'est pas envoyé correctement. Message d'erreur:\n{e.Message}");
                 }
 
                 return Ok($"Le Member a bien été crée. ID = {CreatedMemberId}");
