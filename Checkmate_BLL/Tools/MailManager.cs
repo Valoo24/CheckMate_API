@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CheckMate_BLL.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -14,13 +15,13 @@ namespace CheckMate_BLL.Tools
     public static class MailManager
     {
         /// <summary>
-        /// Permet l'envoi d'Email depuis le serveur OVH du formateur ( Khun Ly - Merci ;-) ).
+        /// Permet d'envoyer un email depuis le serveur OVH du formateur ( KhunLy - mercy ;-) )
         /// </summary>
-        /// <param name="receiverMailAdress">Adresse Email du destinataire</param>
+        /// <param name="receiverMailAdress">Adresse email du destinataire.</param>
         /// <param name="content">Contenu de l'email.</param>
-        /// <param name="Title">Sujet de l'Email</param>
-        /// <returns>Renvoie True si l'Email s'est bien envoyé, False si il ne s'est pas envoyé correctement.</returns>
-        public static bool SendFromKhunly(string receiverMailAdress, string content, string Title)
+        /// <param name="title">Sujet de l'email</param>
+        /// <exception cref="MailNotSentExceptions">Exception levée si l'email ne s'est pas envoyé correctement.</exception>
+        public static void SendFromKhunly(string receiverMailAdress, string content, string title)
         {
             string sender = "net2022@khunly.be";
             string pasword = "test1234=";
@@ -29,7 +30,7 @@ namespace CheckMate_BLL.Tools
             message.To.Add(receiverMailAdress);
             message.From = new MailAddress(sender);
             message.Body = content;
-            message.Subject = "Ceci est un test de moi à moi";
+            message.Subject = title;
 
             SmtpClient smtp = new SmtpClient("SSL0.ovh.net");
             smtp.EnableSsl = true;
@@ -40,11 +41,10 @@ namespace CheckMate_BLL.Tools
             try
             {
                 smtp.Send(message);
-                return true;
             }
             catch (Exception e)
             {
-                return false;
+                throw new MailNotSentExceptions(e.Message);
             }
         }
     }
