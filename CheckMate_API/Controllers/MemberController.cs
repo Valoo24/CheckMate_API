@@ -94,7 +94,10 @@ l'équipe de développement du service CheckMate.";
         {
             try
             {
-                _service.Delete(id);
+                if(_service.Delete(id) == false)
+                {
+                    return BadRequest($"Aucun Member avec l'ID n°{id} n'a pu être supprimé.");
+                }
             }
             catch(Exception e)
             {

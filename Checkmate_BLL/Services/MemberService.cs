@@ -68,16 +68,26 @@ namespace CheckMate_BLL.Services
             {
                 throw new Exception("Mot de passe incorrect");
             }
+        }
 
+        public bool Delete(int id)
+        {
+            bool IsDeleted = false;
 
+            try
+            {
+                IsDeleted = Repository.Delete(id);
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            return IsDeleted;
         }
         #endregion
 
         #region A FAIRE !!!!!
-        public bool Delete(int id)
-        {
-            return Repository.Delete(id);
-        }
 
         public Member Read(int id)
         {
