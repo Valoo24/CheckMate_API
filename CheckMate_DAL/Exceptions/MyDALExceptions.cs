@@ -16,4 +16,9 @@ namespace CheckMate_DAL.Exceptions
     {
         public QuerryFailedException(string message) : base(message) { }
     }
+
+    public class MemberNotFoundException : Exception
+    {
+        public MemberNotFoundException(string message) : base(message) { }
+    }
 }

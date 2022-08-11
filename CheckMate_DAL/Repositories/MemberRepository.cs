@@ -76,7 +76,6 @@ namespace CheckMate_DAL.Repositories
                 try
                 {
                     int id = (int)cmd.ExecuteScalar();
-                    //_Connection.Close();
                     return id;
                 }
                 catch (Exception e)
@@ -110,8 +109,13 @@ namespace CheckMate_DAL.Repositories
                 using (IDataReader reader = cmd.ExecuteReader())
                 {
                     if (reader.Read())
+                    {
                         return Convert(reader);
-                    return null;
+                    }
+                    else
+                    {
+                        throw new MemberNotFoundException($"Aucun Member correspondant à l'ID n°{id} n'a été trouvé dans la base de donnée.");
+                    }
                 }
             }
         }
@@ -132,7 +136,7 @@ namespace CheckMate_DAL.Repositories
                 {
                     DataAccess.ConnectionOpen(_Connection);
                 }
-                catch(ConnectionFailedException e)
+                catch (ConnectionFailedException e)
                 {
                     throw new ConnectionFailedException(e.Message);
                 }
