@@ -63,6 +63,7 @@ namespace CheckMate_API.Controllers
             return Ok(_service.Read(id));
         }
 
+        [Authorize("Auth")]
         [Authorize("Admin")]
         [HttpPost("CreateTournament")]
         public IActionResult Create(TournamentForm form)
@@ -95,7 +96,6 @@ namespace CheckMate_API.Controllers
 
         [Authorize("Auth")]
         [Authorize("Admin")]
-
         [HttpDelete("DeleteTournament")]
         public IActionResult Delete(int id)
         {
@@ -140,20 +140,35 @@ namespace CheckMate_API.Controllers
                 return BadRequest($"Vous etes deja inscrit au tournoi n°{id}");
             
         }
-        /*[HttpPut]
-        public IActionResult Update([FromBody] GameForm form)
+
+        [Authorize("Auth")]
+        [HttpDelete("Unsubscribe/{id}")]
+        public IActionResult Unsubscription(int id)
         {
-            if (!ModelState.IsValid) return BadRequest();
-            try
+            string idJoueur = User.FindFirst(ClaimTypes.Sid).Value;
+
+
+            if (_service.CheckInscription(id, int.Parse(idJoueur)) == false)
+            { 
+                return BadRequest($"Vous n'êtes pas inscrit à ce tournoi !"); }
+            else
             {
-                if (_service.Update(form.ToModel())) return Ok();
-                return Forbid();
+                if (!_service.TournamentStarted(_service.Read(id)))
+                {
+                    _service.Unsubscription(id, int.Parse(idJoueur));
+                    return Ok();
+                }
+               
+               return BadRequest($" Le tournoi {id} a deja commencé !");
+                
             }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }*/
+            
+
+
+
+            
+
+        }
         //[Authorize("Auth")]
 
     }
