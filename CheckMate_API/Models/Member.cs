@@ -56,7 +56,7 @@ namespace CheckMate_API.Models
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-       
+
         [DataType(DataType.Password)]
         [Compare(nameof(Password), ErrorMessage = "Les deux mots de passe doivent correspondre")]
         public string PasswordCheck { get; set; }

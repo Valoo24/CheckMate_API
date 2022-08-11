@@ -35,6 +35,14 @@ namespace CheckMate_API.Controllers
         [HttpPost("Register")]
         public IActionResult Create(MemberRegisterForm form)
         {
+            /* A Utiliser pour générer aléatoire le mot de passe d'un nouveau Member.
+             * Si l'on veut utiliser cette méthode il faut: 
+             * - Enlever les propriétés Password dans le MemberLoginForm
+             * - modifier le mapper du formulaire vers le model*/
+
+            //PasswordGenerator gen = new PasswordGenerator();
+            //form.Password = gen.GenrerateNewRandomPassword();
+            
             string MemberCreatedMail = @$"
 Félicitations !
 
