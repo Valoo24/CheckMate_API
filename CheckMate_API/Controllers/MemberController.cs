@@ -3,6 +3,7 @@ using CheckMate_API.Infrastructure;
 using CheckMate_API.Models;
 using CheckMate_API.Tools;
 using CheckMate_BLL.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -34,6 +35,14 @@ namespace CheckMate_API.Controllers
         [HttpPost("Register")]
         public IActionResult Create(MemberRegisterForm form)
         {
+            /* A Utiliser pour générer aléatoire le mot de passe d'un nouveau Member.
+             * Si l'on veut utiliser cette méthode il faut: 
+             * - Enlever les propriétés Password dans le MemberLoginForm
+             * - modifier le mapper du formulaire vers le model*/
+
+            //PasswordGenerator gen = new PasswordGenerator();
+            //form.Password = gen.GenrerateNewRandomPassword();
+
             string MemberCreatedMail = @$"
 Félicitations !
 
@@ -73,7 +82,7 @@ l'équipe de développement du service CheckMate.";
 
                 try
                 {
-                    MailManager.SendFromKhunly(form.Mail, MemberCreatedMail);
+                    MailManager.SendFromKhunly(form.Mail, MemberCreatedMail, "Votre inscription aux services CheckMate.");
                 }
                 catch (MailNotSentExceptions e)
                 {
@@ -88,24 +97,67 @@ l'équipe de développement du service CheckMate.";
                 return BadRequest("Le champ \"Gender\" n'accepte que les lettres suivantes: M pour Male, F pour Female et X pour Autre");
             }
         }
-
+        /// <summary>
+        /// Méthode de l'API qui permet de Supprimer un Member selon une ID. Seuls un utilisateur connecté peut utiliser cette méthode.
+        /// </summary>
+        /// <param name="id">ID du Member à supprimée dans la base de donnée.</param>
+        /// <returns>Une réponse HTTP avec l'ID du Member supprimée.</returns>
+        [Authorize("Auth")]
         [HttpDelete("DeleteMember")]
         public IActionResult Delete(int id)
         {
             try
             {
-                _service.Delete(id);
+                if (_service.Delete(id) == false)
+                {
+                    return BadRequest($"Aucun Member avec l'ID n°{id} n'a pu être supprimé.");
+                }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
 
             return Ok($"Le Member n°{id} a bien été supprimé correctement.");
         }
+        /// <summary>
+        /// Méthode de l'API qui permet de récupérer un Member selon une ID. Seul les utilisateurs avec le rôle d'Admin peuvent utiliser cette méthode.
+        /// </summary>
+        /// <param name="id">ID du Member que l'on veut récupérr dans la base de donnée.</param>
+        /// <returns>Une réponse HTTP avec les informations du Member correspondant à l'ID.</returns>
+        [Authorize("Admin")]
+        [HttpGet("{id}")]
+        public IActionResult Read(int id)
+        {
+            try
+            {
+                return Ok(_service.Read(id));
+            }
+            catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+        [HttpGet("GetAllMembers")]
+        public IActionResult ReadAll()
+        {
+            try
+            {
+                return Ok(_service.ReadAll());
+            }
+            catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
         #endregion
 
         #region Méthodes Custom
+        /// <summary>
+        /// Méthode de l'API permettant de se connecter en tant que Member.
+        /// </summary>
+        /// <param name="login">Formulaire de connexion rempli par l'utilisateur.</param>
+        /// <returns>Une réponse HTTP avec le Token du Member si la connexion a réussi. Un message d'erreur si la connexion a échouée.</returns>
         [HttpPost("login")]
         public IActionResult Login(MemberLoginForm login)
         {
@@ -118,7 +170,6 @@ l'équipe de développement du service CheckMate.";
                 try
                 {
                     Member currentUser = _service.Login(login.Credentials, login.Password).FromBLLToModel();
-
                     currentUser.Token = _tokenManager.GenerateToken(currentUser);
                     return Ok(currentUser.Token);
                 }

@@ -76,7 +76,6 @@ namespace CheckMate_DAL.Repositories
                 try
                 {
                     int id = (int)cmd.ExecuteScalar();
-                    //_Connection.Close();
                     return id;
                 }
                 catch (Exception e)
@@ -110,8 +109,45 @@ namespace CheckMate_DAL.Repositories
                 using (IDataReader reader = cmd.ExecuteReader())
                 {
                     if (reader.Read())
+                    {
                         return Convert(reader);
-                    return null;
+                    }
+                    else
+                    {
+                        throw new MemberNotFoundException($"Aucun Member correspondant à l'ID n°{id} n'a été trouvé dans la base de donnée.");
+                    }
+                }
+            }
+        }
+
+        public IEnumerable<Member> ReadAll()
+        {
+            using(IDbCommand cmd = _Connection.CreateCommand())
+            {
+                cmd.CommandText = $"SELECT * FROM Member";
+
+                try
+                {
+                    DataAccess.ConnectionOpen(_Connection);
+                }
+                catch(ConnectionFailedException e)
+                {
+                    throw new ConnectionFailedException(e.Message);
+                }
+
+                using(IDataReader reader = cmd.ExecuteReader())
+                {
+                    if(reader.Read())
+                    {
+                        while(reader.Read())
+                        {
+                            yield return Convert(reader);
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("Impossible de lire les données du tableau");
+                    }
                 }
             }
         }
@@ -132,7 +168,7 @@ namespace CheckMate_DAL.Repositories
                 {
                     DataAccess.ConnectionOpen(_Connection);
                 }
-                catch(ConnectionFailedException e)
+                catch (ConnectionFailedException e)
                 {
                     throw new ConnectionFailedException(e.Message);
                 }
@@ -166,7 +202,6 @@ namespace CheckMate_DAL.Repositories
                 }
 
                 object result = cmd.ExecuteScalar();
-                _Connection.Close();
 
                 return result is DBNull ? null : (string)result;
             }
@@ -204,11 +239,6 @@ namespace CheckMate_DAL.Repositories
         #endregion
 
         #region A FAIRE !!!!!
-        public IEnumerable<Member> ReadAll()
-        {
-            throw new NotImplementedException();
-        }
-
         public bool Update(Member entity)
         {
             throw new NotImplementedException();

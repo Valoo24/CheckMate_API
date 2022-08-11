@@ -28,6 +28,9 @@ namespace CheckMate_BLL.BLL_Entities
         
         public DateTime CreationDate { get; set; }
         public DateTime UpdateDate { get; set; }
+        /// <summary>
+        /// La date de fin des inscription. Elle est automatiquement calculée sur base de la date de création du tournoi, auquel l'on ajoute aux jours le nombre minimum de joueurs devant être inscrit. L'heure de fin est automatiquement définie à 23:59:59.
+        /// </summary>
         public DateTime EndDate
         {
             get

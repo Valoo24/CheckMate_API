@@ -41,7 +41,7 @@ namespace CheckMate_BLL.Services
             {
                 return Repository.Create(DBEntity);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
@@ -56,7 +56,7 @@ namespace CheckMate_BLL.Services
 
             if (string.IsNullOrWhiteSpace(hash))
             {
-                throw new Exception("User inexistant");
+                throw new Exception("Member inexistant");
             }
 
             // Validation du hash avec le password
@@ -68,27 +68,60 @@ namespace CheckMate_BLL.Services
             {
                 throw new Exception("Mot de passe incorrect");
             }
-
-
         }
-        #endregion
 
-        #region A FAIRE !!!!!
         public bool Delete(int id)
         {
-            return Repository.Delete(id);
+            bool IsDeleted = false;
+
+            try
+            {
+                IsDeleted = Repository.Delete(id);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            return IsDeleted;
         }
 
         public Member Read(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return Repository.Read(id).FromDALToBLL();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public IEnumerable<Member> ReadAll()
         {
-            throw new NotImplementedException();
-        }
+            IList<CheckMate_DAL.DAL_Entities.Member> DALMemberList = new List<CheckMate_DAL.DAL_Entities.Member>();
 
+            try
+            {
+                foreach (CheckMate_DAL.DAL_Entities.Member member in Repository.ReadAll())
+                {
+                    DALMemberList.Add(member);
+                }
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            foreach(CheckMate_DAL.DAL_Entities.Member member in DALMemberList)
+            {
+                yield return member.FromDALToBLL();
+            }
+        }
+        #endregion
+
+        #region A FAIRE !!!!!
         public bool Update(Member entity)
         {
             throw new NotImplementedException();

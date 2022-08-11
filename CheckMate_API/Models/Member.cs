@@ -12,7 +12,6 @@ namespace CheckMate_API.Models
         public string Mail { get; set; } = String.Empty;
         public string PasswordHash { get; set; }
         public DateTime Birthdate { get; set; }
-
         public string Gender { get; set; }
         private int _Elo;
         public int Elo
@@ -20,18 +19,18 @@ namespace CheckMate_API.Models
             get { return _Elo; }
             set
             {
-                if (Elo == 0)
-                { _Elo = 1200; }
-
+                if (value == 0)
+                { 
+                    _Elo = 1200; 
+                }
+                else
+                {
+                    _Elo = value;
+                }
             }
         }
-
-
-
         public string Token { get; set; } = String.Empty;
         public bool IsAdmin { get; set; }
-
-
     }
     /// <summary>
     /// Model de formulaire de création pour les Member.
@@ -50,7 +49,6 @@ namespace CheckMate_API.Models
 
         [Required]
         public string Gender { get; set; }
-
         
         [Required]
         public int Elo { get; set; }
@@ -58,11 +56,9 @@ namespace CheckMate_API.Models
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-       
-       
-        // !!! Message d'erreur temporaire !!!
+
         [DataType(DataType.Password)]
-        [Compare(nameof(Password), ErrorMessage = "Les deux mdp doivent correspondre")]
+        [Compare(nameof(Password), ErrorMessage = "Les deux mots de passe doivent correspondre")]
         public string PasswordCheck { get; set; }
     }   
     /// <summary>
@@ -75,7 +71,5 @@ namespace CheckMate_API.Models
 
         [Required]
         public string Password { get; set; }
-
     }
-
 }
