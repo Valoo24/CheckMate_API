@@ -119,12 +119,17 @@ namespace CheckMate_BLL.Services
                 yield return member.FromDALToBLL();
             }
         }
-        #endregion
 
-        #region A FAIRE !!!!!
         public bool Update(Member entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return Repository.Update(entity.FromBLLToDal());
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
         #endregion
     }

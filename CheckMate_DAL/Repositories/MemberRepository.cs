@@ -183,6 +183,12 @@ namespace CheckMate_DAL.Repositories
             }
         }
 
+        /// <summary>
+        /// Permet de mettre à jour un Member déjà existant dans la base de donnée.
+        /// </summary>
+        /// <param name="entity">Member à mettre à jour dans la base de dnnée.</param>
+        /// <returns>True si le Member à correctement été mis à jour.</returns>
+        /// <exception cref="ConnectionFailedException">Exception levée si la connexion à la base de donnée à échoué.</exception>
         public bool Update(Member entity)
         {
             using (IDbCommand cmd = _Connection.CreateCommand())
