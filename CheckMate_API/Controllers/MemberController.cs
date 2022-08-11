@@ -138,6 +138,18 @@ l'équipe de développement du service CheckMate.";
                 return BadRequest(e.Message);
             }
         }
+        [HttpGet("GetAllMembers")]
+        public IActionResult ReadAll()
+        {
+            try
+            {
+                return Ok(_service.ReadAll());
+            }
+            catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
         #endregion
 
         #region Méthodes Custom

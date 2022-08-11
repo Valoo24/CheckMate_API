@@ -120,6 +120,38 @@ namespace CheckMate_DAL.Repositories
             }
         }
 
+        public IEnumerable<Member> ReadAll()
+        {
+            using(IDbCommand cmd = _Connection.CreateCommand())
+            {
+                cmd.CommandText = $"SELECT * FROM Member";
+
+                try
+                {
+                    DataAccess.ConnectionOpen(_Connection);
+                }
+                catch(ConnectionFailedException e)
+                {
+                    throw new ConnectionFailedException(e.Message);
+                }
+
+                using(IDataReader reader = cmd.ExecuteReader())
+                {
+                    if(reader.Read())
+                    {
+                        while(reader.Read())
+                        {
+                            yield return Convert(reader);
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("Impossible de lire les données du tableau");
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// Permet de supprimer un Member dans la base de donée selon l'ID introduit.
         /// </summary>
@@ -207,11 +239,6 @@ namespace CheckMate_DAL.Repositories
         #endregion
 
         #region A FAIRE !!!!!
-        public IEnumerable<Member> ReadAll()
-        {
-            throw new NotImplementedException();
-        }
-
         public bool Update(Member entity)
         {
             throw new NotImplementedException();

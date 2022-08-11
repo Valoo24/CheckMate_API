@@ -41,7 +41,7 @@ namespace CheckMate_BLL.Services
             {
                 return Repository.Create(DBEntity);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
@@ -78,7 +78,7 @@ namespace CheckMate_BLL.Services
             {
                 IsDeleted = Repository.Delete(id);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
@@ -92,20 +92,36 @@ namespace CheckMate_BLL.Services
             {
                 return Repository.Read(id).FromDALToBLL();
             }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public IEnumerable<Member> ReadAll()
+        {
+            IList<CheckMate_DAL.DAL_Entities.Member> DALMemberList = new List<CheckMate_DAL.DAL_Entities.Member>();
+
+            try
+            {
+                foreach (CheckMate_DAL.DAL_Entities.Member member in Repository.ReadAll())
+                {
+                    DALMemberList.Add(member);
+                }
+            }
             catch(Exception e)
             {
                 throw new Exception(e.Message);
+            }
+
+            foreach(CheckMate_DAL.DAL_Entities.Member member in DALMemberList)
+            {
+                yield return member.FromDALToBLL();
             }
         }
         #endregion
 
         #region A FAIRE !!!!!
-
-        public IEnumerable<Member> ReadAll()
-        {
-            throw new NotImplementedException();
-        }
-
         public bool Update(Member entity)
         {
             throw new NotImplementedException();
